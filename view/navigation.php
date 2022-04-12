@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="sticky-top">
+<nav class="sticky-top" id="view">
   <header class="d-flex justify-content-center py-3 bg-white">
     <ul class="nav nav-pills">
       <li class="nav-item">
