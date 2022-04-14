@@ -21,7 +21,7 @@ include '../view/navigation.php';
       <div class="col-md-5 col-lg-4 order-md-last">
         <div class="sticky-top" style="top:72px; z-index: 1018">
 
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Summary</span>
             <span class="badge bg-primary rounded-pill">3</span>
           </h4>
@@ -72,7 +72,7 @@ include '../view/navigation.php';
 
       <!-- Cart -->
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Your Items</h4>
+        <h4 class="mb-3 pt-1">Your Items</h4>
         <table class="table">
           <tbody>
             <tr>

@@ -13,14 +13,14 @@ include '../view/navigation.php';
   <main>
     <div class="py-5 text-center">
       <h2>Checkout</h2>
-      <p class="lead">Those gorgeous items are almost yours.</p>
+      <p class="lead">These gorgeous items are almost yours.</p>
     </div>
 
     <div class="row g-5">
       <!-- Cart -->
       <div class="col-md-5 col-lg-4 order-md-last">
         <div class="sticky-top" style="top:72px; z-index: 1018">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Your cart</span>
             <span class="badge bg-primary rounded-pill">3</span>
           </h4>
@@ -71,7 +71,7 @@ include '../view/navigation.php';
       <!-- Billing & Shipping -->
       <div class="col-md-7 col-lg-8">
         <form class="needs-validation" novalidate>
-          <h4 class="mb-3">Shipping Address</h4>
+          <h4 class="mb-3 pt-1">Shipping Address</h4>
 
           <div class="row g-3">
             <div class="col-sm-6">
@@ -172,17 +172,6 @@ include '../view/navigation.php';
               <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label for="username" class="form-label">Username</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                <div class="invalid-feedback">
-                  Your username is required.
-                </div>
               </div>
             </div>
 

@@ -24,7 +24,7 @@ include '../view/navigation.php';
             <div class="col-md-5 col-lg-4 order-md-last">
                 <div class="sticky-top" style="top:72px; z-index: 1018">
 
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
                         <span class="text-primary">Your Info</span>
                     </h4>
                     <ul class="list-group mb-3">
@@ -74,7 +74,7 @@ include '../view/navigation.php';
 
             <!-- Cart -->
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3 text-primary">Your Order History</h4>
+                <h4 class="mb-3 text-primary pt-1">Your Order History</h4>
                 <table class="table">
                     <tbody>
                         <tr>
