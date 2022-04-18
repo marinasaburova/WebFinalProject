@@ -7,8 +7,9 @@
 <!-- Use GET for this page, so that users can bookmark it -->
 
 <?php
-include '../view/header.php';
-include '../view/navigation.php';
+include('../view/header.php');
+include('../view/navigation.php');
+require_once('utils/secure_conn.php');  // require a secure connection
 ?>
 
 
