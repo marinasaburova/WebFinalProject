@@ -14,7 +14,7 @@ include 'view/navigation.php';
       <div class="row align-items-start justify-content-center text-center">
         <div class="col-sm">
           <div class="card mb-4">
-            <a href="product.php#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
+            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -24,7 +24,7 @@ include 'view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <a href="product.php#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
+            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>

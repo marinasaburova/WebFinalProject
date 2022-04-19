@@ -19,7 +19,21 @@ switch ($action) {
     //  $categories = getCategories();
     //  $products = getProducts($category);
     include 'page/home.php';
+    break;
+
+  case ('product'):
+    include 'page/product.php';
+    break;
 
   case ('cart'):
     include 'page/cart.php';
+    break;
+
+  case ('account'):
+    include 'page/account.php';
+    break;
+
+  case ('checkout'):
+    include 'page/checkout.php';
+    break;
 }

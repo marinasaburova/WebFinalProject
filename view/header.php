@@ -22,8 +22,8 @@
     <!-- Mini Nav -->
     <div class="container d-flex justify-content-end flex-wrap sticky-top" style="z-index: 1022; top:14px">
       <ul class="nav">
-        <li class="nav-item"><a href="cart.php#view?action=cart" class="nav-link link-dark px-2"><i class="fa-solid fa-cart-shopping"></i></a></li>
-        <li class="nav-item"><a href="account.php#viewaction=account" class="nav-link link-dark px-2"><i class="fa-solid fa-circle-user"></i></a></li>
+        <li class="nav-item"><a href=".?action=cart#view" class="nav-link link-dark px-2"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <li class="nav-item"><a href=".?action=account#view" class="nav-link link-dark px-2"><i class="fa-solid fa-circle-user"></i></a></li>
       </ul>
     </div>
     <!-- Header -->
