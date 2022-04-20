@@ -1,12 +1,12 @@
 <?php
-include '../view/header.php';
-include '../view/navigation.php';
+include 'view/header.php';
+include 'view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <?php include '../view/sidebar.php'; ?>
+    <?php include 'view/sidebar.php'; ?>
 
     <!-- Main Content -->
     <div class="col-md-9">
@@ -14,7 +14,7 @@ include '../view/navigation.php';
       <div class="row align-items-start justify-content-center text-center">
         <div class="col-sm">
           <div class="card mb-4">
-            <a href="product.php#view"><img class="card-img-top" src="../media/purse.jpg" alt="Image of product" /></a>
+            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -24,7 +24,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <a href="product.php#view"><img class="card-img-top" src="../media/purse.jpg" alt="Image of product" /></a>
+            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -34,7 +34,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -49,7 +49,7 @@ include '../view/navigation.php';
       <div class="row align-items-start justify-content-center text-center">
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -59,7 +59,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -69,7 +69,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -84,7 +84,7 @@ include '../view/navigation.php';
       <div class="row align-items-start justify-content-center text-center">
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -94,7 +94,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -104,7 +104,7 @@ include '../view/navigation.php';
         </div>
         <div class="col-sm">
           <div class="card mb-4">
-            <img class="card-img-top" src="../media/purse.jpg" alt="Image of product" />
+            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
             <div class="card-body">
               <h5 class="card-title">Product Name</h5>
               <p class="card-text">Price</p>
@@ -122,5 +122,5 @@ include '../view/navigation.php';
 <!-- /.middle container -->
 
 <?php
-include '../view/footer.php';
+include 'view/footer.php';
 ?>

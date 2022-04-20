@@ -7,8 +7,8 @@
 <!-- Use GET for this page, so that users can bookmark it -->
 
 <?php
-include '../view/header.php';
-include '../view/navigation.php';
+include('view/header.php');
+include('view/navigation.php');
 ?>
 
 
@@ -30,35 +30,31 @@ include '../view/navigation.php';
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">Product total</h6>
+                                <h6 class="my-0">Name</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">$71</span>
+                            <span class="text-muted">Firstname Lastname</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">Estimated Tax</h6>
+                                <h6 class="my-0">Email</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">$2.01</span>
+                            <span class="text-muted">email address</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">Shipping</h6>
+                                <h6 class="my-0">Phone Number</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">$5</span>
+                            <span class="text-muted">Phone</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">Default Address</h6>
+                                <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-success">−$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$92</strong>
+                            <span class="text-muted">Address</span>
                         </li>
                     </ul>
 
@@ -111,5 +107,5 @@ include '../view/navigation.php';
     </main>
 
     <?php
-    include '../view/footer.php';
+    include 'view/footer.php';
     ?>

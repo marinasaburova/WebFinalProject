@@ -4,8 +4,8 @@
 <!-- Use GET for this page, so that users can bookmark it -->
 
 <?php
-include '../view/header.php';
-include '../view/navigation.php';
+include 'view/header.php';
+include 'view/navigation.php';
 ?>
 
 
@@ -59,8 +59,9 @@ include '../view/navigation.php';
             </li>
           </ul>
 
-          <form class="card p-2" action="cart.php#view">
+          <form class="card p-2" action=".#view">
             <div class="input-group">
+              <input type="hidden" name="action" value="cart">
               <button class="w-100 btn btn-secondary" type="submit">Edit Cart</button>
             </div>
           </form>
@@ -291,5 +292,5 @@ include '../view/navigation.php';
   </main>
 
   <?php
-  include '../view/footer.php';
+  include 'view/footer.php';
   ?>
