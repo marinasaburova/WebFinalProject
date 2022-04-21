@@ -3,16 +3,18 @@ $class_all = 'nav-link';
 $class_bag = 'nav-link';
 $class_sunglasses = 'nav-link';
 
-switch ($category) {
-  case ('all'):
-    $class_all = 'nav-link active';
-    break;
-  case ('bags'):
-    $class_bag = 'nav-link active';
-    break;
-  case ('sunglasses'):
-    $class_sunglasses = 'nav-link active';
-    break;
+if (isset($category)) {
+  switch ($category) {
+    case ('all'):
+      $class_all = 'nav-link active';
+      break;
+    case ('bags'):
+      $class_bag = 'nav-link active';
+      break;
+    case ('sunglasses'):
+      $class_sunglasses = 'nav-link active';
+      break;
+  }
 }
 ?>
 
