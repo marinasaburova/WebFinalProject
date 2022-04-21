@@ -28,12 +28,19 @@ switch ($action) {
   case ('cart'):
     include 'page/cart.php';
     break;
+  case ('checkout'):
+    include 'page/checkout.php';
+    break;
 
   case ('account'):
     include 'page/account.php';
     break;
 
-  case ('checkout'):
-    include 'page/checkout.php';
+  case ('editaccount'):
+    include 'page/edit-account.php';
+    break;
+
+  case ('login'):
+    include 'page/login.php';
     break;
 }
