@@ -43,4 +43,8 @@ switch ($action) {
   case ('login'):
     include 'page/login.php';
     break;
+
+  case ('register'):
+    include 'page/register.html';
+    break;
 }
