@@ -12,6 +12,8 @@ if ($action == NULL) {
 }
 
 switch ($action) {
+
+    // show homepage with products
   case ('list_products'):
     $category = filter_input(INPUT_GET, 'category');
     if ($category == NULL || $category == FALSE) {
@@ -22,25 +24,32 @@ switch ($action) {
     include 'page/home.php';
     break;
 
+    // show product details
   case ('product'):
     include 'page/product.php';
     break;
 
+    // show a person's cart 
   case ('cart'):
     include 'page/cart.php';
     break;
+
+    // show checkout page
   case ('checkout'):
     include 'page/checkout.php';
     break;
 
+    // show customer's account
   case ('account'):
     include 'page/account.php';
     break;
 
+    // show edit account page
   case ('editaccount'):
     include 'page/edit-account.php';
     break;
 
+    // show login page
   case ('login'):
     $email = filter_input(INPUT_POST, 'email');
     $password = filter_input(INPUT_POST, 'password');
@@ -53,12 +62,13 @@ switch ($action) {
     }
     break;
 
+    // show register page 
   case ('register'):
     include 'page/register.html';
     break;
 
+    // log someone out 
   case ('logout'):
-    session_destroy();
-    include 'page/home.php';
+    logout();
     break;
 }

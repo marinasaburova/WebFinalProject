@@ -20,3 +20,9 @@ function isValidLogin($email, $password)
     $hash = $row['password'];
     return password_verify($password, $hash);*/
 }
+
+function logout()
+{
+    session_destroy();
+    header('Location: .');
+}

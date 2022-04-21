@@ -19,8 +19,8 @@ if (isset($category)) {
 ?>
 
 <!-- Navigation -->
-<nav class="sticky-top" id="view">
-  <header class="d-flex justify-content-center py-3 bg-white">
+<nav class="sticky-top" id="view" style="z-index: 1021">
+  <header class="d-flex justify-content-center py-3 bg-white ">
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a href="." class="<?php echo $class_all ?>" aria-current="page">All Items</a>
