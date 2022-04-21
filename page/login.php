@@ -10,15 +10,16 @@ include('view/header.php');
     <!-- main column-->
     <div class="col-sm-4">
       <main class="form-signin">
-        <form>
-          <h1 class="h3 mb-3 fw-normal">Sign in to view your account</h1>
-
+        <form action=".#view" method="post">
+          <h1 class="h3 mb-3 fw-normal">Login</h1>
+          <p><?php echo $login_message; ?></p>
+          <input type="hidden" name="action" value="login">
           <div class="form-floating my-2">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
             <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating my-2">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
             <label for="floatingPassword">Password</label>
           </div>
 

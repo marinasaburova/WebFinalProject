@@ -24,6 +24,10 @@
       <ul class="nav">
         <li class="nav-item"><a href=".?action=cart#view" class="nav-link link-dark px-2"><i class="fa-solid fa-cart-shopping"></i></a></li>
         <li class="nav-item"><a href=".?action=account#view" class="nav-link link-dark px-2"><i class="fa-solid fa-circle-user"></i></a></li>
+        <?php
+        if (isset($_SESSION['loggedin'])) { ?>
+          <li class="nav-item"><a href=".?action=logout" class="nav-link link-dark px-2"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+        <?php } ?>
       </ul>
     </div>
     <!-- Header -->

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('function/db.php');
+require('function/customer-db.php');
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -41,10 +42,23 @@ switch ($action) {
     break;
 
   case ('login'):
-    include 'page/login.php';
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+    if (isValidLogin($email, $password)) {
+      $_SESSION['loggedin'] = true;
+      include('page/account.php');
+    } else {
+      $login_message = 'Sign in to view your account.';
+      include('page/login.php');
+    }
     break;
 
   case ('register'):
     include 'page/register.html';
+    break;
+
+  case ('logout'):
+    session_destroy();
+    include 'page/home.php';
     break;
 }
