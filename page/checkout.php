@@ -7,7 +7,7 @@
 include 'view/header.php';
 include 'view/navigation.php';
 ?>
-
+ 
 
 <div class="container">
   <main>
