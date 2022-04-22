@@ -1,4 +1,6 @@
 <?php
+// notes from class. just to reference: 
+
 //setcookie($name, $value, $expire, $path, $domain, $secure, $httponly); 
 
 // Setting a cookie
