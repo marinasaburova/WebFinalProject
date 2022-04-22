@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customer` (
-  `customerID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `customerID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
   `email` varchar(60) UNIQUE NOT NULL,
   `pwd` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `employee` (
-  `employeeID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `employeeID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
   `email` varchar(60) UNIQUE NOT NULL,
   `pwd` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `employee` (
 --
 
 CREATE TABLE `item` (
-  `itemID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `itemID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
   `name` varchar(30) NOT NULL,
   `price` decimal(5,2) UNSIGNED NOT NULL,
   `quantity` int(3) UNSIGNED NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `orders` (
-  `orderID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `orderID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
   `customerID` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
   `itemsPrice` decimal(7,2) UNSIGNED NOT NULL,
   `shipping` decimal(4,2) UNSIGNED NOT NULL,
