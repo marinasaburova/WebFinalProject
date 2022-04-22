@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `customer` (
-  `customerID` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `email` varchar(60) NOT NULL,
+  `customerID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `email` varchar(60) UNIQUE NOT NULL,
   `pwd` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(30) NOT NULL,
@@ -41,7 +41,8 @@ CREATE TABLE `customer` (
   `shipState` char(2) DEFAULT NULL,
   `shipZip` int(5) UNSIGNED DEFAULT NULL,
   `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(10) NOT NULL DEFAULT 'active'
+  `status` varchar(10) NOT NULL DEFAULT 'active', 
+  PRIMARY KEY (`customerID`), 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -51,13 +52,14 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `employee` (
-  `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `email` varchar(60) NOT NULL,
+  `employeeID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
+  `email` varchar(60) UNIQUE NOT NULL,
   `pwd` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(30) NOT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'active',
-  `dateJoined` timestamp NOT NULL DEFAULT current_timestamp()
+  `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(), 
+    PRIMARY KEY (`employeeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,7 +69,7 @@ CREATE TABLE `employee` (
 --
 
 CREATE TABLE `item` (
-  `itemID` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `itemID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
   `name` varchar(30) NOT NULL,
   `price` decimal(5,2) UNSIGNED NOT NULL,
   `quantity` int(3) UNSIGNED NOT NULL,
@@ -75,7 +77,8 @@ CREATE TABLE `item` (
   `color` varchar(15) NOT NULL,
   `material` varchar(15) NOT NULL,
   `description` text DEFAULT NULL,
-  `tags` text DEFAULT NULL
+  `tags` text DEFAULT NULL, 
+    PRIMARY KEY (`itemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -85,7 +88,7 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `orders` (
-  `orderID` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `orderID` int(10) UNSIGNED ZEROFILL AUTOINCREMENT UNIQUE NOT NULL,
   `customerID` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
   `itemsPrice` decimal(7,2) UNSIGNED NOT NULL,
   `shipping` decimal(4,2) UNSIGNED NOT NULL,
@@ -98,7 +101,10 @@ CREATE TABLE `orders` (
   `shipStreet2` varchar(30) NOT NULL,
   `shipCity` varchar(30) NOT NULL,
   `shipState` char(2) NOT NULL,
-  `shipZip` int(5) UNSIGNED NOT NULL
+  `shipZip` int(5) UNSIGNED NOT NULL,
+    PRIMARY KEY (`orderID`),
+    FOREIGN KEY (`customerID`) REFERENCES `customer`(`customerID`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -111,35 +117,11 @@ CREATE TABLE `order_items` (
   `orderID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `itemID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `quantity` int(3) UNSIGNED NOT NULL,
-  `price` decimal(5,2) UNSIGNED NOT NULL
+  `price` decimal(5,2) UNSIGNED NOT NULL,
+    FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`),
+    FOREIGN KEY (`itemID`) REFERENCES `item`(`itemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customerID`),
-  ADD UNIQUE KEY `customerID` (`customerID`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`employeeID`),
-  ADD UNIQUE KEY `employeeID` (`employeeID`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `item`
---
-ALTER TABLE `item`
-  ADD PRIMARY KEY (`itemID`),
-  ADD UNIQUE KEY `itemID` (`itemID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
