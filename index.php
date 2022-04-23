@@ -53,11 +53,18 @@ switch ($action) {
   case ('login'):
     $email = filter_input(INPUT_POST, 'email');
     $password = filter_input(INPUT_POST, 'password');
+
+    if (!isset($_POST['email'])) {
+      $login_message = 'Sign in to view your account.';
+      include('page/login.php');
+      break;
+    }
+
     if (isValidLogin($email, $password)) {
       $_SESSION['loggedin'] = true;
       include('page/account.php');
     } else {
-      $login_message = 'Sign in to view your account.';
+      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
       include('page/login.php');
     }
     break;

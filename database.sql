@@ -21,7 +21,27 @@ SET time_zone = "+00:00";
 -- Database: `kelarinadatabase`
 --
 
+
+
+
+-- create user to query product database --
+/* 
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON kelarinadatabase.*
+TO kelarina@localhost
+IDENTIFIED BY 'kelarinapass';
+*/
+
+
 -- --------------------------------------------------------
+
+
+-- create user to query product database --
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON kelarinadatabase.*
+TO kelarina@localhost
+IDENTIFIED BY 'kelarinapass';
+
 
 --
 -- Table structure for table `customer`
@@ -42,7 +62,7 @@ CREATE TABLE `customer` (
   `shipZip` int(5) UNSIGNED DEFAULT NULL,
   `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(10) NOT NULL DEFAULT 'active', 
-  PRIMARY KEY (`customerID`), 
+  PRIMARY KEY (`customerID`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

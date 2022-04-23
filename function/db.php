@@ -1,7 +1,10 @@
 <?php
-
 /*
-$dsn = 'mysql:host=localhost;dbname=webshop';
+$dsn = 'mysql:host=localhost;dbname=kelarinadatabase';
+$username = 'kelarina';
+$password = 'kelarinapass';*/
+
+$dsn = 'mysql:host=localhost;dbname=kelarinadatabase';
 $username = 'root';
 $password = '';
 $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
@@ -12,4 +15,3 @@ try {
     include('view/error.php');
     exit();
 }
-*/
