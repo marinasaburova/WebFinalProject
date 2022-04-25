@@ -1,12 +1,8 @@
 <!-- Displays user's account info -->
 <!-- User needs to be logged in to see -->
 
-<!-- Show's users cart and lets them edit it -->
-
-<!-- Displays details for a specific product -->
-<!-- Use GET for this page, so that users can bookmark it -->
-
 <?php
+require_once('utils/verify-login.php');
 include('view/header.php');
 include('view/navigation.php');
 ?>
@@ -58,10 +54,10 @@ include('view/navigation.php');
                         </li>
                     </ul>
 
-                    <form class="card p-2" action="checkout.php#view">
+                    <form class="card p-2" action=".#view">
+                        <input type="hidden" name="action" value="editaccount">
                         <div class="input-group">
                             <button class="w-100 btn btn-secondary" type="submit">Edit</button>
-
                         </div>
                     </form>
                 </div>
