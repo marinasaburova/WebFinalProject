@@ -32,25 +32,10 @@ TO kelarina@localhost
 IDENTIFIED BY 'kelarinapass';
 */
 
-
--- --------------------------------------------------------
-
-
--- create user to query product database --
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON kelarinadatabase.*
-TO kelarina@localhost
-IDENTIFIED BY 'kelarinapass';
-
-
---
--- Table structure for table `customer`
---
-
 CREATE TABLE `customer` (
-  `customerID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
-  `email` varchar(60) UNIQUE NOT NULL,
-  `pwd` varchar(60) NOT NULL,
+  `customerID` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(30) NOT NULL,
   `shipFirstName` varchar(30) DEFAULT NULL,
@@ -61,9 +46,16 @@ CREATE TABLE `customer` (
   `shipState` char(2) DEFAULT NULL,
   `shipZip` int(5) UNSIGNED DEFAULT NULL,
   `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(10) NOT NULL DEFAULT 'active', 
-  PRIMARY KEY (`customerID`) 
+  `status` varchar(10) NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customerID`, `email`, `password`, `firstName`, `lastName`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`, `dateJoined`, `status`) VALUES
+(0000000001, 'marina@gmail.com', '$2y$10$jVkig/cDe.UHNrVGosV1tu6SSwCh62bxLxNHBbdwP34abPnlI9J4S', 'Marina', 'Saburova', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:14:42', 'active'),
+(0000000002, 'kelsey@gmail.com', '$2y$10$i1D9cQHT9R21gFDjZv3vE.iTFTabTBrahyEXRgujTv2oUQFZ0mWVS', 'Kelsey', 'Nyman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:22:25', 'active');
 
 -- --------------------------------------------------------
 
@@ -72,14 +64,13 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `employee` (
-  `employeeID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
-  `email` varchar(60) UNIQUE NOT NULL,
+  `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `email` varchar(60) NOT NULL,
   `pwd` varchar(60) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(30) NOT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'active',
-  `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(), 
-    PRIMARY KEY (`employeeID`)
+  `dateJoined` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -89,7 +80,7 @@ CREATE TABLE `employee` (
 --
 
 CREATE TABLE `item` (
-  `itemID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
+  `itemID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `name` varchar(30) NOT NULL,
   `price` decimal(5,2) UNSIGNED NOT NULL,
   `quantity` int(3) UNSIGNED NOT NULL,
@@ -97,8 +88,7 @@ CREATE TABLE `item` (
   `color` varchar(15) NOT NULL,
   `material` varchar(15) NOT NULL,
   `description` text DEFAULT NULL,
-  `tags` text DEFAULT NULL, 
-    PRIMARY KEY (`itemID`)
+  `tags` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -108,7 +98,7 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `orders` (
-  `orderID` int(10) UNSIGNED ZEROFILL AUTO_INCREMENT UNIQUE NOT NULL,
+  `orderID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `customerID` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
   `itemsPrice` decimal(7,2) UNSIGNED NOT NULL,
   `shipping` decimal(4,2) UNSIGNED NOT NULL,
@@ -121,10 +111,7 @@ CREATE TABLE `orders` (
   `shipStreet2` varchar(30) NOT NULL,
   `shipCity` varchar(30) NOT NULL,
   `shipState` char(2) NOT NULL,
-  `shipZip` int(5) UNSIGNED NOT NULL,
-    PRIMARY KEY (`orderID`),
-    FOREIGN KEY (`customerID`) REFERENCES `customer`(`customerID`)
-
+  `shipZip` int(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -137,11 +124,95 @@ CREATE TABLE `order_items` (
   `orderID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `itemID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `quantity` int(3) UNSIGNED NOT NULL,
-  `price` decimal(5,2) UNSIGNED NOT NULL,
-    FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`),
-    FOREIGN KEY (`itemID`) REFERENCES `item`(`itemID`)
+  `price` decimal(5,2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customerID`),
+  ADD UNIQUE KEY `customerID` (`customerID`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`employeeID`),
+  ADD UNIQUE KEY `employeeID` (`employeeID`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`itemID`),
+  ADD UNIQUE KEY `itemID` (`itemID`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orderID`),
+  ADD UNIQUE KEY `orderID` (`orderID`),
+  ADD KEY `customerID` (`customerID`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `itemID` (`itemID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `itemID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`);
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`itemID`) REFERENCES `item` (`itemID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
