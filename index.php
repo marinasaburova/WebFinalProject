@@ -2,6 +2,7 @@
 session_start();
 require('function/db.php');
 require('function/customer-db.php');
+require('function/store-db.php');
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -19,8 +20,8 @@ switch ($action) {
     if ($category == NULL || $category == FALSE) {
       $category = 'all';
     }
-    //  $categories = getCategories();
-    //  $products = getProducts($category);
+    //$categories = getCategories();
+    $products = getProducts($category);
     include 'page/home.php';
     break;
 
