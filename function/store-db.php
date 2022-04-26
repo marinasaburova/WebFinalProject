@@ -29,6 +29,15 @@ function getProducts($category)
 
 function getProductDetails($itemID)
 {
+    global $db;
+
+    $query = 'SELECT * FROM `item` WHERE `itemID` = :itemID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':itemID', $itemID);
+    $statement->execute();
+    $product = $statement->fetch();
+    $statement->closeCursor();
+    return $product;
 }
 
 function updateItem($itemID)

@@ -70,7 +70,9 @@ include('view/navigation.php');
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th scope="row">Order Number</td>
+                            <th scope="row"> <a href=".?action=order-details#view">
+                                    Order Number </a>
+                                </td>
                             <td>Date</td>
                             <td>Items Ordered</td>
                             <td>Order Total</td>

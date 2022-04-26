@@ -10,6 +10,7 @@ include 'view/navigation.php';
 
     <!-- Main Content -->
     <div class="col-md-9">
+      <!-- Products -->
       <div class="row align-items-start justify-content-start text-center">
         <?php
 
@@ -28,118 +29,17 @@ include 'view/navigation.php';
 
         <?php
         }
-
-
         ?>
+      </div>
+      <!-- /.products -->
 
-        <!--
-        <div class="col-sm">
-          <div class="card mb-4">
-            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <a href=".?action=product#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.row -->
-
-        <!--
-      <div class="row align-items-start justify-content-center text-center">
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-start justify-content-center text-center">
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div class="card mb-4">
-            <img class="card-img-top" src="media/purse.jpg" alt="Image of product" />
-            <div class="card-body">
-              <h5 class="card-title">Product Name</h5>
-              <p class="card-text">Price</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
-      </div>
-      <!-- /.col main content -->
     </div>
-    <!-- /.row -->
+    <!-- /.col main content -->
   </div>
-  <!-- /.middle container -->
+  <!-- /.row -->
+</div>
+<!-- /.middle container -->
 
-  <?php
-  include 'view/footer.php';
-  ?>
+<?php
+include 'view/footer.php';
+?>

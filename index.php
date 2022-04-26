@@ -27,6 +27,11 @@ switch ($action) {
 
     // show product details
   case ('product'):
+    if (!isset($_GET['itemid'])) {
+      include 'page/home.php';
+      break;
+    }
+    $product = getProductDetails($_GET['itemid']);
     include 'page/product.php';
     break;
 
@@ -72,11 +77,15 @@ switch ($action) {
 
     // show register page 
   case ('register'):
-    include 'page/register.html';
+    include 'page/register.php';
     break;
 
     // log someone out 
   case ('logout'):
     logout();
+    break;
+
+  case ('order-details'):
+    include 'page/order-details.php';
     break;
 }
