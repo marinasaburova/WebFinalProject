@@ -133,5 +133,5 @@ switch ($action) {
     $email = filter_input(INPUT_POST, 'email');
 
     updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
-    include 'page/account.php';
+    header('Location: .?action=account');
 }

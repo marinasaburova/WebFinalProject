@@ -12,7 +12,6 @@ include('view/navigation.php');
     <main>
         <div class="py-5 text-center">
             <h2>Welcome, <?php echo $info['firstName'] ?></h2>
-            <p><?php echo 'Customer ID: ' . $_SESSION['customerID'] ?></p>
             <p class="lead">Manage your account here.</p>
         </div>
 
