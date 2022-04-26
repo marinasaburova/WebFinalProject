@@ -11,7 +11,8 @@ include('view/navigation.php');
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <h2>Welcome, Name</h2>
+            <h2>Welcome, <?php echo $info['firstName'] ?></h2>
+            <p><?php echo 'Customer ID: ' . $_SESSION['customerID'] ?></p>
             <p class="lead">Manage your account here.</p>
         </div>
 
@@ -29,28 +30,33 @@ include('view/navigation.php');
                                 <h6 class="my-0">Name</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">Firstname Lastname</span>
+                            <span class="text-muted"><?php echo $info['firstName'] . ' ' . $info['lastName'] ?></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Email</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">email address</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Phone Number</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">Phone</span>
+                            <span class="text-muted"><?php echo $info['email'] ?></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Default Address</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">Address</span>
+                            <span class="text-muted">
+
+                                <?php
+                                if (isset($info['shipStreet'])) {
+                                    echo $info['shipStreet'];
+                                    echo $info['shipCity'];
+                                    echo $info['shipState'];
+                                    echo $info['shipZip'];
+                                } else {
+                                    echo 'not set';
+                                }
+                                ?>
+                            </span>
                         </li>
                     </ul>
 

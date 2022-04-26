@@ -32,33 +32,26 @@ $total = $price + $tax + $shipping;
             <span class="badge bg-primary rounded-pill">3</span>
           </h4>
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Product total</h6>
                 <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$<?php echo $price ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Estimated Tax</h6>
                 <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$<?php echo $tax ?>1</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Shipping</h6>
                 <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$<?php echo $shipping ?></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">−$5</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>

@@ -51,11 +51,13 @@ switch ($action) {
 
     // show customer's account
   case ('account'):
+    $info = getCustomerData($_SESSION['customerID']);
     include 'page/account.php';
     break;
 
     // show edit account page
   case ('editaccount'):
+    $info = getCustomerData($_SESSION['customerID']);
     include 'page/edit-account.php';
     break;
 
@@ -72,7 +74,9 @@ switch ($action) {
 
     if (isValidLogin($email, $password)) {
       $_SESSION['loggedin'] = true;
-      include('page/account.php');
+      $_SESSION['customerID'] = getCustomerID($email);
+      $info = getCustomerData($_SESSION['customerID']);
+      include 'page/account.php';
     } else {
       $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
       include('page/login.php');
@@ -122,4 +126,12 @@ switch ($action) {
     removeFromCart($itemID);
     header('Location: .?action=cart#view');
     break;
+
+  case ('update-personal'):
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $email = filter_input(INPUT_POST, 'email');
+
+    updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
+    include 'page/account.php';
 }
