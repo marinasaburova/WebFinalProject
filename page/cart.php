@@ -7,6 +7,11 @@
 include 'view/header.php';
 include 'view/navigation.php';
 $cart = $_SESSION['cart'];
+
+$price = getCartTotal();
+$tax = $price * .05;
+$shipping = 5;
+$total = $price + $tax + $shipping;
 ?>
 
 
@@ -32,21 +37,21 @@ $cart = $_SESSION['cart'];
                 <h6 class="my-0">Product total</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo getCartTotal() ?></span>
+              <span class="text-muted">$<?php echo $price ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Estimated Tax</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$2.01</span>
+              <span class="text-muted">$<?php echo $tax ?>1</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Shipping</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-muted">$<?php echo $shipping ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
@@ -57,7 +62,7 @@ $cart = $_SESSION['cart'];
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$92</strong>
+              <strong>$<?php echo $total ?></strong>
             </li>
           </ul>
 
@@ -86,8 +91,8 @@ $cart = $_SESSION['cart'];
               $product = getProductDetails($item);
             ?>
               <tr>
-                <td>Picture</td>
-                <td><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></a></td>
+                <td>Image</td>
+                <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
                 <td>Quantity: <?php echo $quantity ?></td>
                 <td>
                   <div>
@@ -95,6 +100,14 @@ $cart = $_SESSION['cart'];
                     </p>
                     <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
                   </div>
+                </td>
+                <td>
+                  <form action="." method="post">
+                    <input type="hidden" name="itemid" value="<?php echo $product['itemID'] ?>">
+                    <button type="submit" name="action" value="remove-item" class="btn btn-sm btn-outline-danger"> <i class="fas fa-times-circle"></i>
+                    </button>
+                  </form>
+
                 </td>
               </tr>
             <?php
@@ -105,7 +118,7 @@ $cart = $_SESSION['cart'];
         </table>
         <?php
         if (!empty($cart)) {
-          echo '<a href=".?action=clear-cart" class="btn btn-danger" type="submit">Clear Cart</a>';
+          echo '<a href=".?action=clear-cart" class="btn btn-danger float-right" type="submit">Clear Cart</a>';
         } ?>
       </div>
       <!-- ./cart -->

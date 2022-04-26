@@ -103,8 +103,23 @@ switch ($action) {
     header("Location: .?action=product&itemid=$itemID&msg=success#view");
     break;
 
+  case ('home-add-to-cart'):
+    $itemID = $_POST['itemid'];
+    $quantity = $_POST['quantity'];
+    addToCart($itemID, $quantity);
+
+    $products = getProducts('all');
+    header("Location: .?msg=success#view");
+    break;
+
   case ('clear-cart'):
     clearCart();
+    header('Location: .?action=cart#view');
+    break;
+
+  case ('remove-item'):
+    $itemID = $_POST['itemid'];
+    removeFromCart($itemID);
     header('Location: .?action=cart#view');
     break;
 }

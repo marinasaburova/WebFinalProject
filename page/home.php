@@ -22,7 +22,12 @@ include 'view/navigation.php';
               <div class="card-body">
                 <h5 class="card-title"><?php echo $p['name'] ?></h5>
                 <p class="card-text">$<?php echo $p['price'] ?></p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <form action="." method="post" class="needs-validation">
+                  <input type="hidden" class="form-control" id="action" name="action" value="home-add-to-cart" />
+                  <input type="hidden" class="form-control" id="itemid" name="itemid" value="<?php echo $p['itemID'] ?>" />
+                  <input type="hidden" class="form-control" id="quantity" name="quantity" value="1" />
+                  <button class="btn btn-primary" type="submit">Add to cart</button>
+                </form>
               </div>
             </div>
           </div>
