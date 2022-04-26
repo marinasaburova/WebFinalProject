@@ -16,6 +16,7 @@ include('view/navigation.php');
     <div class="row g-5">
       <div class="col-md-3 col-lg-2"></div>
       <div class="col-md-6 col-lg-8">
+        <!-- Personal Form -->
         <form action="." method="post" class="needs-validation">
           <h4 class="mb-3 pt-1">Personal Information</h4>
 
@@ -34,19 +35,59 @@ include('view/navigation.php');
 
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required placeholder="you@example.com" value="<?php echo $info['email'] ?>">
+              <input type="email" class="form-control" id="email" name="email" required placeholder="" value="<?php echo $info['email'] ?>">
+            </div>
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
+
+            <hr class="my-4" id="password">
+          </div>
+        </form>
+        <!-- ./personal form -->
+
+        <!-- Password Form -->
+        <form action="." method="post" class="needs-validation" oninput='newPassword2.setCustomValidity(newPassword2.value != newPassword.value ? "Passwords do not match." : "")'>
+          <h4 class="mb-3 pt-1">Password</h4>
+
+          <?php
+          if (isset($_GET['msg']) && $_GET['msg'] == 'success') {
+            echo "<p class='text-success'>Password has been updated!</p>";
+          }
+          ?>
+
+          <input type="hidden" name="action" value="update-password">
+          <input type="hidden" name="email" value="<?php echo $info['email'] ?>">
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+            </div>
+
+            <?php
+            if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
+              echo "<p class='text-danger mb-0'>Wrong current password.</p>";
+            }
+            ?>
+
+            <div class="col-12">
+              <label for="newPassword" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="newPassword" name="newPassword" required>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required placeholder="Change password">
+              <label for="newPassword2" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" id="newPassword2" name="newPassword2" required>
             </div>
 
             <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
 
             <hr class="my-4">
+          </div>
         </form>
+        <!-- ./password form -->
 
+        <!-- Address Form -->
         <form action="." method="post" class="needs-validation">
           <h4 class="mb-3 pt-1">Shipping Information</h4>
 
@@ -55,22 +96,27 @@ include('view/navigation.php');
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" required placeholder="" value="<?php echo ($info['shipFirstName'] ?? ($info['firstName'] ?? '')) ?>">
+              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="" value="<?php echo ($info['shipFirstName'] ?? ($info['firstName'] ?? '')) ?>">
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="lastName" required placeholder="" value="<?php echo ($info['shipLastName'] ?? ($info['lastName'] ?? ''))  ?>">
+              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="" value="<?php echo ($info['shipLastName'] ?? ($info['lastName'] ?? ''))  ?>">
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" required placeholder="1234 Main St" value="<?php echo ($info['shipStreet'] ?? '') ?>">
+              <label for="address" class="form-label">Street</label>
+              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St" value="<?php echo ($info['shipStreet'] ?? '') ?>">
             </div>
 
             <div class="col-12">
-              <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" value="<?php echo ($info['shipStreet2'] ?? '') ?>">
+              <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="street2" name="street2" placeholder="Apartment or suite" value="<?php echo ($info['shipStreet2'] ?? '') ?>">
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" name="city" required placeholder="" value="<?php echo ($info['shipCity'] ?? '') ?>">
             </div>
 
             <div class="col-md-5">
@@ -88,17 +134,15 @@ include('view/navigation.php');
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" required placeholder="" value="<?php echo ($info['shipZip'] ?? '') ?>">
+              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required placeholder="" value="<?php echo ($info['shipZip'] ?? '') ?>">
             </div>
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
+
+            <hr class="my-4">
           </div>
-
-          <hr class="my-4">
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
-
-          <hr class="my-4">
-
         </form>
+        <!-- ./address form -->
       </div>
       <!-- ./col -->
       <div class="col-md-3 col-lg-2"></div>

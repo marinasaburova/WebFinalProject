@@ -46,12 +46,20 @@ switch ($action) {
 
     // show checkout page
   case ('checkout'):
-    include 'page/checkout.php';
+    if (empty($_SESSION['cart'])) {
+      include 'page/cart.php';
+    } else {
+      if (isset($_SESSION['loggedin'])) {
+        $info = getCustomerData($_SESSION['customerID']);
+      }
+      include 'page/checkout.php';
+    }
     break;
 
     // show customer's account
   case ('account'):
     $info = getCustomerData($_SESSION['customerID']);
+    $orders = getOrderHistory($_SESSION['customerID']);
     include 'page/account.php';
     break;
 
@@ -76,7 +84,7 @@ switch ($action) {
       $_SESSION['loggedin'] = true;
       $_SESSION['customerID'] = getCustomerID($email);
       $info = getCustomerData($_SESSION['customerID']);
-      include 'page/account.php';
+      header('Location: .?action=account');
     } else {
       $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
       include('page/login.php');
@@ -99,8 +107,8 @@ switch ($action) {
     break;
 
   case ('add-to-cart'):
-    $itemID = $_POST['itemid'];
-    $quantity = $_POST['quantity'];
+    $itemID = filter_input(INPUT_POST, 'itemid');
+    $quantity = filter_input(INPUT_POST, 'quantity');
     addToCart($itemID, $quantity);
 
     $products = getProducts('all');
@@ -108,8 +116,8 @@ switch ($action) {
     break;
 
   case ('home-add-to-cart'):
-    $itemID = $_POST['itemid'];
-    $quantity = $_POST['quantity'];
+    $itemID = filter_input(INPUT_POST, 'itemid');
+    $quantity = filter_input(INPUT_POST, 'quantity');
     addToCart($itemID, $quantity);
 
     $products = getProducts('all');
@@ -122,7 +130,7 @@ switch ($action) {
     break;
 
   case ('remove-item'):
-    $itemID = $_POST['itemid'];
+    $itemID = filter_input(INPUT_POST, 'itemid');
     removeFromCart($itemID);
     header('Location: .?action=cart#view');
     break;
@@ -134,4 +142,51 @@ switch ($action) {
 
     updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
     header('Location: .?action=account');
+    break;
+
+  case ('update-password'):
+    $current = filter_input(INPUT_POST, 'currentPassword');
+    $email = filter_input(INPUT_POST, 'email');
+
+    if (isValidLogin($email, $current)) {
+      $newPassword = filter_input(INPUT_POST, 'newPassword');
+      updatePassword($_SESSION['customerID'], $newPassword);
+      $message = 'Password updated';
+      header('Location: .?action=editaccount&msg=success#password');
+    } else {
+      header('Location: .?action=editaccount&msg=error#password');
+    }
+    break;
+
+  case ('update-shipping'):
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $street = filter_input(INPUT_POST, 'street');
+    $street2 = filter_input(INPUT_POST, 'street2');
+    $city = filter_input(INPUT_POST, 'city');
+    $state = filter_input(INPUT_POST, 'state');
+    $zip = filter_input(INPUT_POST, 'zip');
+
+    updateDefaultAddr($_SESSION['customerID'], $firstName, $lastName, $street, $street2, $city, $state, $zip);
+    header('Location: .?action=account');
+    break;
+
+  case ('place-order'):
+    $email = filter_input(INPUT_POST, 'email');
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $street = filter_input(INPUT_POST, 'street');
+    $street2 = filter_input(INPUT_POST, 'street2');
+    $city = filter_input(INPUT_POST, 'city');
+    $state = filter_input(INPUT_POST, 'state');
+    $zip = filter_input(INPUT_POST, 'zip');
+
+    $cart = $_SESSION['cart'];
+    if (isset($_SESSION['customerID'])) {
+      $customerID = $_SESSION['customerID'];
+    }
+
+    placeOrder();
+    include 'page/confirmation.php';
+    break;
 }

@@ -47,9 +47,13 @@ include('view/navigation.php');
 
                                 <?php
                                 if (isset($info['shipStreet'])) {
-                                    echo $info['shipStreet'];
-                                    echo $info['shipCity'];
-                                    echo $info['shipState'];
+                                    echo $info['firstName'] . ' ' . $info['lastName'] . '</br>';
+                                    echo $info['shipStreet'] . '</br>';
+                                    if ($info['shipStreet2']) {
+                                        echo $info['shipStreet2'] . '</br>';
+                                    }
+                                    echo $info['shipCity'] . ', ';
+                                    echo $info['shipState'] . ' ';
                                     echo $info['shipZip'];
                                 } else {
                                     echo 'not set';
@@ -74,14 +78,29 @@ include('view/navigation.php');
                 <h4 class="mb-3 text-primary pt-1">Your Order History</h4>
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <th scope="row"> <a href=".?action=order-details#view">
-                                    Order Number </a>
-                                </td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
+                        <?php
+                        if (empty($orders) || sizeof($orders) == 0) {
+                            echo '<p class="">You have no orders.</p>';
+                            echo '<a href="."><p class="my-0">Go shopping!</p></a>';
+                        }
+
+                        foreach ($orders as $order) {
+                            $totalPrice = $order['itemsPrice'] + $order['shipping'] + $order['tax'];
+                        ?>
+                            <tr>
+                                <th scope="row"> <a href=".?action=order-details#view" class="text-reset text-decoration-none">
+                                        Order #<?php echo $order['orderID'] ?></a>
+                                    </td>
+                                <td><?php echo $order['timePlaced'] ?></td>
+                                <td><?php echo 'num of items' ?></td>
+                                <td><?php echo $totalPrice ?></td>
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+
+                        <!-- 
                         <tr>
                             <th scope="row">Order Number</td>
                             <td>Date</td>
@@ -99,7 +118,7 @@ include('view/navigation.php');
                             <td>Date</td>
                             <td>Items Ordered</td>
                             <td>Order Total</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
 
                 </table>

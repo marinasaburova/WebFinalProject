@@ -6,27 +6,14 @@
 <?php
 include 'view/header.php';
 include 'view/navigation.php';
-
-$cart = $_SESSION['cart'];
-
-$price = getCartTotal();
-$tax = $price * .05;
-$shipping = 5;
-$total = $price + $tax + $shipping;
-
-$numOfItems = 0;
-foreach ($cart as $item => $quantity) {
-  $numOfItems += $quantity;
-}
-
 ?>
 
 
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>Checkout</h2>
-      <p class="lead">These gorgeous items are almost yours.</p>
+      <h2>Order Confirmation</h2>
+      <p class="lead">Yay! Congrats on your new purchase.</p>
     </div>
 
     <div class="row g-5">
@@ -35,60 +22,46 @@ foreach ($cart as $item => $quantity) {
         <div class="sticky-top" style="top:72px; z-index: 1018">
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
+            <span class="badge bg-primary rounded-pill">3</span>
           </h4>
           <ul class="list-group mb-3">
-
-            <?php
-            foreach ($cart as $item => $quantity) {
-              $product = getProductDetails($item);
-            ?>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
-                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
-                </div>
-                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
-              </li>
-
-            <?php } ?>
-
-          </ul>
-
-          <ul class="list-group mb-3">
-
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0">Product total</h6>
+                <h6 class="my-0">Product name</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $price ?></span>
+              <span class="text-muted">$12</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0">Estimated Tax</h6>
+                <h6 class="my-0">Second product</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
+              <span class="text-muted">$8</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0">Shipping</h6>
+                <h6 class="my-0">Third item</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $shipping ?></span>
+              <span class="text-muted">$5</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between ">
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">−$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$<?php echo $total ?></strong>
+              <strong>$20</strong>
             </li>
-
           </ul>
 
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="cart">
-              <button class="w-100 btn btn-secondary" type="submit">Edit Cart</button>
             </div>
           </form>
         </div>
@@ -270,7 +243,6 @@ foreach ($cart as $item => $quantity) {
           </div>
           <!-- ./billing -->
 
-          <button class="w-100 btn btn-primary btn-lg my-4" type="submit">Place Order</button>
         </form>
       </div>
       <!-- ./billing and shipping -->

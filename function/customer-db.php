@@ -53,8 +53,18 @@ function updateCustomer($customerID, $email, $firstName, $lastName)
     $statement->closeCursor();
 }
 
-function changeCustomerPwd($customerID, $newPwd)
+function updatePassword($customerID, $newPassword)
 {
+    global $db;
+
+    $hash = password_hash($newPassword, PASSWORD_BCRYPT);
+
+    $query = 'UPDATE customer SET `password` = :hash WHERE `customerID` = :customerID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':hash', $hash);
+    $statement->bindValue(':customerID', $customerID);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function getCustomerData($customerID)
@@ -82,15 +92,11 @@ function getCustomerID($email)
     return $customer['customerID'];
 }
 
-function getDefaultAddr($customer)
-{
-}
-
-function setDefaultAddr($customerID, $firstName, $lastName, $street, $street2, $city, $state, $zip)
+function updateDefaultAddr($customerID, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
     global $db;
 
-    $query = 'UPDATE customer SET (`shipFirstName` = :firstName, `shipLastName` = :lastName, `shipStreet` = :street, `shipStreet2` = :street2, `shipCity` = :city, `shipState` = :state), `shipZip` = :zip WHERE `customerID` = :customerID';
+    $query = 'UPDATE customer SET `shipFirstName` = :firstName, `shipLastName` = :lastName, `shipStreet` = :street, `shipStreet2` = :street2, `shipCity` = :city, `shipState` = :state, `shipZip` = :zip WHERE `customerID` = :customerID';
     $statement = $db->prepare($query);
     $statement->bindValue(':firstName', $firstName);
     $statement->bindValue(':lastName', $lastName);

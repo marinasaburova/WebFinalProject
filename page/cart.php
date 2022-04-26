@@ -12,6 +12,11 @@ $price = getCartTotal();
 $tax = $price * .05;
 $shipping = 5;
 $total = $price + $tax + $shipping;
+
+$numOfItems = 0;
+foreach ($cart as $item => $quantity) {
+  $numOfItems += $quantity;
+}
 ?>
 
 
@@ -29,7 +34,7 @@ $total = $price + $tax + $shipping;
 
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Summary</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
@@ -62,7 +67,7 @@ $total = $price + $tax + $shipping;
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="checkout">
-              <button class="w-100 btn btn-secondary" type="submit">Continue to checkout</button>
+              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart)) echo 'disabled' ?>>Continue to checkout</button>
 
             </div>
           </form>
@@ -78,7 +83,7 @@ $total = $price + $tax + $shipping;
             <?php
             if (empty($cart) || sizeof($cart) == 0) {
               echo '<p class="">Your cart is empty.</p>';
-              echo '<a href="."><p class="mb-0">Go shopping!</p></a>';
+              echo '<a href="."><p class="my-0">Go shopping!</p></a>';
             }
             foreach ($cart as $item => $quantity) {
               $product = getProductDetails($item);

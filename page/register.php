@@ -15,7 +15,7 @@ include('view/navigation.php')
       <div class="mb-3">
         <!-- General Info -->
         <div>
-          <form class="needs-validation" novalidate>
+          <form action="." method="post" class="needs-validation" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
 
             <div class="mb-3">
               <!-- first name -->
