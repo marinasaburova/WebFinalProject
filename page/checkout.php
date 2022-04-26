@@ -97,7 +97,7 @@ foreach ($cart as $item => $quantity) {
 
       <!-- Billing & Shipping -->
       <div class="col-md-7 col-lg-8">
-        <form action="." method="post" class="needs-validation" novalidate>
+        <form action="." method="post" class="needs-validation">
           <input type="hidden" name="action" value="place-order">
 
           <!-- Shipping -->
@@ -227,27 +227,27 @@ foreach ($cart as $item => $quantity) {
           <div class="row g-3" id="billing">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="">
+              <input type="text" class="form-control" id="billFirstName" name="firstName" placeholder="" required>
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="">
+              <input type="text" class="form-control" id="billLastName" name="lastName" placeholder="" required>
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">Street</label>
-              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St">
+              <input type="text" class="form-control" id="billStreet" name="street" placeholder="1234 Main St" required>
             </div>
 
             <div class="col-12">
               <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="street2" name="street2" placeholder="Apartment or suite">
+              <input type="text" class="form-control" id="billStreet2" name="street2" placeholder="Apartment or suite">
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" name="city" required placeholder="">
+              <input type="text" class="form-control" id="billCity" name="city" placeholder="" required>
             </div>
 
             <div class="col-md-5">
@@ -259,14 +259,13 @@ foreach ($cart as $item => $quantity) {
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <input type="text" class="form-control" minlength="2" maxlength="2" id="state" name="state" required>
+              <input type="text" class="form-control" minlength="2" maxlength="2" id="billState" name="state" required>
             </div>
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required placeholder="">
+              <input type="text" class="form-control" id="billZip" name="zip" minlength="5" maxlength="5" placeholder="" required>
             </div>
-
           </div>
           <!-- ./billing -->
 
@@ -289,8 +288,24 @@ foreach ($cart as $item => $quantity) {
       if (checkBox.checked == true) {
         div.className += " d-none";
 
+        // make attributes optional
+        document.getElementById("billFirstName").removeAttribute("required");
+        document.getElementById("billLastName").removeAttribute("required");
+        document.getElementById("billStreet").removeAttribute("required");
+        document.getElementById("billCity").removeAttribute("required");
+        document.getElementById("billState").removeAttribute("required");
+        document.getElementById("billZip").removeAttribute("required");
+
       } else {
         div.className = div.className.replace(/(?:^|\s)d-none(?!\S)/g, '')
+
+        // make attributes required
+        document.getElementById("billFirstName").setAttribute("required", "true");
+        document.getElementById("billLastName").setAttribute("required", "true");
+        document.getElementById("billStreet").setAttribute("required", "true");
+        document.getElementById("billCity").setAttribute("required", "true");
+        document.getElementById("billState").setAttribute("required", "true");
+        document.getElementById("billZip").setAttribute("required", "true");
       }
     }
   </script>
