@@ -1,43 +1,22 @@
 <!-- Shows details about a specific order -->
 <!-- User needs to be logged in to see -->
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include('view/header.php') ?>
+<?php include('view/navigation.php') ?>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <title>Login</title>
+<div class="container-fluid">
+    <main>
+        <!-- Title -->
+        <div class="py-5 text-center">
+            <h2>Your Order</h2>
+            <p class="lead">So cute, girl!</p>
+        </div>
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-        }
-    </style>
-
-    <?php include('view/header.php') ?>
-    <?php include('view/navigation.php') ?>
-
-</head>
-
-<body>
-    <div class="py-5 text-center">
-        <h2>Your Order</h2>
-        <p class="lead">So cute, girl!</p>
-    </div>
-
-
-    <div class="container-fluid">
         <!-- Shipping Address -->
-
-        <div class="py-5 text-center w-25 mx-auto">
+        <div class="py-0 text-center w-25 mx-auto">
             <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
                 <div class="card-body">
-                    <h5 class="card-title">Shipping Address</h5>
+                    <h5 class="card-title">Shipped To</h5>
                     <p class="card-text">$Addr1</p>
                     <p class="card-text">$City</p>
                     <p class="card-text">$State</p>
@@ -79,9 +58,20 @@
                 </div>
             </a>
         </div>
-    </div>
 
-    <?php include('view/footer.php') ?>
-</body>
+        <!-- Order Totals -->
+        <div class="my-4 text-center w-25 mx-auto">
+            <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
+                <div class="card-body">
+                    <h5 class="card-title">Order Total</h5>
+                    <p class="card-text">$itemTotal</p>
+                    <p class="card-text">$tax</p>
+                    <p class="card-text">$shipping</p>
+                    <p class="card-text">$total</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 
-</html>
+<?php include('view/footer.php') ?>

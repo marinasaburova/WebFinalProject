@@ -6,6 +6,7 @@
 <?php
 include 'view/header.php';
 include 'view/navigation.php';
+$cart = $_SESSION['cart'];
 ?>
 
 
@@ -31,7 +32,7 @@ include 'view/navigation.php';
                 <h6 class="my-0">Product total</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$71</span>
+              <span class="text-muted">$<?php echo getCartTotal() ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
@@ -76,118 +77,36 @@ include 'view/navigation.php';
         <h4 class="mb-3 pt-1">Your Items</h4>
         <table class="table">
           <tbody>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Picture</td>
-              <td>Item Name</td>
-              <td>Quantity</td>
-              <td>
-                <div>
-                  <p class="mb-0">Total Price
-                  </p>
-                  <small class="text-muted">$price * quantity</small>
-                </div>
-              </td>
-            </tr>
+            <?php
+            if (empty($cart) || sizeof($cart) == 0) {
+              echo '<p class="">Your cart is empty.</p>';
+              echo '<a href="."><p class="mb-0">Go shopping!</p></a>';
+            }
+            foreach ($cart as $item => $quantity) {
+              $product = getProductDetails($item);
+            ?>
+              <tr>
+                <td>Picture</td>
+                <td><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></a></td>
+                <td>Quantity: <?php echo $quantity ?></td>
+                <td>
+                  <div>
+                    <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
+                    </p>
+                    <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
+                  </div>
+                </td>
+              </tr>
+            <?php
+            }
+            ?>
           </tbody>
 
         </table>
-
+        <?php
+        if (!empty($cart)) {
+          echo '<a href=".?action=clear-cart" class="btn btn-danger" type="submit">Clear Cart</a>';
+        } ?>
       </div>
       <!-- ./cart -->
     </div>

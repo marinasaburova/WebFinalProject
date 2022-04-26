@@ -21,8 +21,15 @@ include 'view/navigation.php';
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title"><?php echo $product['name'] ?></h5>
-            <p class="card-text">Price: $<?php echo $product['price'] ?></p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+            <p class="card-text">$<?php echo $product['price'] ?></p>
+            <form action="." method="post" class="needs-validation">
+              <input type="hidden" class="form-control" id="action" name="action" value="add-to-cart" />
+              <input type="hidden" class="form-control" id="itemid" name="itemid" value="<?php echo $product['itemID'] ?>" />
+              <input type="hidden" class="form-control" id="quantity" name="quantity" value="1" />
+              <button class="btn btn-primary" type="submit">Add to cart</button>
+            </form>
+
+            <?php if (isset($message)) { ?><p class="text-success pt-2"><?php echo $message ?></p> <?php } ?>
             <p class="card-text pt-3"><?php echo $product['description'] ?>
 
           </div>
