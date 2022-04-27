@@ -47,3 +47,28 @@ function getCartTotal()
 
     return $total;
 }
+
+function getTax()
+{
+    return getCartTotal() * .05;
+}
+
+function getShipping()
+{
+    return 5;
+}
+
+function getTotal()
+{
+    return getCartTotal() + getShipping() + getTax();
+}
+
+function getCartNumOfItems()
+{
+    $cart = $_SESSION['cart'];
+    $numOfItems = 0;
+    foreach ($cart as $item => $quantity) {
+        $numOfItems += $quantity;
+    }
+    return $numOfItems;
+}

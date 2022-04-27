@@ -35,45 +35,34 @@ foreach ($cart as $item => $quantity) {
         <div class="sticky-top" style="top:72px; z-index: 1018">
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Shipping & Billing</span>
-            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
           </h4>
-          <ul class="list-group mb-3">
-
-            <?php
-            foreach ($cart as $item => $quantity) {
-              $product = getProductDetails($item);
-            ?>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
-                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
-                </div>
-                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
-              </li>
-
-            <?php } ?>
-
-          </ul>
 
           <ul class="list-group mb-3">
 
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
-                <h6 class="my-0">Product total</h6>
+                <h6 class="my-0">Shipping to</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $price ?></span>
+              <span class="text-muted">
+                <?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] . '</br>' ?>
+                <?php echo $order['shipStreet'] . '</br>' ?>
+                <?php if (isset($order['shipStreet2'])) {
+                  echo $order['shipStreet2'] . '</br>';
+                } ?>
+                <?php echo $order['shipCity'] . ', ' . $order['shipState'] . ' ' . $order['shipZip'] ?>
+              </span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
-                <h6 class="my-0">Estimated Tax</h6>
+                <h6 class="my-0">Billing to</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
+              <span class="text-muted">Address<?php echo $tax ?>1</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
-                <h6 class="my-0">Shipping</h6>
+                <h6 class="my-0">Payment Info</h6>
                 <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$<?php echo $shipping ?></span>
@@ -91,25 +80,7 @@ foreach ($cart as $item => $quantity) {
         <div class="sticky-top" style="top:72px; z-index: 1018">
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Order Total</span>
-            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
           </h4>
-          <ul class="list-group mb-3">
-
-            <?php
-            foreach ($cart as $item => $quantity) {
-              $product = getProductDetails($item);
-            ?>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
-                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
-                </div>
-                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
-              </li>
-
-            <?php } ?>
-
-          </ul>
 
           <ul class="list-group mb-3">
 
@@ -118,25 +89,25 @@ foreach ($cart as $item => $quantity) {
                 <h6 class="my-0">Product total</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $price ?></span>
+              <span class="text-muted">$<?php echo $order['itemsPrice'] ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
-                <h6 class="my-0">Estimated Tax</h6>
+                <h6 class="my-0">Tax</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
+              <span class="text-muted">$<?php echo $order['tax'] ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Shipping</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $shipping ?></span>
+              <span class="text-muted">$<?php echo $order['shipping'] ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between ">
               <span>Total (USD)</span>
-              <strong>$<?php echo $total ?></strong>
+              <strong>$<?php echo ($order['itemsPrice'] + $order['tax'] + $order['shipping']) ?></strong>
             </li>
           </ul>
         </div>
@@ -147,54 +118,21 @@ foreach ($cart as $item => $quantity) {
         <div class="sticky-top" style="top:72px; z-index: 1018">
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
             <span class="text-primary">Items Ordered</span>
-            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
           </h4>
           <ul class="list-group mb-3">
 
             <?php
-            foreach ($cart as $item => $quantity) {
-              $product = getProductDetails($item);
+            foreach ($items as $item) {
             ?>
               <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
-                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
-                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
+                  <h6 class="my-0"><?php echo $item['name'] ?></h6>
+                  <small class="text-muted"><?php echo '$' . $item['price'] . ' * ' . $item['quantity']  ?></small>
                 </div>
-                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
+                <span class="text-muted">$<?php echo ($item['price'] * $item['quantity']) ?></span>
               </li>
 
             <?php } ?>
-
-          </ul>
-
-          <ul class="list-group mb-3">
-
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
-              <div>
-                <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$<?php echo $price ?></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
-              <div>
-                <h6 class="my-0">Estimated Tax</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
-              <div>
-                <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$<?php echo $shipping ?></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between ">
-              <span>Total (USD)</span>
-              <strong>$<?php echo $total ?></strong>
-            </li>
-
           </ul>
 
         </div>

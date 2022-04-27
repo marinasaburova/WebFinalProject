@@ -1,9 +1,19 @@
+
+-- create user to query product database --
+/* 
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON kelarinadatabase.*
+TO kelarina@localhost
+IDENTIFIED BY 'kelarinapass';
+*/
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 07:05 PM
+-- Generation Time: Apr 27, 2022 at 02:24 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -21,16 +31,11 @@ SET time_zone = "+00:00";
 -- Database: `kelarinadatabase`
 --
 
+-- --------------------------------------------------------
 
-
-
--- create user to query product database --
-/* 
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON kelarinadatabase.*
-TO kelarina@localhost
-IDENTIFIED BY 'kelarinapass';
-*/
+--
+-- Table structure for table `customer`
+--
 
 CREATE TABLE `customer` (
   `customerID` int(10) UNSIGNED ZEROFILL NOT NULL,
@@ -44,7 +49,7 @@ CREATE TABLE `customer` (
   `shipStreet2` varchar(30) DEFAULT NULL,
   `shipCity` varchar(30) DEFAULT NULL,
   `shipState` char(2) DEFAULT NULL,
-  `shipZip` int(5) UNSIGNED DEFAULT NULL,
+  `shipZip` int(5) UNSIGNED ZEROFILL DEFAULT NULL,
   `dateJoined` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(10) NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -54,7 +59,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `email`, `password`, `firstName`, `lastName`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`, `dateJoined`, `status`) VALUES
-(0000000001, 'marina@gmail.com', '$2y$10$jVkig/cDe.UHNrVGosV1tu6SSwCh62bxLxNHBbdwP34abPnlI9J4S', 'Marina', 'Saburova', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:14:42', 'active'),
+(0000000001, 'marina@gmail.com', '$2y$10$PMMWInZZYD3H.wmCc8kEFenORHTlAWHZ0N99ke0L/udypkIaUGk2C', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043, '2022-04-23 20:14:42', 'active'),
 (0000000002, 'kelsey@gmail.com', '$2y$10$i1D9cQHT9R21gFDjZv3vE.iTFTabTBrahyEXRgujTv2oUQFZ0mWVS', 'Kelsey', 'Nyman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:22:25', 'active');
 
 -- --------------------------------------------------------
@@ -91,6 +96,16 @@ CREATE TABLE `item` (
   `tags` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`itemID`, `name`, `price`, `quantity`, `category`, `color`, `material`, `description`, `tags`) VALUES
+(0000000001, 'Bag1', '10.00', 50, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. ', 'leather, bag, purse, minimal'),
+(0000000002, 'Belt1', '15.00', 50, 'belt', 'white', 'faux leather', 'A simple faux leather belt with gold details. ', 'gold, faux leather, belt, simple, minimal'),
+(0000000003, 'Sunglasses1', '10.00', 80, 'sunglasses', 'pink', 'metal', 'Metal frame sunglasses with a pink border. ', 'girly, cute, pink, feminine'),
+(0000000004, 'Sunglasses2', '10.00', 80, 'sunglasses', 'blue', 'metal', 'Metal frame sunglasses with a teal border. ', 'beachy, cute, teal, blue, feminine');
+
 -- --------------------------------------------------------
 
 --
@@ -100,6 +115,7 @@ CREATE TABLE `item` (
 CREATE TABLE `orders` (
   `orderID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `customerID` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
+  `email` varchar(60) NOT NULL,
   `itemsPrice` decimal(7,2) UNSIGNED NOT NULL,
   `shipping` decimal(4,2) UNSIGNED NOT NULL,
   `tax` decimal(4,2) UNSIGNED NOT NULL,
@@ -111,8 +127,17 @@ CREATE TABLE `orders` (
   `shipStreet2` varchar(30) NOT NULL,
   `shipCity` varchar(30) NOT NULL,
   `shipState` char(2) NOT NULL,
-  `shipZip` int(5) UNSIGNED NOT NULL
+  `shipZip` int(5) UNSIGNED ZEROFILL NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `customerID`, `email`, `itemsPrice`, `shipping`, `tax`, `status`, `timePlaced`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`) VALUES
+(0000000020, 0000000001, 'marina@gmail.com', '40.00', '5.00', '2.00', 'placed', '2022-04-27 01:23:28', 'Marina', 'Saburova', '1 Normal Ave', ' ', 'Montclair', 'NJ', 07043),
+(0000000021, NULL, 'glnsbr@gmail.com', '105.00', '5.00', '5.25', 'placed', '2022-04-27 01:25:34', 'Galina', 'Saburova', '1 Normal Ave', ' ', 'Montclair', 'NJ', 07043),
+(0000000022, 0000000001, 'marina@gmail.com', '60.00', '5.00', '3.00', 'placed', '2022-04-27 01:27:22', 'Marina', 'Saburova', '1 Normal Ave', ' ', 'Montclair', 'NJ', 07043);
 
 -- --------------------------------------------------------
 
@@ -126,6 +151,18 @@ CREATE TABLE `order_items` (
   `quantity` int(3) UNSIGNED NOT NULL,
   `price` decimal(5,2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`orderID`, `itemID`, `quantity`, `price`) VALUES
+(0000000020, 0000000001, 1, '10.00'),
+(0000000020, 0000000004, 3, '10.00'),
+(0000000021, 0000000002, 7, '15.00'),
+(0000000022, 0000000001, 1, '10.00'),
+(0000000022, 0000000003, 4, '10.00'),
+(0000000022, 0000000004, 1, '10.00');
 
 --
 -- Indexes for dumped tables
@@ -189,13 +226,13 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `itemID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables

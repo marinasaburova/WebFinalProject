@@ -9,14 +9,11 @@ include 'view/navigation.php';
 $cart = $_SESSION['cart'];
 
 $price = getCartTotal();
-$tax = $price * .05;
-$shipping = 5;
-$total = $price + $tax + $shipping;
+$tax = getTax();
+$shipping = getShipping();
+$total = getTotal();
+$numOfItems = getCartNumOfItems();
 
-$numOfItems = 0;
-foreach ($cart as $item => $quantity) {
-  $numOfItems += $quantity;
-}
 ?>
 
 

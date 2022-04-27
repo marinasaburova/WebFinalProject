@@ -58,6 +58,7 @@ switch ($action) {
 
     // show customer's account
   case ('account'):
+    require_once('utils/verify-login.php');
     $info = getCustomerData($_SESSION['customerID']);
     $orders = getOrderHistory($_SESSION['customerID']);
     include 'page/account.php';
@@ -65,6 +66,7 @@ switch ($action) {
 
     // show edit account page
   case ('editaccount'):
+    require_once('utils/verify-login.php');
     $info = getCustomerData($_SESSION['customerID']);
     include 'page/edit-account.php';
     break;
@@ -103,6 +105,23 @@ switch ($action) {
 
     // show page to search for order
   case ('order-search'):
+    $order_message = 'Search for your order here.';
+
+    if (isset($_POST['orderid']) && isset($_POST['email'])) {
+      $order_message = '<span class="text-danger">This order was not found.</span>';
+
+      $orderID = filter_input(INPUT_POST, 'orderid');
+      $email = filter_input(INPUT_POST, 'email');
+
+      if (searchOrder($email, $orderID)) {
+        $order = getOrderDetails($orderID);
+        $items = getOrderItems($orderID);
+        include 'page/order-details.php';
+        break;
+      }
+      echo searchOrder($email, $orderID);
+    }
+
     include 'page/order-search.php';
     break;
 
@@ -196,7 +215,10 @@ switch ($action) {
       $customerID = null;
     }
 
-    placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+    $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+
+    $order = getOrderDetails($orderID);
+    $items = getOrderItems($orderID);
     include 'page/confirmation.php';
     break;
 }
