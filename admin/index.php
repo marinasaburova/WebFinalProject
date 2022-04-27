@@ -39,10 +39,8 @@ switch ($action) {
 
         // show register page 
     case ('register'):
-        /*
         require_once('../utils/verify-admin.php');
-        include 'page/register.php';*/
-        registerEmployee('marina@employee.com', '1234', 'Marina', 'TheEmployee');
+        include 'page/register.php';
         break;
 
         // log someone out 
