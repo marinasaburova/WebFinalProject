@@ -32,10 +32,6 @@ include('admin-view/header.php');
                     <a href=".?action=customer">
                         <p class="mt-4 mb-5 pb-4 text-muted">Back to Customer</p>
                     </a>
-
-                    <a href=".?action=register">
-                        <p class="mt-4 mb-5 pb-4 text-muted">Register</p>
-                    </a>
                 </form>
             </main>
         </div>
