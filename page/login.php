@@ -32,8 +32,8 @@ include('view/header.php');
           <a href=".?action=register#view">
             <p class="mt-4 mb-3 text-muted">Register</p>
           </a>
-          <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">
-            <p class="mt-2 mb-5 text-muted">Go back</p>
+          <a href=".?action=order-search">
+            <p class="mt-2 mb-5 text-muted">Find order by number</p>
           </a>
         </form>
       </main>

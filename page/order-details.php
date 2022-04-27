@@ -1,41 +1,20 @@
 <!-- Shows details about a specific order -->
 <!-- User needs to be logged in to see -->
+<?php
+//require_once('utils/verify-login.php');
+include('view/header.php');
+include('view/navigation.php')
+?>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" 
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-            crossorigin="anonymous"
-        >
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" 
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
-            crossorigin="anonymous">
-        </script>
-        <title>Login</title>
-
-        <style>
-            .bd-placeholder-img {
-              font-size: 1.125rem;
-              text-anchor: middle;
-            }
-        </style>
-
-        <?php include('../view/header.php') ?>
-        <?php include('../view/navigation.php')?>
-
-    </head>
-
-    <body>
+<div class="container-fluid">
+    <main>
+        <!-- Title -->
         <div class="py-5 text-center">
-            <h2>Your Order</h2>
-            <p class="lead">So cute, girl!</p>
-          </div>
+            <h2>Order Details</h2>
+            <p class="lead">Take a look at your order!</p>
+        </div>
 
-
+<<<<<<< HEAD
         <div class="container-fluid">
             <!-- Shipping Address -->
 
@@ -50,51 +29,64 @@
             
             <div class="py-5 text-center w-25 mx-auto">
                 <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
+=======
+        <!-- Shipping Address -->
+        <div class="py-0 text-center w-25 mx-auto">
+            <div class="card sticky-top bg-light mb-4 border-light" style="top: 72px">
+>>>>>>> e476db58b17459c5317315774591270a517a6b53
                 <div class="card-body">
-                    <h5 class="card-title">Shipping Address</h5>
-                    <p class="card-text">$Addr1</p>
-                    <p class="card-text">$City</p>
-                    <p class="card-text">$State</p>
-                    <p class="card-text">$Zip</p>
+                    <h5 class="card-title"><b>Shipped To</b></h5>
+                    <p class="card-text my-0"><?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] ?></p>
+                    <p class="card-text my-0"><?php echo $order['shipStreet'] ?></p>
+                    <p class="card-text my-0"><?php if (isset($order['shipStreet2'])) echo $order['shipStreet2'] ?></p>
+                    <p class="card-text my-0"><?php echo $order['shipCity'] . ', ' . $order['shipState'] . ' ' . $order['shipZip'] ?></p>
                 </div>
-                </div>
-            </div>
-
-            <!-- List Items -->
-            <div class="list-group w-50 mx-auto">
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="../media/purse.jpg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                    <h6 class="mb-0">Item 1</h6>
-                    <p class="mb-0 opacity-75">$quantity</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">$price</small>
-                </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                    <img src="../media/purse.jpg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">Item 2</h6>
-                        <p class="mb-0 opacity-75">$quantity</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">$price</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                    <img src="../media/purse.jpg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                    <div>
-                        <h6 class="mb-0">Item 3</h6>
-                        <p class="mb-0 opacity-75">$quantity</p>
-                    </div>
-                    <small class="opacity-50 text-nowrap">$price</small>
-                    </div>
-                </a>
             </div>
         </div>
 
-        <?php include ('../view/footer.php') ?>
-    </body>
-</html>
+        <!-- Status -->
+        <div class="py-0 text-center w-25 mx-auto">
+            <div class="card sticky-top bg-white mb-4 border-success" style="top: 72px">
+                <div class="card-body">
+                    <h6 class="card-title my-0"><?php echo $order['status'] ?></h6>
+                </div>
+            </div>
+        </div>
+        <!-- ./status -->
+
+        <!-- List Items -->
+        <div class="list-group w-50 mx-auto">
+            <?php
+            foreach ($items as $item) { ?>
+                <a href=".?action=product&itemid=<?php echo $item['itemID'] ?>#view" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <img src="media/purse.jpg" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h6 class="my-0"><?php echo $item['name'] ?></h6>
+                        </div>
+                        <div>
+                            <p class="text-muted my-0">$<?php echo ($item['price'] * $item['quantity']) ?></p>
+                            <small class="opacity-50 my-0">$<?php echo $item['price'] . ' * ' . $item['quantity'] ?></small>
+
+                        </div>
+                    </div>
+                </a>
+            <?php } ?>
+        </div>
+
+        <!-- Order Totals -->
+        <div class="my-4 text-center w-25 mx-auto">
+            <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Order Total</b></h5>
+                    <p class="card-text my-0">Item Total: $<?php echo $order['itemsPrice'] ?></p>
+                    <p class="card-text my-0">Tax: $<?php echo $order['tax'] ?></p>
+                    <p class="card-text my-0">Shipping: $<?php echo $order['shipping'] ?></p>
+                    <p class="card-text my-0">Total: $<?php echo ($order['itemsPrice'] + $order['tax'] + $order['shipping']) ?></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<?php include('view/footer.php') ?>

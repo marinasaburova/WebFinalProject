@@ -11,7 +11,7 @@ include('view/navigation.php');
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <h2>Welcome, Name</h2>
+            <h2>Welcome, <?php echo $info['firstName'] ?></h2>
             <p class="lead">Manage your account here.</p>
         </div>
 
@@ -29,28 +29,37 @@ include('view/navigation.php');
                                 <h6 class="my-0">Name</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">Firstname Lastname</span>
+                            <span class="text-muted"><?php echo $info['firstName'] . ' ' . $info['lastName'] ?></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Email</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">email address</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Phone Number</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">Phone</span>
+                            <span class="text-muted"><?php echo $info['email'] ?></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
                                 <h6 class="my-0">Default Address</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">Address</span>
+                            <span class="text-muted">
+
+                                <?php
+                                if (isset($info['shipStreet'])) {
+                                    echo $info['firstName'] . ' ' . $info['lastName'] . '</br>';
+                                    echo $info['shipStreet'] . '</br>';
+                                    if ($info['shipStreet2']) {
+                                        echo $info['shipStreet2'] . '</br>';
+                                    }
+                                    echo $info['shipCity'] . ', ';
+                                    echo $info['shipState'] . ' ';
+                                    echo $info['shipZip'];
+                                } else {
+                                    echo 'not set';
+                                }
+                                ?>
+                            </span>
                         </li>
                     </ul>
 
@@ -69,6 +78,29 @@ include('view/navigation.php');
                 <h4 class="mb-3 text-primary pt-1">Your Order History</h4>
                 <table class="table">
                     <tbody>
+                        <?php
+                        if (empty($orders) || sizeof($orders) == 0) {
+                            echo '<p class="">You have no orders.</p>';
+                            echo '<a href="."><p class="my-0">Go shopping!</p></a>';
+                        }
+
+                        foreach ($orders as $order) {
+                            $totalPrice = $order['itemsPrice'] + $order['shipping'] + $order['tax'];
+                        ?>
+                            <tr>
+                                <th scope="row"> <a href=".?action=order-details&orderid=<?php echo $order['orderID'] ?>#view" class="text-reset text-decoration-none">
+                                        Order #<?php echo $order['orderID'] ?></a>
+                                    </td>
+                                <td><?php echo $order['timePlaced'] ?></td>
+                                <td><?php echo 'num of items' ?></td>
+                                <td>$<?php echo $totalPrice ?></td>
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+
+                        <!-- 
                         <tr>
                             <th scope="row">Order Number</td>
                             <td>Date</td>
@@ -86,13 +118,7 @@ include('view/navigation.php');
                             <td>Date</td>
                             <td>Items Ordered</td>
                             <td>Order Total</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
 
                 </table>
