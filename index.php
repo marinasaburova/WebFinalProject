@@ -101,6 +101,11 @@ switch ($action) {
     logout();
     break;
 
+    // show page to search for order
+  case ('order-search'):
+    include 'page/order-search.php';
+    break;
+
     // show order details page 
   case ('order-details'):
     $orderID = filter_input(INPUT_GET, 'orderid');

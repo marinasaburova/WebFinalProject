@@ -1,8 +1,10 @@
 <!-- Shows details about a specific order -->
 <!-- User needs to be logged in to see -->
-
-<?php include('view/header.php') ?>
-<?php include('view/navigation.php') ?>
+<?php
+//require_once('utils/verify-login.php');
+include('view/header.php');
+include('view/navigation.php')
+?>
 
 <div class="container-fluid">
     <main>
