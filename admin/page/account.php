@@ -1,9 +1,9 @@
 <!-- Shows employee's personal account info -->
 
 <?php
-require_once('utils/verify-login.php');
-include('view/header.php');
-include('view/navigation.php');
+require_once('../utils/verify-admin.php');
+include('admin-view/header.php');
+include('admin-view/navigation.php');
 ?>
 
 <div class="container">
@@ -58,5 +58,5 @@ include('view/navigation.php');
     </main>
 
     <?php
-    include 'view/footer.php';
+    include 'admin-view/footer.php';
     ?>

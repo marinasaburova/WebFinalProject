@@ -1,8 +1,8 @@
 <!-- Shows item details and allows employee to edit them -->
 
 <?php
-include 'view/header.php';
-include 'view/navigation.php';
+include 'admin-view/header.php';
+include 'admin-view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
@@ -11,7 +11,7 @@ include 'view/navigation.php';
       <!-- Main Content -->
       <div class="col-md-5">
         <div class="card mb-4 sticky-top" style="top: 72px; z-index:1018;">
-          <img class=" card-img-top" src="media/purse.jpg" alt="Image of product" />
+          <img class=" card-img-top" src="../media/purse.jpg" alt="Image of product" />
 
         </div>
       </div>
@@ -45,5 +45,5 @@ include 'view/navigation.php';
 <!-- /.middle container -->
 
 <?php
-include 'view/footer.php';
+include 'admin-view/footer.php';
 ?>

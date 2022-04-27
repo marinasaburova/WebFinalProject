@@ -38,8 +38,7 @@ foreach ($cart as $item => $quantity) {
           </h4>
 
           <ul class="list-group mb-3">
-
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Shipping to</h6>
                 <small class="text-muted">Brief description</small>
@@ -53,23 +52,27 @@ foreach ($cart as $item => $quantity) {
                 <?php echo $order['shipCity'] . ', ' . $order['shipState'] . ' ' . $order['shipZip'] ?>
               </span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Billing to</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">Address<?php echo $tax ?>1</span>
+              <span class="text-muted">
+                <?php echo $billFirstName . ' ' . $billLastName . '</br>' ?>
+                <?php echo $billStreet . '</br>' ?>
+                <?php if (isset($billStreet2)) {
+                  echo $billStreet2 . '</br>';
+                } ?>
+                <?php echo $billCity . ', ' . $billState . ' ' . $billZip ?>
+              </span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Payment Info</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $shipping ?></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between ">
-              <span>Total (USD)</span>
-              <strong>$<?php echo $total ?></strong>
+              <span class="text-muted">Method: <?php echo $paymentMethod . '</br>' ?>
+                <?php echo $cardNum ?></span>
             </li>
           </ul>
         </div>

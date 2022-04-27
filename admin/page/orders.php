@@ -1,8 +1,8 @@
 <!-- Shows current store inventory -->
 
 <?php
-include '../admin-view/header.php';
-include '../admin-view/navigation.php';
+include 'admin-view/header.php';
+include 'admin-view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
@@ -13,7 +13,7 @@ include '../admin-view/navigation.php';
 
         <div class="row">
             <!-- Sidebar -->
-            <?php include '../admin-view/order-sidebar.php'; ?>
+            <?php include 'admin-view/order-sidebar.php'; ?>
 
             <!-- Main Content -->
             <div class="col-md-9">
@@ -25,7 +25,7 @@ include '../admin-view/navigation.php';
                                 <h5 class="card-title">Order Number</h5>
                                 <p class="card-text">Status</p>
                                 <p class="card-text">Total Price</p>
-                                <a href="#" class="btn btn-primary">Manage</a>
+                                <a href=".?action=order-details&orderid=0000000026" class="btn btn-primary">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -60,5 +60,5 @@ include '../admin-view/navigation.php';
 <!-- /.middle container -->
 
 <?php
-include '../admin-view/footer.php';
+include 'admin-view/footer.php';
 ?>

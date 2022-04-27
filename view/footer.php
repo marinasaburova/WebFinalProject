@@ -5,7 +5,7 @@
 <!-- can make it fixed using fixed-bottom -->
 <footer class="footer bg-light mt-2">
     <div class="container py-4 text-center">
-        <span class="text-muted">Footer</span>
+        <a href=".?action=admin"><span class="text-muted">Admin Login</span></a>
     </div>
 </footer>
 <!-- /.footer -->

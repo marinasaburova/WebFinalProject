@@ -55,3 +55,7 @@ function deleteItem($itemID)
 function updateOrderStatus($orderID, $status)
 {
 }
+
+function getAllOrders()
+{
+}

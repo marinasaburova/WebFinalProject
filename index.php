@@ -199,26 +199,96 @@ switch ($action) {
     break;
 
   case ('place-order'):
-    $email = filter_input(INPUT_POST, 'email');
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $street = filter_input(INPUT_POST, 'street');
-    $street2 = filter_input(INPUT_POST, 'street2');
-    $city = filter_input(INPUT_POST, 'city');
-    $state = filter_input(INPUT_POST, 'state');
-    $zip = filter_input(INPUT_POST, 'zip');
-
     $cart = $_SESSION['cart'];
+    if (empty($cart) || sizeof($cart) == 0 || !isset($cart)) {
+      header('Location: .');
+      break;
+    }
+
     if (isset($_SESSION['customerID'])) {
       $customerID = $_SESSION['customerID'];
     } else {
       $customerID = null;
     }
 
+    $email = filter_input(INPUT_POST, 'email');
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $street = filter_input(INPUT_POST, 'street');
+    $city = filter_input(INPUT_POST, 'city');
+    $state = filter_input(INPUT_POST, 'state');
+    $zip = filter_input(INPUT_POST, 'zip');
+
+    if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
+      $street2 = null;
+    } else {
+      $street2 = filter_input(INPUT_POST, 'street2');
+    }
+
     $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+
+
+    // Variables for confirmation page
+    if (!isset($_POST['same-address'])) {
+      $billFirstName = filter_input(INPUT_POST, 'billFirstName');
+      $billLastName = filter_input(INPUT_POST, 'billLastName');
+      $billStreet = filter_input(INPUT_POST, 'billStreet');
+      $billCity = filter_input(INPUT_POST, 'billCity');
+      $billState = filter_input(INPUT_POST, 'billState');
+      $billZip = filter_input(INPUT_POST, 'billZip');
+      if (!isset($_POST['billStreet2']) || trim($_POST['billStreet2']) == '') {
+        $billStreet2 = null;
+      } else {
+        $billStreet2 = filter_input(INPUT_POST, 'billStreet2');
+      }
+    } else {
+      $billFirstName = filter_input(INPUT_POST, 'firstName');
+      $billLastName = filter_input(INPUT_POST, 'lastName');
+      $billStreet = filter_input(INPUT_POST, 'street');
+      $billCity = filter_input(INPUT_POST, 'city');
+      $billState = filter_input(INPUT_POST, 'state');
+      $billZip = filter_input(INPUT_POST, 'zip');
+      if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
+        $billStreet2 = null;
+      } else {
+        $billStreet2 = filter_input(INPUT_POST, 'street2');
+      }
+    }
+
+    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod');
+    $cardNum = '*' . substr(filter_input(INPUT_POST, 'cardNum'), -4);
 
     $order = getOrderDetails($orderID);
     $items = getOrderItems($orderID);
     include 'page/confirmation.php';
+    break;
+
+  case ('modal'):
+
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+
+    if (!isset($_POST['email'])) {
+      $login_message = 'Sign in to save your information for next time!';
+      include 'page/modal.php';
+      break;
+    }
+
+    if (isValidLogin($email, $password)) {
+      $_SESSION['loggedin'] = true;
+      $_SESSION['customerID'] = getCustomerID($email);
+      $info = getCustomerData($_SESSION['customerID']);
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
+      include('page/modal.php');
+    }
+
+    break;
+
+    // ADMIN STUFF
+  case ('admin'):
+    logout();
+    header('Location: admin/index.php');
     break;
 }
