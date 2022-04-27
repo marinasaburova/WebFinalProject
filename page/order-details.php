@@ -38,6 +38,15 @@
 
         <div class="container-fluid">
             <!-- Shipping Address -->
+
+            <div class="py-5 text-center w-25 mx-auto">
+                <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
+                <div class="card-body">
+                    <h5 class="card-title">Order Status: </h5>
+                    <p>$status</p>
+                </div>
+                </div>
+            </div>
             
             <div class="py-5 text-center w-25 mx-auto">
                 <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
