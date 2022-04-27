@@ -17,7 +17,7 @@
 
 <body>
   <!-- Container -->
-  <div class="container-fluid">
+  <div class="container-fluid bg-light">
 
     <!-- Mini Nav -->
     <div class="container d-flex justify-content-end flex-wrap sticky-top" style="z-index: 1022; top:14px">
