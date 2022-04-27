@@ -6,6 +6,19 @@
 <?php
 include 'view/header.php';
 include 'view/navigation.php';
+
+$cart = $_SESSION['cart'];
+
+$price = getCartTotal();
+$tax = $price * .05;
+$shipping = 5;
+$total = $price + $tax + $shipping;
+
+$numOfItems = 0;
+foreach ($cart as $item => $quantity) {
+  $numOfItems += $quantity;
+}
+
 ?>
 
 
@@ -18,235 +31,177 @@ include 'view/navigation.php';
 
     <div class="row g-5">
       <!-- Cart -->
-      <div class="col-md-5 col-lg-4 order-md-last">
+      <div class="col-md-5 col-lg-4">
         <div class="sticky-top" style="top:72px; z-index: 1018">
           <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
-            <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            <span class="text-primary">Shipping & Billing</span>
+            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
           </h4>
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">−$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
+
+            <?php
+            foreach ($cart as $item => $quantity) {
+              $product = getProductDetails($item);
+            ?>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
+                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
+                </div>
+                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
+              </li>
+
+            <?php } ?>
+
           </ul>
 
-          <form class="card p-2" action=".#view">
-            <div class="input-group">
-              <input type="hidden" name="action" value="cart">
-            </div>
-          </form>
+          <ul class="list-group mb-3">
+
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Product total</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $price ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Estimated Tax</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $tax ?>1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Shipping</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $shipping ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between ">
+              <span>Total (USD)</span>
+              <strong>$<?php echo $total ?></strong>
+            </li>
+          </ul>
         </div>
       </div>
       <!-- ./cart -->
 
-      <!-- Billing & Shipping -->
-      <div class="col-md-7 col-lg-8">
-        <form action="." method="post" class="needs-validation" novalidate>
-          <input type="hidden" name="action" value="place-order">
+      <div class="col-md-5 col-lg-4">
+        <div class="sticky-top" style="top:72px; z-index: 1018">
+          <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
+            <span class="text-primary">Order Total</span>
+            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
+          </h4>
+          <ul class="list-group mb-3">
 
-          <!-- Shipping -->
-          <h4 class="mb-3 pt-1">Shipping Address</h4>
-          <div class="row g-3" id="shipping">
-            <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="" value="<?php echo ($info['shipFirstName'] ?? ($info['firstName'] ?? '')) ?>">
-            </div>
+            <?php
+            foreach ($cart as $item => $quantity) {
+              $product = getProductDetails($item);
+            ?>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
+                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
+                </div>
+                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
+              </li>
 
-            <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="" value="<?php echo ($info['shipLastName'] ?? ($info['lastName'] ?? ''))  ?>">
-            </div>
+            <?php } ?>
 
-            <div class="col-12">
-              <label for="address" class="form-label">Email</label>
-              <input type="email" class="form-control" id="street" name="street" required placeholder="example@gmail.com" value="<?php echo ($info['email'] ?? '') ?>">
-            </div>
+          </ul>
 
-            <div class="col-12">
-              <label for="address" class="form-label">Street</label>
-              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St" value="<?php echo ($info['shipStreet'] ?? '') ?>">
-            </div>
+          <ul class="list-group mb-3">
 
-            <div class="col-12">
-              <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="street2" name="street2" placeholder="" value=" <?php echo ($info['shipStreet2'] ?? '') ?>">
-            </div>
-
-            <div class="col-12">
-              <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" name="city" required placeholder="" value="<?php echo ($info['shipCity'] ?? '') ?>">
-            </div>
-
-            <div class="col-md-5">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option>United States</option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <input type="text" class="form-control" minlength="2" maxlength="2" id="state" name="state" required value="<?php echo ($info['shipState'] ?? '') ?>">
-            </div>
-
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required placeholder="" value="<?php echo ($info['shipZip'] ?? '') ?>">
-            </div>
-
-          </div>
-          <!-- ./shipping -->
-
-          <div class="form-check mt-4">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this as my default address</label>
-          </div>
-
-          <hr class="my-4">
-
-          <!-- Payment -->
-          <h4 class="mb-3">Payment</h4>
-          <div class="my-3" id="payment">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
-
-          <div class="row gy-3" id="payment2">
-            <div class=" col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Product total</h6>
+                <small class="text-muted">Brief description</small>
               </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="password" class="form-control" minlength="16" maxlength="16" id="cc-number" required>
-              <div class="invalid-feedback">
-                Credit card number is required
+              <span class="text-muted">$<?php echo $price ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Estimated Tax</h6>
+                <small class="text-muted">Brief description</small>
               </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-              <div class="invalid-feedback">
-                Expiration date required
+              <span class="text-muted">$<?php echo $tax ?>1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Shipping</h6>
+                <small class="text-muted">Brief description</small>
               </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="password" class="form-control" minlength="3" maxlength="4" id="cc-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                Security code required
-              </div>
-            </div>
-          </div>
-          <!-- ./payment -->
-
-          <hr class="my-4">
-
-          <!-- Billing -->
-          <h4 class="mb-3">Billing address</h4>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address" onclick="fillBillingAddress()">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
-
-          <hr class="my-4">
-
-          <div class="row g-3" id="billing">
-            <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="">
-            </div>
-
-            <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="">
-            </div>
-
-            <div class="col-12">
-              <label for="address" class="form-label">Street</label>
-              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St">
-            </div>
-
-            <div class="col-12">
-              <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="street2" name="street2" placeholder="Apartment or suite">
-            </div>
-
-            <div class="col-12">
-              <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" name="city" required placeholder="">
-            </div>
-
-            <div class="col-md-5">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option>United States</option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <input type="text" class="form-control" minlength="2" maxlength="2" id="state" name="state" required>
-            </div>
-
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required placeholder="">
-            </div>
-
-          </div>
-          <!-- ./billing -->
-
-        </form>
+              <span class="text-muted">$<?php echo $shipping ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between ">
+              <span>Total (USD)</span>
+              <strong>$<?php echo $total ?></strong>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- ./billing and shipping -->
+      <!-- ./cart -->
+
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <div class="sticky-top" style="top:72px; z-index: 1018">
+          <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
+            <span class="text-primary">Items Ordered</span>
+            <span class="badge bg-primary rounded-pill"><?php echo $numOfItems ?></span>
+          </h4>
+          <ul class="list-group mb-3">
+
+            <?php
+            foreach ($cart as $item => $quantity) {
+              $product = getProductDetails($item);
+            ?>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0"><?php echo $product['name'] ?></h6>
+                  <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
+                </div>
+                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
+              </li>
+
+            <?php } ?>
+
+          </ul>
+
+          <ul class="list-group mb-3">
+
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Product total</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $price ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Estimated Tax</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $tax ?>1</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+              <div>
+                <h6 class="my-0">Shipping</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$<?php echo $shipping ?></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between ">
+              <span>Total (USD)</span>
+              <strong>$<?php echo $total ?></strong>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+      <!-- ./cart -->
     </div>
+    <!-- ./row -->
   </main>
 
   <script>

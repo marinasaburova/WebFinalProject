@@ -24,7 +24,7 @@ function removeFromCart($itemID)
 function clearCart()
 {
     if (isset($_SESSION['cart'])) {
-        unset($_SESSION['cart']);
+        $_SESSION['cart'] = array();
     }
     return;
 }
@@ -32,10 +32,6 @@ function clearCart()
 function getCart()
 {
     $cart = $_SESSION['cart'];
-    /*  foreach ($cart as $item => $quantity) {
-        echo $item . ' ';
-        echo $quantity . '</br>';
-    }*/
     return $cart;
 }
 

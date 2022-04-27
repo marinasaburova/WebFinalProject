@@ -88,12 +88,12 @@ include('view/navigation.php');
                             $totalPrice = $order['itemsPrice'] + $order['shipping'] + $order['tax'];
                         ?>
                             <tr>
-                                <th scope="row"> <a href=".?action=order-details#view" class="text-reset text-decoration-none">
+                                <th scope="row"> <a href=".?action=order-details&orderid=<?php echo $order['orderID'] ?>#view" class="text-reset text-decoration-none">
                                         Order #<?php echo $order['orderID'] ?></a>
                                     </td>
                                 <td><?php echo $order['timePlaced'] ?></td>
                                 <td><?php echo 'num of items' ?></td>
-                                <td><?php echo $totalPrice ?></td>
+                                <td>$<?php echo $totalPrice ?></td>
                             </tr>
 
                         <?php

@@ -49,7 +49,7 @@ foreach ($cart as $item => $quantity) {
                 <h6 class="my-0">Estimated Tax</h6>
                 <small class="text-muted">Brief description</small>
               </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
+              <span class="text-muted">$<?php echo $tax ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>

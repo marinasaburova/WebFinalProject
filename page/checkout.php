@@ -114,22 +114,22 @@ foreach ($cart as $item => $quantity) {
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Email</label>
-              <input type="email" class="form-control" id="street" name="street" required placeholder="example@gmail.com" value="<?php echo ($info['email'] ?? '') ?>">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com" value="<?php echo ($info['email'] ?? '') ?>">
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Street</label>
+              <label for="street" class="form-label">Street</label>
               <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St" value="<?php echo ($info['shipStreet'] ?? '') ?>">
             </div>
 
             <div class="col-12">
-              <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
+              <label for="street2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
               <input type="text" class="form-control" id="street2" name="street2" placeholder="" value=" <?php echo ($info['shipStreet2'] ?? '') ?>">
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">City</label>
+              <label for="city" class="form-label">City</label>
               <input type="text" class="form-control" id="city" name="city" required placeholder="" value="<?php echo ($info['shipCity'] ?? '') ?>">
             </div>
 
@@ -226,28 +226,28 @@ foreach ($cart as $item => $quantity) {
 
           <div class="row g-3" id="billing">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="billFirstName" name="firstName" placeholder="" required>
+              <label for="billFirstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="billFirstName" name="billFirstName" placeholder="" required>
             </div>
 
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="billLastName" name="lastName" placeholder="" required>
+              <label for="billLastName" class="form-label">Last name</label></label>
+              <input type="text" class="form-control" id="billLastName" name="billLastName" placeholder="" required>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Street</label>
-              <input type="text" class="form-control" id="billStreet" name="street" placeholder="1234 Main St" required>
+              <label for="billStreet" class="form-label">Street</label>
+              <input type="text" class="form-control" id="billStreet" name="billStreet" placeholder="1234 Main St" required>
             </div>
 
             <div class="col-12">
-              <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="billStreet2" name="street2" placeholder="Apartment or suite">
+              <label for="billStreet2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="billStreet2" name="billStreet2" placeholder="Apartment or suite">
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="billCity" name="city" placeholder="" required>
+              <label for="billCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="billCity" name="billCity" placeholder="" required>
             </div>
 
             <div class="col-md-5">
@@ -258,13 +258,13 @@ foreach ($cart as $item => $quantity) {
             </div>
 
             <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <input type="text" class="form-control" minlength="2" maxlength="2" id="billState" name="state" required>
+              <label for="billState" class="form-label">State</label>
+              <input type="text" class="form-control" minlength="2" maxlength="2" id="billState" name="billState" required>
             </div>
 
             <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="billZip" name="zip" minlength="5" maxlength="5" placeholder="" required>
+              <label for="billZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="billZip" name="billZip" minlength="5" maxlength="5" placeholder="" required>
             </div>
           </div>
           <!-- ./billing -->

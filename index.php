@@ -103,6 +103,9 @@ switch ($action) {
 
     // show order details page 
   case ('order-details'):
+    $orderID = filter_input(INPUT_GET, 'orderid');
+    $order = getOrderDetails($orderID);
+    $items = getOrderItems($orderID);
     include 'page/order-details.php';
     break;
 
@@ -184,9 +187,11 @@ switch ($action) {
     $cart = $_SESSION['cart'];
     if (isset($_SESSION['customerID'])) {
       $customerID = $_SESSION['customerID'];
+    } else {
+      $customerID = null;
     }
 
-    placeOrder();
+    placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
     include 'page/confirmation.php';
     break;
 }

@@ -139,8 +139,76 @@ function getOrderDetails($orderID)
 
 function getOrderItems($orderID)
 {
+    global $db;
+
+    $query = 'SELECT `order_items`.*, `item`.`name` FROM `order_items` INNER JOIN `item` ON `order_items`.`itemID` = `item`.`itemID`  WHERE `orderID` = :orderID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':orderID', $orderID);
+    $statement->execute();
+    $items = $statement->fetchAll();
+    $statement->closeCursor();
+    return $items;
 }
 
-function placeOrder()
+function placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
+    global $db;
+
+    $itemsPrice = getCartTotal();
+    $tax = getCartTax();
+    $shipping = getCartShipping();
+    $cart = $_SESSION['cart'];
+
+    $query = 'INSERT INTO `orders` (`customerID`, `email`, `itemsPrice`, `shipping`, `tax`, `status`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`)
+              VALUES (:customerID, :email, :itemsPrice, :shipping, :tax, :status, :shipFirstName, :shipLastName, :shipStreet, :shipStreet2, :shipCity, :shipState, :shipZip)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':customerID', $customerID);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':itemsPrice', $itemsPrice);
+    $statement->bindValue(':shipping', $shipping);
+    $statement->bindValue(':tax', $tax);
+    $statement->bindValue(':status', 'placed');
+    $statement->bindValue(':shipFirstName', $firstName);
+    $statement->bindValue(':shipLastName', $lastName);
+    $statement->bindValue(':shipStreet', $street);
+    $statement->bindValue(':shipStreet2', $street2);
+    $statement->bindValue(':shipCity', $city);
+    $statement->bindValue(':shipState', $state);
+    $statement->bindValue(':shipZip', $zip);
+
+    $statement->execute();
+    $statement->closeCursor();
+
+    $orderID = $db->lastInsertId();
+
+    foreach ($cart as $item => $quantity) {
+        $product = getProductDetails($item);
+        $price = $product['price'];
+
+        $query2 = 'INSERT INTO `order_items` (`orderID`, `itemID`, `quantity`, `price`)
+        VALUES (:orderID, :itemID, :quantity, :price)';
+        $statement2 = $db->prepare($query2);
+
+        $statement2->bindValue(':orderID', $orderID);
+        $statement2->bindValue(':itemID', $item);
+        $statement2->bindValue(':quantity', $quantity);
+        $statement2->bindValue(':price', $price);
+
+        $statement2->execute();
+        $statement2->closeCursor();
+    }
+
+    clearCart();
+}
+
+function getCartTax()
+{
+    $price = getCartTotal();
+    $tax = $price * 0.05;
+    return $tax;
+}
+
+function getCartShipping()
+{
+    return 5;
 }
