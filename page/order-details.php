@@ -14,7 +14,6 @@ include('view/navigation.php')
             <p class="lead">Take a look at your order!</p>
         </div>
 
-<<<<<<< HEAD
         <div class="container-fluid">
             <!-- Shipping Address -->
 
@@ -29,11 +28,9 @@ include('view/navigation.php')
             
             <div class="py-5 text-center w-25 mx-auto">
                 <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
-=======
         <!-- Shipping Address -->
         <div class="py-0 text-center w-25 mx-auto">
             <div class="card sticky-top bg-light mb-4 border-light" style="top: 72px">
->>>>>>> e476db58b17459c5317315774591270a517a6b53
                 <div class="card-body">
                     <h5 class="card-title"><b>Shipped To</b></h5>
                     <p class="card-text my-0"><?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] ?></p>
