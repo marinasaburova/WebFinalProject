@@ -21,8 +21,24 @@ switch ($action) {
     if ($category == NULL || $category == FALSE) {
       $category = 'all';
     }
-    //$categories = getCategories();
-    $products = getProducts($category);
+
+    $color = filter_input(INPUT_GET, 'colorsearch');
+    if ($color == NULL || $color == FALSE) {
+      $color = 'all';
+    }
+
+    $material = filter_input(INPUT_GET, 'materialsearch');
+    if ($material == NULL || $material == FALSE) {
+      $material = 'all';
+    }
+
+    $products = getProducts($category, $color, $material);
+
+    if (isset($_GET['search'])) {
+      $searchterm = filter_input(INPUT_GET, 'searchterm');
+      $products = keywordSearch($searchterm, $category);
+    }
+
     include 'page/home.php';
     break;
 
@@ -138,7 +154,7 @@ switch ($action) {
     $quantity = filter_input(INPUT_POST, 'quantity');
     addToCart($itemID, $quantity);
 
-    $products = getProducts('all');
+    $products = getProducts('all', 'all', 'all');
     header("Location: .?action=product&itemid=$itemID&msg=success#view");
     break;
 
@@ -147,7 +163,7 @@ switch ($action) {
     $quantity = filter_input(INPUT_POST, 'quantity');
     addToCart($itemID, $quantity);
 
-    $products = getProducts('all');
+    $products = getProducts('all', 'all', 'all');
     header("Location: .?msg=success#view");
     break;
 
