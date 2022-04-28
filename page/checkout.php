@@ -153,10 +153,17 @@ foreach ($cart as $item => $quantity) {
           </div>
           <!-- ./shipping -->
 
-          <div class="form-check mt-4">
-            <input type="checkbox" class="form-check-input" id="save-info" onclick="openModal()">
-            <label class=" form-check-label" for="save-info">Save this as my default address</label>
-          </div>
+          <?php
+          if (isset($_SESSION['loggedin'])) {  ?>
+            <div class="form-check mt-4">
+              <input type="checkbox" class="form-check-input" id="save-info" name="save-info" onclick="openModal()">
+              <label class=" form-check-label" for="save-info">Save this as my default address</label>
+            </div>
+          <?php } else { ?>
+            <div class="form-label mt-4">
+              <a href=".?action=login" class=" form-check-label" for="save-info">Login to save your information</a>
+            </div>
+          <?php } ?>
 
           <hr class="my-4">
 

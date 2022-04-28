@@ -18,7 +18,6 @@ $numOfItems = 0;
 foreach ($cart as $item => $quantity) {
   $numOfItems += $quantity;
 }
-
 ?>
 
 
@@ -27,6 +26,9 @@ foreach ($cart as $item => $quantity) {
     <div class="py-5 text-center">
       <h2>Order Confirmation</h2>
       <p class="lead">Yay! Congrats on your new purchase.</p>
+      <?php if (isset($update_message)) {
+        echo "<div class='alert alert-success' role='alert'>$update_message</div>";
+      } ?>
     </div>
 
     <div class="row g-5">

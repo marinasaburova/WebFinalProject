@@ -227,6 +227,10 @@ switch ($action) {
 
     $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
 
+    if (isset($_POST['save-info'])) {
+      $update_message = 'Successfully updated your info!';
+      updateDefaultAddr($customerID, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+    }
 
     // Variables for confirmation page
     if (!isset($_POST['same-address'])) {
