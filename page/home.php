@@ -5,6 +5,11 @@ include 'view/navigation.php';
 <!-- Middle Container -->
 <div class="container-fluid">
   <div class="row">
+
+    <div class="py-3 text-center">
+      <h2><?php echo ucfirst($category) ?></h2>
+    </div>
+
     <!-- Sidebar -->
     <?php include 'view/sidebar.php'; ?>
 

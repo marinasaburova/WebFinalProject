@@ -62,7 +62,7 @@ switch ($action) {
             $category = 'all';
         }
         //$categories = getCategories();
-        $products = getProducts($category);
+        $products = getProducts($category, 'all', 'all');
         include 'page/inventory.php';
         break;
 

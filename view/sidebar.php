@@ -6,10 +6,10 @@ $materials = getMaterials();
 
 <div class="col-md-3">
   <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
-    <div class="card-header">
-      <h4 class="card-title">Filter</h4>
-    </div>
     <div class="card-body">
+      <h4 class="card-title">Filter</h4>
+      <hr class="my-3">
+
       <form action="." method="get">
         <label for="colorsearch" class="form-label">Color:</label>
         <select class="form-control mb-3" name="colorsearch">
