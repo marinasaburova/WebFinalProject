@@ -168,6 +168,18 @@ function getOrderItems($orderID)
     return $items;
 }
 
+function getOrderQuantity($orderID)
+{
+    $items = getOrderItems($orderID);
+
+    $quantity = 0;
+    foreach ($items as $item) {
+        $quantity += $item['quantity'];
+    }
+
+    return $quantity;
+}
+
 function placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
     global $db;

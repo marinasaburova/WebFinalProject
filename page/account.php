@@ -92,7 +92,7 @@ include('view/navigation.php');
                                         Order #<?php echo $order['orderID'] ?></a>
                                     </td>
                                 <td><?php echo $order['timePlaced'] ?></td>
-                                <td><?php echo 'num of items' ?></td>
+                                <td><?php echo getOrderQuantity($order['orderID']) ?> items </td>
                                 <td>$<?php echo $totalPrice ?></td>
                             </tr>
 
