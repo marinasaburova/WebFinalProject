@@ -17,8 +17,9 @@ include 'view/navigation.php';
     <div class="col-md-9">
       <!-- Products -->
       <div class="row align-items-start justify-content-start text-center">
-        <?php
 
+        <!-- List all products -->
+        <?php
         foreach ($products as $p) {
         ?>
           <div class="col-sm-6 col-md-4">
