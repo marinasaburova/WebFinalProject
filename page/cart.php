@@ -37,21 +37,21 @@ $numOfItems = getCartNumOfItems();
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Total for all items</small>
               </div>
               <span class="text-muted">$<?php echo $price ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Estimated Tax</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Sales Tax: 5%</small>
               </div>
               <span class="text-muted">$<?php echo $tax ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Flat rate</small>
               </div>
               <span class="text-muted">$<?php echo $shipping ?></span>
             </li>
@@ -86,7 +86,7 @@ $numOfItems = getCartNumOfItems();
               $product = getProductDetails($item);
             ?>
               <tr>
-                <td>Image</td>
+                <td> <img src="media/purse.jpg" alt="product image" width="50" class="rounded"></td>
                 <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
                 <td>Quantity: <?php echo $quantity ?></td>
                 <td>
