@@ -8,10 +8,6 @@ include 'view/navigation.php';
 
     <div class="py-3 text-center">
       <h2><?php echo ucfirst($category) ?></h2>
-      <?php
-      if (empty($products)) { ?>
-        <p>No products found.</p>
-      <?php } ?>
     </div>
 
     <!-- Sidebar -->
@@ -21,6 +17,14 @@ include 'view/navigation.php';
     <div class="col-md-9">
       <!-- Products -->
       <div class="row align-items-start justify-content-start text-center">
+
+        <!-- if no products found -->
+        <?php
+        if (empty($products)) { ?>
+          <div class="col-md-8">
+            <p>No products found.</p>
+          </div>
+        <?php } ?>
 
         <!-- List all products -->
         <?php
