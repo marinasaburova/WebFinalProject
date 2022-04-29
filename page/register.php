@@ -6,57 +6,55 @@ include('view/navigation.php')
 ?>
 
 <body>
-  <div class="container">
-    <main>
-      <div class="py-5 text-center">
-        <h2>Register</h2>
-      </div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <!-- Center column-->
+      <div class="col-sm-4">
+        <main class="form-signin">
+          <!-- Register form -->
+          <form action=".#view" class="needs-validation" method="post" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
+            <h1 class="h3 mb-3 fw-normal">Register</h1>
+            <input type="hidden" name="action" value="register">
+            <div class="form-floating my-2">
+              <input type="text" name="firstName" class="form-control" id="floatingFirstName" placeholder="Type your first name" required>
+              <label for="floatingFirstName">First Name</label>
+            </div>
+            <div class="form-floating my-2">
+              <input type="text" name="lastName" class="form-control" id="floatingLastName" placeholder="Type your last name" required>
+              <label for="floatingLastName">Last Name</label>
+            </div>
+            <div class="form-floating my-2">
+              <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating my-2">
+              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Create a Password" required>
+              <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating my-2">
+              <input type="password" name="password2" class="form-control" id="floatingPassword2" placeholder="Confirm Password" required>
+              <label for="floatingPassword2">Confirm Password</label>
+            </div>
 
-      <div class="mb-3">
-        <!-- General Info -->
-        <div>
-          <form action="." method="post" class="needs-validation" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
-            <div class="mb-3">
-              <!-- first name -->
-              <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Type in your first name..." required>
-              </div>
-
-              <!-- last name -->
-              <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Type in your last name.." required>
-              </div>
-
-              <!-- email -->
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
-              </div>
-              <!-- password -->
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
-              </div>
-
-              <!-- confirm password -->
-              <div class="mb-3">
-                <label for="password2" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password..." required>
-              </div>
-
-              <a href="register.php">Register</a>
-
-              <hr class="my-4">
-
-              <button class="w-100 btn btn-primary btn-lg" type="submit">Login</button>
+            <a href=".?action=login">
+              <p class="mt-4 mb-3 text-muted">Login</p>
+            </a>
+            <a href=".?action=order-search">
+              <p class="mt-2 mb-5 text-muted">Find order by number</p>
+            </a>
           </form>
-        </div>
-        <!-- ./General Information -->
+          <!-- ./register form -->
+        </main>
+        <!-- ./main -->
       </div>
-    </main>
+      <!-- ./center column -->
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+  </main>
   </div>
   <?php include('view/footer.php') ?>
 </body>

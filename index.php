@@ -111,7 +111,28 @@ switch ($action) {
 
     // show register page 
   case ('register'):
-    include 'page/register.php';
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+
+    if (!isset($_POST['email'])) {
+      $register_message = 'Create an account for a better shopping experience!';
+      include 'page/register.php';
+      break;
+    }
+
+    registerCustomer($email, $password, $firstName, $lastName);
+
+    if (isValidLogin($email, $password)) {
+      $_SESSION['loggedin'] = true;
+      $_SESSION['customerID'] = getCustomerID($email);
+      $info = getCustomerData($_SESSION['customerID']);
+      header('Location: .?action=account');
+    } else {
+      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
+      include('page/login.php');
+    }
     break;
 
     // log someone out 
