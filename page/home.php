@@ -8,6 +8,10 @@ include 'view/navigation.php';
 
     <div class="py-3 text-center">
       <h2><?php echo ucfirst($category) ?></h2>
+      <?php
+      if (empty($products)) { ?>
+        <p>No products found.</p>
+      <?php } ?>
     </div>
 
     <!-- Sidebar -->
