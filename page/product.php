@@ -6,7 +6,7 @@ include 'view/header.php';
 include 'view/navigation.php';
 ?>
 <!-- Middle Container -->
-<div class="container-fluid">
+<div class="container">
   <main>
     <div class="row">
       <!-- Main Content -->
