@@ -86,7 +86,7 @@ $numOfItems = getCartNumOfItems();
               $product = getProductDetails($item);
             ?>
               <tr>
-                <td> <img src="media/purse.jpg" alt="product image" width="50" class="rounded"></td>
+                <td> <img src="media/purse.jpg" alt="product image" height="50" class="rounded"></td>
                 <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
                 <td>Quantity: <?php echo $quantity ?></td>
                 <td>
