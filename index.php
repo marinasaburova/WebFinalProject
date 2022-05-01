@@ -204,6 +204,25 @@ switch ($action) {
     header("Location: .?msg=success#view");
     break;
 
+  case ('change-cart-quantity'):
+    $itemID = filter_input(INPUT_POST, 'itemid');
+    if (isset($_POST['remove1'])) {
+      removeOneFromCart($itemID);
+      header("Location: .?action=cart#view");
+    }
+    if (isset($_POST['add1'])) {
+
+      if (!canAddToCart($itemID, 1)) {
+        header("Location: .?action=cart#view");
+        break;
+      }
+
+      addToCart($itemID, 1);
+      header("Location: .?action=cart#view");
+    }
+
+    break;
+
   case ('clear-cart'):
     clearCart();
     header('Location: .?action=cart#view');

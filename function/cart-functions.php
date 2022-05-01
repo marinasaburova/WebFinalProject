@@ -21,6 +21,19 @@ function removeFromCart($itemID)
     return;
 }
 
+function removeOneFromCart($itemID)
+{
+    if (isset($_SESSION['cart'][$itemID])) {
+        if ($_SESSION['cart'][$itemID] <= 1) {
+            removeFromCart($itemID);
+            return;
+        }
+        $_SESSION['cart'][$itemID] -= 1;
+    }
+    return;
+}
+
+
 function clearCart()
 {
     if (isset($_SESSION['cart'])) {

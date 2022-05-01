@@ -89,7 +89,24 @@ $numOfItems = getCartNumOfItems();
               <tr <?php if (!$isInStock) echo 'class="table-secondary"' ?>>
                 <td> <img src="media/purse.jpg" alt="product image" height="50" class="rounded"></td>
                 <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
-                <td>Quantity: <?php echo $quantity ?></td>
+                <td>
+                  <form action="." method="post">
+                    <input type="hidden" name="itemid" value="<?php echo $item ?>">
+                    <input type="hidden" name="action" value="change-cart-quantity">
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="submit" name="remove1">-</button>
+                      </div>
+
+                      <input class="text-center bg-light border-0" value="<?php echo $quantity ?>" size="1" aria-describedby="basic-addon1" readonly>
+
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="add1">+</button>
+                      </div>
+                    </div>
+                  </form>
+                </td>
 
                 <?php if (!$isInStock) { ?>
                   <td>Item is out of stock</td>
