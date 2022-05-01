@@ -26,7 +26,8 @@ include 'view/navigation.php';
               <input type="hidden" class="form-control" id="action" name="action" value="add-to-cart" />
               <input type="hidden" class="form-control" id="itemid" name="itemid" value="<?php echo $product['itemID'] ?>" />
               <input type="hidden" class="form-control" id="quantity" name="quantity" value="1" />
-              <button class="btn btn-primary" type="submit">Add to cart</button>
+              <?php if ($product['quantity'] <= 0) echo '<button class="btn btn-secondary" type="submit" disabled>Out of Stock</button>' ?>
+              <?php if ($product['quantity'] > 0) echo '<button class="btn btn-primary" type="submit" >Add to cart</button>' ?>
             </form>
 
             <?php if (isset($message)) { ?><p class="text-success pt-2"><?php echo $message ?></p> <?php } ?>
