@@ -11,7 +11,7 @@ IDENTIFIED BY 'kelarinapass';
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2022 at 09:15 PM
+-- Generation Time: May 02, 2022 at 12:30 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -57,8 +57,11 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `email`, `password`, `firstName`, `lastName`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`, `dateJoined`, `status`) VALUES
-(0000000001, 'marina@gmail.com', '$2y$10$PMMWInZZYD3H.wmCc8kEFenORHTlAWHZ0N99ke0L/udypkIaUGk2C', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043, '2022-04-23 20:14:42', 'active'),
-(0000000002, 'kelsey@gmail.com', '$2y$10$i1D9cQHT9R21gFDjZv3vE.iTFTabTBrahyEXRgujTv2oUQFZ0mWVS', 'Kelsey', 'Nyman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:22:25', 'active');
+(0000000001, 'marina@gmail.com', '$2y$10$PMMWInZZYD3H.wmCc8kEFenORHTlAWHZ0N99ke0L/udypkIaUGk2C', 'Marina', 'Saburova', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043, '2022-04-23 20:14:42', 'active'),
+(0000000002, 'kelsey@gmail.com', '$2y$10$i1D9cQHT9R21gFDjZv3vE.iTFTabTBrahyEXRgujTv2oUQFZ0mWVS', 'Kelsey', 'Nyman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:22:25', 'active'),
+(0000000003, 'marina2@gmail.com', '$2y$10$EApJZ5hxCoW6NfBaGm0hNOVZVG.0sUCiM13KvrwGwCOKTPO/OXVrG', 'Marina2', 'Saburova', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29 13:16:09', 'active'),
+(0000000004, 'sharpay@gmail.com', '$2y$10$WacD08gqa5Rs4P.C7hlAJeYPid7bQ5wSP56gigyWcPg0JrVq.pBfq', 'Sharpay', 'Evans', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29 13:16:29', 'active'),
+(0000000005, 'london@tipton.com', '$2y$10$/CKCAvZJiK7TltwhThhjXOrh4rux/A6QyXpIXbD64DUybfrTqlUuO', 'London', 'Tipton', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29 13:17:16', 'active');
 
 -- --------------------------------------------------------
 
@@ -107,10 +110,10 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`itemID`, `name`, `price`, `quantity`, `category`, `color`, `material`, `description`, `tags`) VALUES
-(0000000001, 'Bag1', '10.00', 50, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. ', 'leather, bag, purse, minimal'),
-(0000000002, 'Belt1', '15.00', 50, 'belt', 'white', 'faux leather', 'A simple faux leather belt with gold details. ', 'gold, faux leather, belt, simple, minimal'),
-(0000000003, 'Sunglasses1', '10.00', 80, 'sunglasses', 'pink', 'metal', 'Metal frame sunglasses with a pink border. ', 'girly, cute, pink, feminine'),
-(0000000004, 'Sunglasses2', '10.00', 80, 'sunglasses', 'blue', 'metal', 'Metal frame sunglasses with a teal border. ', 'beachy, cute, teal, blue, feminine');
+(0000000001, 'Bag1', '10.00', 1, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. ', 'leather, bag, purse, minimal'),
+(0000000002, 'Belt1', '15.00', 49, 'belt', 'white', 'faux leather', 'A simple faux leather belt with gold details. ', 'gold, faux leather, belt, simple, minimal'),
+(0000000003, 'Sunglasses1', '10.00', 77, 'sunglasses', 'pink', 'metal', 'Metal frame sunglasses with a pink border. ', 'girly, cute, pink, feminine'),
+(0000000004, 'Sunglasses2', '10.00', 79, 'sunglasses', 'blue', 'metal', 'Metal frame sunglasses with a teal border. ', 'beachy, cute, teal, blue, feminine');
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,17 @@ INSERT INTO `orders` (`orderID`, `customerID`, `email`, `itemsPrice`, `shipping`
 (0000000038, 0000000001, 'marina@gmail.com', '35.00', '5.00', '1.75', 'placed', '2022-04-27 18:08:02', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
 (0000000039, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-27 18:11:35', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
 (0000000041, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-27 18:16:16', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
-(0000000042, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-27 18:17:20', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043);
+(0000000042, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-27 18:17:20', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000043, 0000000001, 'marina@gmail.com', '20.00', '5.00', '1.00', 'placed', '2022-04-27 23:55:31', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000044, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-28 15:30:24', 'Marina', 'Saburova', '26 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000045, 0000000001, 'marina@gmail.com', '25.00', '5.00', '1.25', 'placed', '2022-04-28 15:46:24', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000046, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-28 15:51:04', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000047, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-28 15:52:13', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000048, 0000000001, 'marina@gmail.com', '10.00', '5.00', '0.50', 'placed', '2022-04-28 16:54:39', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000049, 0000000001, 'marina@gmail.com', '25.00', '5.00', '1.25', 'placed', '2022-04-28 17:05:21', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000050, 0000000001, 'marina@gmail.com', '65.00', '5.00', '3.25', 'placed', '2022-05-01 19:43:54', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000051, 0000000001, 'marina@gmail.com', '65.00', '5.00', '3.25', 'placed', '2022-05-01 19:46:01', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000052, 0000000001, 'marina@gmail.com', '60.00', '5.00', '3.00', 'placed', '2022-05-01 20:55:08', 'Marina', 'Saburova', '22 Normal Ave', NULL, 'Montclair', 'NJ', 07043);
 
 -- --------------------------------------------------------
 
@@ -196,7 +209,23 @@ INSERT INTO `order_items` (`orderID`, `itemID`, `quantity`, `price`) VALUES
 (0000000038, 0000000002, 1, '15.00'),
 (0000000039, 0000000001, 1, '10.00'),
 (0000000041, 0000000003, 1, '10.00'),
-(0000000042, 0000000003, 1, '10.00');
+(0000000042, 0000000003, 1, '10.00'),
+(0000000043, 0000000001, 1, '10.00'),
+(0000000043, 0000000003, 1, '10.00'),
+(0000000044, 0000000001, 1, '10.00'),
+(0000000045, 0000000001, 1, '10.00'),
+(0000000045, 0000000002, 1, '15.00'),
+(0000000046, 0000000001, 1, '10.00'),
+(0000000047, 0000000001, 1, '10.00'),
+(0000000048, 0000000004, 1, '10.00'),
+(0000000049, 0000000003, 1, '10.00'),
+(0000000049, 0000000002, 1, '15.00'),
+(0000000050, 0000000004, 1, '10.00'),
+(0000000051, 0000000004, 1, '10.00'),
+(0000000051, 0000000002, 1, '15.00'),
+(0000000051, 0000000001, 4, '10.00'),
+(0000000052, 0000000003, 3, '10.00'),
+(0000000052, 0000000001, 3, '10.00');
 
 --
 -- Indexes for dumped tables
@@ -248,7 +277,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -266,7 +295,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
