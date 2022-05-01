@@ -72,3 +72,47 @@ function getCartNumOfItems()
     }
     return $numOfItems;
 }
+
+function canAddToCart($itemID, $quantityAdding)
+{
+    $item = getProductDetails($itemID);
+    $quantityInStock = $item['quantity'];
+    if (isset($_SESSION['cart'][$itemID])) {
+        $quantityInCart = $_SESSION['cart'][$itemID];
+    } else {
+        $quantityInCart = 0;
+    }
+
+    if ($quantityInStock >= ($quantityInCart + $quantityAdding)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function canPurchaseItem($itemID)
+{
+    $item = getProductDetails($itemID);
+    $quantityInStock = $item['quantity'];
+    if (isset($_SESSION['cart'][$itemID])) {
+        $quantityInCart = $_SESSION['cart'][$itemID];
+    } else {
+        $quantityInCart = 0;
+    }
+
+    if ($quantityInStock >= $quantityInCart) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function canPurchaseCart()
+{
+    foreach ($_SESSION['cart'] as $item => $quantity) {
+        if (!canPurchaseItem($item)) {
+            return false;
+        }
+    }
+    return true;
+}

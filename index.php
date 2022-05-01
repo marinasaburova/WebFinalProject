@@ -51,6 +51,9 @@ switch ($action) {
     if (isset($_GET['msg']) && ($_GET['msg'] == 'success')) {
       $message = 'Added to cart!';
     }
+    if (isset($_GET['msg']) && ($_GET['msg'] == 'error')) {
+      $outofstock_msg = 'Could not add item to cart: item is out of stock!';
+    }
     $product = getProductDetails($_GET['itemid']);
     include 'page/product.php';
     break;
@@ -62,7 +65,7 @@ switch ($action) {
 
     // show checkout page
   case ('checkout'):
-    if (empty($_SESSION['cart'])) {
+    if (empty($_SESSION['cart']) || !canPurchaseCart()) {
       include 'page/cart.php';
     } else {
       if (isset($_SESSION['loggedin'])) {
@@ -170,11 +173,18 @@ switch ($action) {
     include 'page/order-details.php';
     break;
 
+    // add item to cart
   case ('add-to-cart'):
     $itemID = filter_input(INPUT_POST, 'itemid');
     $quantity = filter_input(INPUT_POST, 'quantity');
-    addToCart($itemID, $quantity);
 
+    if (!canAddToCart($itemID, $quantity)) {
+      $products = getProducts('all', 'all', 'all');
+      header("Location: .?action=product&itemid=$itemID&msg=error#view");
+      break;
+    }
+
+    addToCart($itemID, $quantity);
     $products = getProducts('all', 'all', 'all');
     header("Location: .?action=product&itemid=$itemID&msg=success#view");
     break;
@@ -182,9 +192,15 @@ switch ($action) {
   case ('home-add-to-cart'):
     $itemID = filter_input(INPUT_POST, 'itemid');
     $quantity = filter_input(INPUT_POST, 'quantity');
-    addToCart($itemID, $quantity);
 
-    $products = getProducts('all', 'all', 'all');
+    if (!canAddToCart($itemID, $quantity)) {
+      $products = getProducts('all', 'all', 'all');
+      header("Location: .?action=product&itemid=$itemID&msg=error#view");
+      break;
+    }
+
+    addToCart($itemID, $quantity);
+    $products = getProducts('all', 'all', 'al;');
     header("Location: .?msg=success#view");
     break;
 
@@ -237,6 +253,11 @@ switch ($action) {
 
   case ('place-order'):
     $cart = $_SESSION['cart'];
+    if (!canPurchaseCart()) {
+      header('Location: .?action=cart');
+      break;
+    }
+
     if (empty($cart) || sizeof($cart) == 0 || !isset($cart)) {
       header('Location: .');
       break;

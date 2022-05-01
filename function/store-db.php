@@ -9,7 +9,7 @@ function getProducts($category, $color, $material)
 {
     global $db;
 
-    $query = 'SELECT * FROM `item` WHERE `quantity` > 1';
+    $query = 'SELECT * FROM `item` WHERE `quantity` > 0';
 
     if ($category != 'all') {
         $query .= ' AND `category` = :category';
@@ -56,6 +56,23 @@ function getProductDetails($itemID)
     return $product;
 }
 
+/*
+function isInStock($itemID)
+{
+    global $db;
+    $query = 'SELECT `quantity` FROM `item` WHERE `itemID` = :itemID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':itemID', $itemID);
+    $statement->execute();
+    $row = $statement->fetch();
+    $statement->closeCursor();
+    if ($row['quantity'] > 0) {
+        return true;
+    } else {
+        return false;
+    }
+} */
+
 function getColors()
 {
     global $db;
@@ -99,6 +116,26 @@ function keywordSearch($searchterm, $category)
     return $products;
 }
 
+function subtractItemQuantity($itemID, $quantity)
+{
+    global $db;
+
+    $item = getProductDetails($itemID);
+    $currentQuantity = $item['quantity'];
+    $newQuantity = $currentQuantity - $quantity;
+
+    if ($newQuantity < 0) {
+        echo 'Out of stock!';
+        return;
+    }
+
+    $query = 'UPDATE `item` SET `quantity` = :quantity WHERE `itemID` = :itemID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':quantity', $newQuantity);
+    $statement->bindValue(':itemID', $itemID);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
 function updateItem($itemID)
 {

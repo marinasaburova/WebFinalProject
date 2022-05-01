@@ -64,7 +64,7 @@ $numOfItems = getCartNumOfItems();
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="checkout">
-              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart)) echo 'disabled' ?>>Continue to checkout</button>
+              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
 
             </div>
           </form>
@@ -84,18 +84,27 @@ $numOfItems = getCartNumOfItems();
             }
             foreach ($cart as $item => $quantity) {
               $product = getProductDetails($item);
+              $isInStock = canPurchaseItem($item);
             ?>
-              <tr>
+              <tr <?php if (!$isInStock) echo 'class="table-secondary"' ?>>
                 <td> <img src="media/purse.jpg" alt="product image" height="50" class="rounded"></td>
                 <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
                 <td>Quantity: <?php echo $quantity ?></td>
-                <td>
-                  <div>
-                    <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
-                    </p>
-                    <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
-                  </div>
-                </td>
+
+                <?php if (!$isInStock) { ?>
+                  <td>Item is out of stock</td>
+
+                <?php } else {  ?>
+
+                  <td>
+                    <div>
+                      <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
+                      </p>
+
+                      <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
+                    </div>
+                  </td>
+                <?php } ?>
                 <td>
                   <form action="." method="post">
                     <input type="hidden" name="itemid" value="<?php echo $product['itemID'] ?>">

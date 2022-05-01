@@ -30,6 +30,7 @@ include 'view/navigation.php';
             </form>
 
             <?php if (isset($message)) { ?><p class="text-success pt-2"><?php echo $message ?></p> <?php } ?>
+            <?php if (isset($outofstock_msg)) { ?><p class="text-danger pt-2"><?php echo $outofstock_msg ?></p> <?php } ?>
             <p class="card-text pt-3"><?php echo $product['description'] ?>
 
           </div>

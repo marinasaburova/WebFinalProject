@@ -19,7 +19,6 @@ function isValidLogin($email, $password)
 
 function logout()
 {
-    $_SESSION = array();
     session_destroy();
     header('Location: .');
 }
@@ -184,6 +183,10 @@ function placeOrder($customerID, $email, $firstName, $lastName, $street, $street
 {
     global $db;
 
+    if (!canPurchaseCart()) {
+        return;
+    }
+
     $itemsPrice = getCartTotal();
     $tax = getCartTax();
     $shipping = getCartShipping();
@@ -226,6 +229,8 @@ function placeOrder($customerID, $email, $firstName, $lastName, $street, $street
 
         $statement2->execute();
         $statement2->closeCursor();
+
+        subtractItemQuantity($item, $quantity);
     }
 
     clearCart();
