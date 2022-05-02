@@ -17,12 +17,7 @@
         </div>
 
         <div class="card-footer">
-            <form class="" action="#">
-                <div class="input-group">
-                    <button class="w-100 btn btn-secondary" type="submit">Add new item</button>
-
-                </div>
-            </form>
+            <a href="../page/new-product.php" class="btn btn-secondary">Add Item</a>
         </div>
     </div>
 </div>
