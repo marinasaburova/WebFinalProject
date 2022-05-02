@@ -19,7 +19,6 @@ function isValidLogin($email, $password)
 
 function logout()
 {
-    $_SESSION = array();
     session_destroy();
     header('Location: .');
 }
@@ -114,7 +113,7 @@ function getOrderHistory($customerID)
 {
     global $db;
 
-    $query = 'SELECT * FROM `orders` WHERE `customerID` = :customerID';
+    $query = 'SELECT * FROM `orders` WHERE `customerID` = :customerID ORDER BY `timePlaced` DESC';
 
     $statement = $db->prepare($query);
     $statement->bindValue(':customerID', $customerID);
@@ -122,6 +121,24 @@ function getOrderHistory($customerID)
     $orders = $statement->fetchAll();
     $statement->closeCursor();
     return $orders;
+}
+
+function searchOrder($email, $orderID)
+{
+    global $db;
+
+    $query = 'SELECT * FROM `orders` WHERE `orderID` = :orderID AND `email` = :email';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':orderID', $orderID);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $row = $statement->fetch();
+    $statement->closeCursor();
+    if ($row) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function getOrderDetails($orderID)
@@ -150,9 +167,25 @@ function getOrderItems($orderID)
     return $items;
 }
 
+function getOrderQuantity($orderID)
+{
+    $items = getOrderItems($orderID);
+
+    $quantity = 0;
+    foreach ($items as $item) {
+        $quantity += $item['quantity'];
+    }
+
+    return $quantity;
+}
+
 function placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
     global $db;
+
+    if (!canPurchaseCart()) {
+        return;
+    }
 
     $itemsPrice = getCartTotal();
     $tax = getCartTax();
@@ -196,9 +229,12 @@ function placeOrder($customerID, $email, $firstName, $lastName, $street, $street
 
         $statement2->execute();
         $statement2->closeCursor();
+
+        subtractItemQuantity($item, $quantity);
     }
 
     clearCart();
+    return $orderID;
 }
 
 function getCartTax()

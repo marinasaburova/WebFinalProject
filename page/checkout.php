@@ -60,21 +60,21 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Total for all items</small>
               </div>
               <span class="text-muted">$<?php echo $price ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Estimated Tax</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Sales tax: 5%</small>
               </div>
               <span class="text-muted">$<?php echo $tax ?>1</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Flat rate</small>
               </div>
               <span class="text-muted">$<?php echo $shipping ?></span>
             </li>
@@ -153,10 +153,17 @@ foreach ($cart as $item => $quantity) {
           </div>
           <!-- ./shipping -->
 
-          <div class="form-check mt-4">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this as my default address</label>
-          </div>
+          <?php
+          if (isset($_SESSION['loggedin'])) {  ?>
+            <div class="form-check mt-4">
+              <input type="checkbox" class="form-check-input" id="save-info" name="save-info" onclick="openModal()">
+              <label class=" form-check-label" for="save-info">Save this as my default address</label>
+            </div>
+          <?php } else { ?>
+            <div class="form-label mt-4">
+              <a href=".?action=login" class=" form-check-label" for="save-info">Login to save your information</a>
+            </div>
+          <?php } ?>
 
           <hr class="my-4">
 
@@ -164,16 +171,12 @@ foreach ($cart as $item => $quantity) {
           <h4 class="mb-3">Payment</h4>
           <div class="my-3" id="payment">
             <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+              <input id="credit" name="paymentMethod" type="radio" value="credit" class="form-check-input" checked required>
               <label class="form-check-label" for="credit">Credit card</label>
             </div>
             <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+              <input id="debit" name="paymentMethod" type="radio" value="debit" class="form-check-input" required>
               <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
             </div>
           </div>
 
@@ -189,7 +192,7 @@ foreach ($cart as $item => $quantity) {
 
             <div class="col-md-6">
               <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="password" class="form-control" minlength="16" maxlength="16" id="cc-number" required>
+              <input type="password" class="form-control" minlength="16" maxlength="16" id="cardNum" name="cardNum" required>
               <div class="invalid-feedback">
                 Credit card number is required
               </div>
@@ -218,7 +221,7 @@ foreach ($cart as $item => $quantity) {
           <!-- Billing -->
           <h4 class="mb-3">Billing address</h4>
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address" onclick="fillBillingAddress()">
+            <input type="checkbox" class="form-check-input" id="same-address" name="same-address" onclick="fillBillingAddress()">
             <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
           </div>
 
@@ -274,9 +277,56 @@ foreach ($cart as $item => $quantity) {
       </div>
       <!-- ./billing and shipping -->
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <main class="form-signin text-center">
+              <form action=".#view" method="post">
+                <h1 class="h3 mb-3 fw-normal">Login</h1>
+                <p>Please log in or register to save your information.</p>
+                <input type="hidden" name="action" value="modal">
+                <div class="form-floating my-2">
+                  <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                  <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating my-2">
+                  <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                  <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class="checkbox my-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                <a href=".?action=register#view">
+                  <p class="mt-4 mb-3 text-muted">Register</p>
+                </a>
+                <!--   <a href=".?action=order-search">
+                <p class="mt-2 mb-3 text-muted">Find order by number</p>
+              </a> -->
+              </form>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ./modal -->
+
   </main>
 
   <script>
+    function openModal() {}
+
     function fillBillingAddress() {
 
       // Get the checkbox

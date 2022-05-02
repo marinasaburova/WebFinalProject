@@ -21,8 +21,24 @@ switch ($action) {
     if ($category == NULL || $category == FALSE) {
       $category = 'all';
     }
-    //$categories = getCategories();
-    $products = getProducts($category);
+
+    $color = filter_input(INPUT_GET, 'colorsearch');
+    if ($color == NULL || $color == FALSE) {
+      $color = 'all';
+    }
+
+    $material = filter_input(INPUT_GET, 'materialsearch');
+    if ($material == NULL || $material == FALSE) {
+      $material = 'all';
+    }
+
+    $products = getProducts($category, $color, $material);
+
+    if (isset($_GET['search'])) {
+      $searchterm = filter_input(INPUT_GET, 'searchterm');
+      $products = keywordSearch($searchterm, $category);
+    }
+
     include 'page/home.php';
     break;
 
@@ -35,6 +51,9 @@ switch ($action) {
     if (isset($_GET['msg']) && ($_GET['msg'] == 'success')) {
       $message = 'Added to cart!';
     }
+    if (isset($_GET['msg']) && ($_GET['msg'] == 'error')) {
+      $outofstock_msg = 'Could not add item to cart: item is out of stock!';
+    }
     $product = getProductDetails($_GET['itemid']);
     include 'page/product.php';
     break;
@@ -46,7 +65,7 @@ switch ($action) {
 
     // show checkout page
   case ('checkout'):
-    if (empty($_SESSION['cart'])) {
+    if (empty($_SESSION['cart']) || !canPurchaseCart()) {
       include 'page/cart.php';
     } else {
       if (isset($_SESSION['loggedin'])) {
@@ -58,6 +77,7 @@ switch ($action) {
 
     // show customer's account
   case ('account'):
+    require_once('utils/verify-login.php');
     $info = getCustomerData($_SESSION['customerID']);
     $orders = getOrderHistory($_SESSION['customerID']);
     include 'page/account.php';
@@ -65,6 +85,7 @@ switch ($action) {
 
     // show edit account page
   case ('editaccount'):
+    require_once('utils/verify-login.php');
     $info = getCustomerData($_SESSION['customerID']);
     include 'page/edit-account.php';
     break;
@@ -93,7 +114,28 @@ switch ($action) {
 
     // show register page 
   case ('register'):
-    include 'page/register.php';
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+
+    if (!isset($_POST['email'])) {
+      $register_message = 'Create an account for a better shopping experience!';
+      include 'page/register.php';
+      break;
+    }
+
+    registerCustomer($email, $password, $firstName, $lastName);
+
+    if (isValidLogin($email, $password)) {
+      $_SESSION['loggedin'] = true;
+      $_SESSION['customerID'] = getCustomerID($email);
+      $info = getCustomerData($_SESSION['customerID']);
+      header('Location: .?action=account');
+    } else {
+      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
+      include('page/login.php');
+    }
     break;
 
     // log someone out 
@@ -103,6 +145,23 @@ switch ($action) {
 
     // show page to search for order
   case ('order-search'):
+    $order_message = 'Search for your order here.';
+
+    if (isset($_POST['orderid']) && isset($_POST['email'])) {
+      $order_message = '<span class="text-danger">This order was not found.</span>';
+
+      $orderID = filter_input(INPUT_POST, 'orderid');
+      $email = filter_input(INPUT_POST, 'email');
+
+      if (searchOrder($email, $orderID)) {
+        $order = getOrderDetails($orderID);
+        $items = getOrderItems($orderID);
+        include 'page/order-details.php';
+        break;
+      }
+      echo searchOrder($email, $orderID);
+    }
+
     include 'page/order-search.php';
     break;
 
@@ -114,22 +173,54 @@ switch ($action) {
     include 'page/order-details.php';
     break;
 
+    // add item to cart
   case ('add-to-cart'):
     $itemID = filter_input(INPUT_POST, 'itemid');
     $quantity = filter_input(INPUT_POST, 'quantity');
-    addToCart($itemID, $quantity);
 
-    $products = getProducts('all');
+    if (!canAddToCart($itemID, $quantity)) {
+      $products = getProducts('all', 'all', 'all');
+      header("Location: .?action=product&itemid=$itemID&msg=error#view");
+      break;
+    }
+
+    addToCart($itemID, $quantity);
+    $products = getProducts('all', 'all', 'all');
     header("Location: .?action=product&itemid=$itemID&msg=success#view");
     break;
 
   case ('home-add-to-cart'):
     $itemID = filter_input(INPUT_POST, 'itemid');
     $quantity = filter_input(INPUT_POST, 'quantity');
-    addToCart($itemID, $quantity);
 
-    $products = getProducts('all');
+    if (!canAddToCart($itemID, $quantity)) {
+      $products = getProducts('all', 'all', 'all');
+      header("Location: .?action=product&itemid=$itemID&msg=error#view");
+      break;
+    }
+
+    addToCart($itemID, $quantity);
+    $products = getProducts('all', 'all', 'al;');
     header("Location: .?msg=success#view");
+    break;
+
+  case ('change-cart-quantity'):
+    $itemID = filter_input(INPUT_POST, 'itemid');
+    if (isset($_POST['remove1'])) {
+      removeOneFromCart($itemID);
+      header("Location: .?action=cart#view");
+    }
+    if (isset($_POST['add1'])) {
+
+      if (!canAddToCart($itemID, 1)) {
+        header("Location: .?action=cart#view");
+        break;
+      }
+
+      addToCart($itemID, 1);
+      header("Location: .?action=cart#view");
+    }
+
     break;
 
   case ('clear-cart'):
@@ -180,23 +271,105 @@ switch ($action) {
     break;
 
   case ('place-order'):
-    $email = filter_input(INPUT_POST, 'email');
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $street = filter_input(INPUT_POST, 'street');
-    $street2 = filter_input(INPUT_POST, 'street2');
-    $city = filter_input(INPUT_POST, 'city');
-    $state = filter_input(INPUT_POST, 'state');
-    $zip = filter_input(INPUT_POST, 'zip');
-
     $cart = $_SESSION['cart'];
+    if (!canPurchaseCart()) {
+      header('Location: .?action=cart');
+      break;
+    }
+
+    if (empty($cart) || sizeof($cart) == 0 || !isset($cart)) {
+      header('Location: .');
+      break;
+    }
+
     if (isset($_SESSION['customerID'])) {
       $customerID = $_SESSION['customerID'];
     } else {
       $customerID = null;
     }
 
-    placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+    $email = filter_input(INPUT_POST, 'email');
+    $firstName = filter_input(INPUT_POST, 'firstName');
+    $lastName = filter_input(INPUT_POST, 'lastName');
+    $street = filter_input(INPUT_POST, 'street');
+    $city = filter_input(INPUT_POST, 'city');
+    $state = filter_input(INPUT_POST, 'state');
+    $zip = filter_input(INPUT_POST, 'zip');
+
+    if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
+      $street2 = null;
+    } else {
+      $street2 = filter_input(INPUT_POST, 'street2');
+    }
+
+    $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+
+    if (isset($_POST['save-info'])) {
+      $update_message = 'Successfully updated your info!';
+      updateDefaultAddr($customerID, $firstName, $lastName, $street, $street2, $city, $state, $zip);
+    }
+
+    // Variables for confirmation page
+    if (!isset($_POST['same-address'])) {
+      $billFirstName = filter_input(INPUT_POST, 'billFirstName');
+      $billLastName = filter_input(INPUT_POST, 'billLastName');
+      $billStreet = filter_input(INPUT_POST, 'billStreet');
+      $billCity = filter_input(INPUT_POST, 'billCity');
+      $billState = filter_input(INPUT_POST, 'billState');
+      $billZip = filter_input(INPUT_POST, 'billZip');
+      if (!isset($_POST['billStreet2']) || trim($_POST['billStreet2']) == '') {
+        $billStreet2 = null;
+      } else {
+        $billStreet2 = filter_input(INPUT_POST, 'billStreet2');
+      }
+    } else {
+      $billFirstName = filter_input(INPUT_POST, 'firstName');
+      $billLastName = filter_input(INPUT_POST, 'lastName');
+      $billStreet = filter_input(INPUT_POST, 'street');
+      $billCity = filter_input(INPUT_POST, 'city');
+      $billState = filter_input(INPUT_POST, 'state');
+      $billZip = filter_input(INPUT_POST, 'zip');
+      if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
+        $billStreet2 = null;
+      } else {
+        $billStreet2 = filter_input(INPUT_POST, 'street2');
+      }
+    }
+
+    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod');
+    $cardNum = '*' . substr(filter_input(INPUT_POST, 'cardNum'), -4);
+
+    $order = getOrderDetails($orderID);
+    $items = getOrderItems($orderID);
     include 'page/confirmation.php';
+    break;
+
+  case ('modal'):
+
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+
+    if (!isset($_POST['email'])) {
+      $login_message = 'Sign in to save your information for next time!';
+      include 'page/modal.php';
+      break;
+    }
+
+    if (isValidLogin($email, $password)) {
+      $_SESSION['loggedin'] = true;
+      $_SESSION['customerID'] = getCustomerID($email);
+      $info = getCustomerData($_SESSION['customerID']);
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
+      include('page/modal.php');
+    }
+
+    break;
+
+    // ADMIN STUFF
+  case ('admin'):
+    logout();
+    header('Location: admin/index.php');
     break;
 }

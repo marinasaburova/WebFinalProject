@@ -24,24 +24,24 @@ include('view/navigation.php');
                         <span class="text-primary">Your Info</span>
                     </h4>
                     <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <li class="list-group-item d-flex justify-content-between lh-sm  pb-4">
                             <div>
                                 <h6 class="my-0">Name</h6>
-                                <small class="text-muted">Brief description</small>
+                                <small class="text-muted"></small>
                             </div>
                             <span class="text-muted"><?php echo $info['firstName'] . ' ' . $info['lastName'] ?></span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <li class="list-group-item d-flex justify-content-between lh-sm pb-4">
                             <div>
                                 <h6 class="my-0">Email</h6>
-                                <small class="text-muted">Brief description</small>
+                                <small class="text-muted"></small>
                             </div>
                             <span class="text-muted"><?php echo $info['email'] ?></span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <li class="list-group-item d-flex justify-content-between lh-sm  pb-4">
                             <div>
                                 <h6 class="my-0">Default Address</h6>
-                                <small class="text-muted">Brief description</small>
+                                <small class="text-muted"> </small>
                             </div>
                             <span class="text-muted">
 
@@ -92,7 +92,7 @@ include('view/navigation.php');
                                         Order #<?php echo $order['orderID'] ?></a>
                                     </td>
                                 <td><?php echo $order['timePlaced'] ?></td>
-                                <td><?php echo 'num of items' ?></td>
+                                <td><?php echo getOrderQuantity($order['orderID']) ?> items </td>
                                 <td>$<?php echo $totalPrice ?></td>
                             </tr>
 

@@ -9,14 +9,11 @@ include 'view/navigation.php';
 $cart = $_SESSION['cart'];
 
 $price = getCartTotal();
-$tax = $price * .05;
-$shipping = 5;
-$total = $price + $tax + $shipping;
+$tax = getTax();
+$shipping = getShipping();
+$total = getTotal();
+$numOfItems = getCartNumOfItems();
 
-$numOfItems = 0;
-foreach ($cart as $item => $quantity) {
-  $numOfItems += $quantity;
-}
 ?>
 
 
@@ -40,21 +37,21 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Total for all items</small>
               </div>
               <span class="text-muted">$<?php echo $price ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Estimated Tax</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Sales Tax: 5%</small>
               </div>
               <span class="text-muted">$<?php echo $tax ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
                 <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">Flat rate</small>
               </div>
               <span class="text-muted">$<?php echo $shipping ?></span>
             </li>
@@ -67,7 +64,7 @@ foreach ($cart as $item => $quantity) {
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="checkout">
-              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart)) echo 'disabled' ?>>Continue to checkout</button>
+              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
 
             </div>
           </form>
@@ -87,19 +84,45 @@ foreach ($cart as $item => $quantity) {
             }
             foreach ($cart as $item => $quantity) {
               $product = getProductDetails($item);
+              $isInStock = canPurchaseItem($item);
             ?>
-              <tr>
-                <td>Image</td>
-                <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
-                <td>Quantity: <?php echo $quantity ?></td>
-                <td>
-                  <div>
-                    <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
-                    </p>
-                    <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
-                  </div>
+              <tr <?php if (!$isInStock) echo 'class="table-secondary"' ?>>
+                <td class="align-middle"><img src="<?php echo getItemImage($item) ?>" alt="product image" height="60px" class="rounded"></td>
+                <td class="align-middle"><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
+                <td class="align-middle">
+                  <form action="." method="post">
+                    <input type="hidden" name="itemid" value="<?php echo $item ?>">
+                    <input type="hidden" name="action" value="change-cart-quantity">
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="submit" name="remove1">-</button>
+                      </div>
+
+                      <input class="text-center bg-light border-0" value="<?php echo $quantity ?>" size="1" aria-describedby="basic-addon1" readonly>
+
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="add1">+</button>
+                      </div>
+                    </div>
+                  </form>
                 </td>
-                <td>
+
+                <?php if (!$isInStock) { ?>
+                  <td class="align-middle">Item is out of stock</td>
+
+                <?php } else {  ?>
+
+                  <td class="align-middle">
+                    <div>
+                      <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
+                      </p>
+
+                      <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
+                    </div>
+                  </td>
+                <?php } ?>
+                <td class="align-middle">
                   <form action="." method="post">
                     <input type="hidden" name="itemid" value="<?php echo $product['itemID'] ?>">
                     <button type="submit" name="action" value="remove-item" class="btn btn-sm btn-outline-danger"> <i class="fas fa-times-circle"></i>

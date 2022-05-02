@@ -1,6 +1,6 @@
 <?php
 
-function isValidAdmin($email, $pwd)
+function isValidEmployee($email, $password)
 {
     global $db;
     $query = 'SELECT `password` FROM `employee`
@@ -14,8 +14,13 @@ function isValidAdmin($email, $pwd)
     }
     $hash = $row['password'];
     $statement->closeCursor();
+<<<<<<< HEAD
     return password_verify($pwd, $hash);
+=======
+    return password_verify($password, $hash);
+>>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
 }
+
 
 function logoutAdmin()
 {
@@ -24,11 +29,16 @@ function logoutAdmin()
     header('Location: .');
 }
 
-function registerEmployee($email, $pwd, $firstName, $lastName)
+function registerEmployee($email, $password, $firstName, $lastName)
 {
     global $db;
+<<<<<<< HEAD
     $hash = password_hash($pwd, PASSWORD_BCRYPT);
     $query = 'INSERT INTO employee (email, pwd, firstName, lastName)
+=======
+    $hash = password_hash($password, PASSWORD_BCRYPT);
+    $query = 'INSERT INTO employee (email, password, firstName, lastName)
+>>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
               VALUES (:email, :password, :firstName, :lastName)';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
@@ -54,6 +64,17 @@ function updateEmployee($employeeID, $email, $firstName, $lastName)
 }
 
 function updateEmployeePwd($employeeID, $newPwd)
+<<<<<<< HEAD
+=======
+{
+}
+
+function getEmployeeID($email)
+{
+}
+
+function getEmployeeData($employeeID)
+>>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
 {
     global $db;
 
