@@ -217,10 +217,10 @@ function getAllOrders()
 {
     global $db;
 
-    $query = 'SELECT FROM orders';
+    $query = 'SELECT * FROM orders';
     $statement = $db->prepare($query);
     $statement->execute();
-    $orders = $statement->fetch();
+    $orders = $statement->fetchAll();
     $statement->closeCursor();
     return $orders;
 }
