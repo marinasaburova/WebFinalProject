@@ -14,11 +14,7 @@ function isValidEmployee($email, $password)
     }
     $hash = $row['password'];
     $statement->closeCursor();
-<<<<<<< HEAD
-    return password_verify($pwd, $hash);
-=======
     return password_verify($password, $hash);
->>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
 }
 
 
@@ -32,13 +28,9 @@ function logoutAdmin()
 function registerEmployee($email, $password, $firstName, $lastName)
 {
     global $db;
-<<<<<<< HEAD
-    $hash = password_hash($pwd, PASSWORD_BCRYPT);
-    $query = 'INSERT INTO employee (email, pwd, firstName, lastName)
-=======
+
     $hash = password_hash($password, PASSWORD_BCRYPT);
     $query = 'INSERT INTO employee (email, password, firstName, lastName)
->>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
               VALUES (:email, :password, :firstName, :lastName)';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
@@ -64,8 +56,6 @@ function updateEmployee($employeeID, $email, $firstName, $lastName)
 }
 
 function updateEmployeePwd($employeeID, $newPwd)
-<<<<<<< HEAD
-=======
 {
 }
 
@@ -74,16 +64,6 @@ function getEmployeeID($email)
 }
 
 function getEmployeeData($employeeID)
->>>>>>> 505493b646acc62f6831e33a530478093b8cf78b
 {
-    global $db;
-
-    $hash = password_hash($newPwd, PASSWORD_BCRYPT);
-
-    $query = 'UPDATE employee SET `password` = :hash WHERE `employeeID` = :employeeID';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':hash', $hash);
-    $statement->bindValue(':employeeID', $employeeID);
-    $statement->execute();
-    $statement->closeCursor();
+    
 }
