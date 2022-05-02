@@ -45,7 +45,7 @@ include('view/navigation.php')
                 <?php
                 foreach ($items as $item) { ?>
                     <a href=".?action=product&itemid=<?php echo $item['itemID'] ?>#view" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                        <img src="media/purse.jpg" alt="twbs" height="40" class="rounded flex-shrink-0">
+                        <img src="<?php echo getItemImage($item) ?>" alt="twbs" height="40" class="rounded flex-shrink-0">
                         <div class="d-flex gap-2 w-100 justify-content-between">
                             <div>
                                 <h6 class="my-0"><?php echo $item['name'] ?></h6>

@@ -12,7 +12,7 @@ include 'view/navigation.php';
       <!-- Main Content -->
       <div class="col-md-5">
         <div class="card mb-4 sticky-top" style="top: 72px; z-index:1018;">
-          <img class=" card-img-top" src="media/purse.jpg" alt="Image of product" />
+          <img class=" card-img-top" src="<?php echo getItemImage($product['itemID']) ?>" alt="Image of product" />
 
         </div>
       </div>

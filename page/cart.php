@@ -87,9 +87,9 @@ $numOfItems = getCartNumOfItems();
               $isInStock = canPurchaseItem($item);
             ?>
               <tr <?php if (!$isInStock) echo 'class="table-secondary"' ?>>
-                <td> <img src="media/purse.jpg" alt="product image" height="50" class="rounded"></td>
-                <td><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
-                <td>
+                <td class="align-middle"><img src="<?php echo getItemImage($item) ?>" alt="product image" height="60px" class="rounded"></td>
+                <td class="align-middle"><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
+                <td class="align-middle">
                   <form action="." method="post">
                     <input type="hidden" name="itemid" value="<?php echo $item ?>">
                     <input type="hidden" name="action" value="change-cart-quantity">
@@ -109,11 +109,11 @@ $numOfItems = getCartNumOfItems();
                 </td>
 
                 <?php if (!$isInStock) { ?>
-                  <td>Item is out of stock</td>
+                  <td class="align-middle">Item is out of stock</td>
 
                 <?php } else {  ?>
 
-                  <td>
+                  <td class="align-middle">
                     <div>
                       <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
                       </p>
@@ -122,7 +122,7 @@ $numOfItems = getCartNumOfItems();
                     </div>
                   </td>
                 <?php } ?>
-                <td>
+                <td class="align-middle">
                   <form action="." method="post">
                     <input type="hidden" name="itemid" value="<?php echo $product['itemID'] ?>">
                     <button type="submit" name="action" value="remove-item" class="btn btn-sm btn-outline-danger"> <i class="fas fa-times-circle"></i>

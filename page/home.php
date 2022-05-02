@@ -32,7 +32,7 @@ include 'view/navigation.php';
         ?>
           <div class="col-sm-6 col-md-4">
             <div class="card mb-4">
-              <a href=".?action=product&itemid=<?php echo $p['itemID'] ?>#view"><img class="card-img-top" src="media/purse.jpg" alt="Image of product" /></a>
+              <a href=".?action=product&itemid=<?php echo $p['itemID'] ?>#view"><img class="card-img-top" src="<?php echo getItemImage($p['itemID']) ?>" alt="Image of product" height="360px" style="object-fit: cover" /></a>
               <div class="card-body">
                 <h5 class="card-title"><?php echo $p['name'] ?></h5>
                 <p class="card-text">$<?php echo $p['price'] ?></p>

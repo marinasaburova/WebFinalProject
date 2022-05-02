@@ -145,6 +145,24 @@ function addItem($itemID)
 {
 }
 
+function uploadItemPhoto($itemID, $image)
+{
+}
+
+function getItemImage($itemID)
+{
+    $path = "media/purse.jpg";
+    $exts = array('bmp', 'png', 'jpg', 'jpeg');
+    foreach ($exts as $ext) {
+
+        if (file_exists("media/" . $itemID . "." . $ext)) {
+            $path = "media/" . $itemID . "." . $ext;
+        }
+    }
+
+    return $path;
+}
+
 function deleteItem($itemID)
 {
 }

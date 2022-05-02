@@ -139,4 +139,38 @@ switch ($action) {
         logout();
         header('Location: ../');
         break;
+
+
+
+        // TEST: can modify or remove 
+    case ('img-upload-page'):
+        include 'page/image-upload-test.php';
+        break;
+
+    case ('test-img-upload'):
+        $imagename = filter_input(INPUT_POST, 'itemid');
+        $image = filter_input(INPUT_POST, 'pic');
+
+        //Stores the filetype e.g image/jpeg
+        $imagetype = $_FILES['pic']['type'];
+        // Get image extension
+        $extension = explode('/', $imagetype)[1];
+        //Stores any error codes from the upload.
+        $imageerror = $_FILES['pic']['error'];
+        //Stores the tempname as it is given by the host when uploaded.
+        $imagetemp = $_FILES['pic']['tmp_name'];
+
+        //The path you wish to upload the image to
+        $imagePath = "../media/";
+
+        if (is_uploaded_file($imagetemp)) {
+            if (move_uploaded_file($imagetemp, $imagePath . $imagename . '.' . $extension)) {
+                echo "Sussecfully uploaded your image.";
+            } else {
+                echo "Failed to move your image.";
+            }
+        } else {
+            echo "Failed to upload your image.";
+        }
+        break;
 }
