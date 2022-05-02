@@ -42,6 +42,17 @@ function getProductDetails($itemID)
 
 function updateItem($itemID)
 {
+    global $db;
+
+    $query = 'INSERT INTO item (itemID, $email, $)
+              VALUES (:)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':password', $hash);
+    $statement->bindValue(':firstName', $firstName);
+    $statement->bindValue(':lastName', $lastName);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function addItem($itemID)
