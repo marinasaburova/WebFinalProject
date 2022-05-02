@@ -15,6 +15,12 @@ IDENTIFIED BY 'kelarinapass';
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
+
+DROP DATABASE IF EXISTS kelarinadatabase;
+CREATE DATABASE kelarinadatabase;
+USE kelarinadatabase;  -- MySQL command
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -318,3 +324,8 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON kelarinadatabase.*
+TO kelarina@localhost
+IDENTIFIED BY 'kelarinapass';
