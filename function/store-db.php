@@ -137,27 +137,43 @@ function subtractItemQuantity($itemID, $quantity)
     $statement->closeCursor();
 }
 
-function updateItem($itemID)
+function updateItem($itemID, $name, $price, $quanity, $category, $color, $material)
 {
     global $db;
 
-    $query = 'INSERT INTO item (itemID, $email, $)
-              VALUES (:)';
+    $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quanity, `category` = :category, `color` = :color, `material` = :material WHERE `itemID` = :itemID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':email', $email);
-    $statement->bindValue(':password', $hash);
-    $statement->bindValue(':firstName', $firstName);
-    $statement->bindValue(':lastName', $lastName);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':price', $price);
+    $statement->bindValue(':quanity', $quanity);
+    $statement->bindValue(':itemID', $itemID);
+    $statement->bindValue(':category', $category);
+    $statement->bindValue(':color', $color);
+    $statement->bindValue('material', $material);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function addItem($itemID)
+function addItem($name, $price, $quanity, $category, $color, $material)
 {
+    global $db;
+
+    $query = 'INSERT INTO item (name, price, quanity, category, color, material)
+              VALUES (:name, :price, :quanity, :category, :color, :material)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':price', $price);
+    $statement->bindValue(':quanity', $quanity);
+    $statement->bindValue(':category', $category);
+    $statement->bindValue(':color',$color);
+    $statement->bindValue(':material', $material);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function uploadItemPhoto($itemID, $image)
 {
+
 }
 
 function getItemImage($itemID)
@@ -176,12 +192,35 @@ function getItemImage($itemID)
 
 function deleteItem($itemID)
 {
+    global $db;
+    
+    $query = 'DELETE FROM item WHERE `itemID` = :itemID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':itemID', $itemID);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function updateOrderStatus($orderID, $status)
 {
+    global $db;
+
+    $query = 'UPDATE orders SET `status` = :status  WHERE `orderID` = :orderID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':status', $status);
+    $statement->bindValue(':orderID', $orderID);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function getAllOrders()
 {
+    global $db;
+
+    $query = 'SELECT * FROM orders';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $orders = $statement->fetchAll();
+    $statement->closeCursor();
+    return $orders;
 }

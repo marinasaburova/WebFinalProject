@@ -57,13 +57,40 @@ function updateEmployee($employeeID, $email, $firstName, $lastName)
 
 function updateEmployeePwd($employeeID, $newPwd)
 {
+    global $db;
+
+    $hash = password_hash($newPwd, PASSWORD_BCRYPT);
+
+    $query = 'UPDATE employee SET `pwd` = :hash WHERE `employeeID` = :employeeID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':hash', $hash);
+    $statement->bindValue(':employeeID', $employeeID);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function getEmployeeID($email)
 {
+    global $db;
+
+    $query = "SELECT `employeeID` FROM `employee` WHERE `email` = :email";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $employee = $statement->fetch();
+    $statement->closeCursor();
+    return $employee['employeeID'];
 }
 
 function getEmployeeData($employeeID)
 {
-    
+    global $db;
+
+    $query = 'SELECT * FROM `employee` WHERE `employeeID` = :employeeID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':employeeID', $employeeID);
+    $statement->execute();
+    $employee = $statement->fetch();
+    $statement->closeCursor();
+    return $employee;
 }
