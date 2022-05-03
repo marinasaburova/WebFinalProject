@@ -137,15 +137,15 @@ function subtractItemQuantity($itemID, $quantity)
     $statement->closeCursor();
 }
 
-function updateItem($itemID, $name, $price, $quanity, $category, $color, $material)
+function updateItem($itemID, $name, $price, $quantity, $category, $color, $material)
 {
     global $db;
 
-    $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quanity, `category` = :category, `color` = :color, `material` = :material WHERE `itemID` = :itemID';
+    $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quantity, `category` = :category, `color` = :color, `material` = :material WHERE `itemID` = :itemID';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
-    $statement->bindValue(':quanity', $quanity);
+    $statement->bindValue(':quantity', $quantity);
     $statement->bindValue(':itemID', $itemID);
     $statement->bindValue(':category', $category);
     $statement->bindValue(':color', $color);
@@ -154,16 +154,16 @@ function updateItem($itemID, $name, $price, $quanity, $category, $color, $materi
     $statement->closeCursor();
 }
 
-function addItem($name, $price, $quanity, $category, $color, $material)
+function addItem($name, $price, $quantity, $category, $color, $material)
 {
     global $db;
 
-    $query = 'INSERT INTO item (name, price, quanity, category, color, material)
-              VALUES (:name, :price, :quanity, :category, :color, :material)';
+    $query = 'INSERT INTO item (name, price, quantity, category, color, material)
+              VALUES (:name, :price, :quantity, :category, :color, :material)';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
-    $statement->bindValue(':quanity', $quanity);
+    $statement->bindValue('quantity', $quantity);
     $statement->bindValue(':category', $category);
     $statement->bindValue(':color',$color);
     $statement->bindValue(':material', $material);

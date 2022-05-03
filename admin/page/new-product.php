@@ -68,13 +68,9 @@ include('admin-view/navigation.php')
 
             <hr class="my-4">
 
-<<<<<<< HEAD
             <button class="w-100 btn btn-primary btn-lg" type="submit">Add Item</button>
-=======
             <input type="hidden" name="action" value="new-product">
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Login</button>
->>>>>>> c7bfa34fc2d842fffd485afe238ad82c32b6fb29
           </div>
         </form>
       </div>

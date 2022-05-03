@@ -118,9 +118,19 @@ switch ($action) {
         header('Location: .?action=account');
         break;
 
+        //create new product
     case ('new-product'):
         require_once('../utils/verify-admin.php');
+        $name = filter_input(INPUT_POST, 'name');
+        $price = filter_input(INPUT_POST, 'price');
+        $quantity = filter_input(INPUT_POST, 'quantity');
+        $category = filter_input(INPUT_POST, 'category');
+        $color = filter_input(INPUT_POST, 'color');
+        $material = filter_input(INPUT_POST, 'material');
+        $description = filter_input(INPUT_POST, 'description');
+        $tags = filter_input(INPUT_POST, 'tags');
 
+        addItem($name, $price, $quantity, $category, $color, $material);
         include 'page/new-product.php';
         break;
 
