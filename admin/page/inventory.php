@@ -24,7 +24,7 @@ include 'admin-view/navigation.php';
                             <div class="card-body">
                                 <h5 class="card-title">Product Name</h5>
                                 <p class="card-text">Price</p>
-                                <a href="page/product.php" class="btn btn-primary">Edit</a>
+                                <a href=".?action=product&itemid=0000000001#view" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>

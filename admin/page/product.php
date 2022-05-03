@@ -1,8 +1,8 @@
 <!-- Shows item details and allows employee to edit them -->
 
 <?php
-include '../admin-view/header.php';
-include '../admin-view/navigation.php';
+include 'admin-view/header.php';
+include 'admin-view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
@@ -18,9 +18,9 @@ include '../admin-view/navigation.php';
       <div class="col-md-7">
         <div class="card mb-4">
           <div class="card-body">
-          <div class="container text-center">
-            <div class="row">
-              <div class="col-sm-4"></div>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col-sm-4"></div>
                 <!-- main column-->
                 <div class="col-sm-4">
                   <form method="post">
@@ -62,5 +62,5 @@ include '../admin-view/navigation.php';
 <!-- /.middle container -->
 
 <?php
-include ('../admin-view/footer.php');
+include('admin-view/footer.php');
 ?>
