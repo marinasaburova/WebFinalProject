@@ -120,10 +120,9 @@ switch ($action) {
 
     case ('new-product'):
         require_once('../utils/verify-admin.php');
-        
+
         include 'page/new-product.php';
         break;
-
 
         // update password
     case ('update-password'):
