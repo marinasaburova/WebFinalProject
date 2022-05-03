@@ -69,7 +69,7 @@ include('admin-view/navigation.php')
             <!-- Image Upload -->
             <div class="mb-3">
               <label for="formFile" class="form-label">Upload an image</label>
-              <input class="form-control" type="file" id="pic" name="pic">
+              <input class="form-control" type="file" id="pic" name="pic" accept="image/*">
             </div>
 
             <hr class="my-4">
