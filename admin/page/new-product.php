@@ -19,7 +19,7 @@ include('admin-view/navigation.php')
             <!-- name -->
             <div class="mb-3">
               <label for="itemName" class="form-label">Item Name</label>
-              <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Type in item name..." required>
+              <input type="text" class="form-control" id="itemName" name="name" placeholder="Type in item name..." required>
             </div>
 
             <!-- price -->
@@ -68,7 +68,7 @@ include('admin-view/navigation.php')
 
             <hr class="my-4">
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Add Item</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit" name="addItem">Add Item</button>
             <input type="hidden" name="action" value="new-product">
 
           </div>
