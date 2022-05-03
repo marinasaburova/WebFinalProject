@@ -1,11 +1,6 @@
 <!-- Sidebar -->
-
 <?php
-$class_product = 'nav-link';
-
-if (isset($action)) {
-    $class_product = 'nav-link active';
-}
+$class_product = 'nav-link active';
 ?>
 
 <div class="col-md-3">
@@ -26,9 +21,13 @@ if (isset($action)) {
         </div>
 
         <div class="card-footer">
+            <!-- Navigation -->
             <nav class="sticky-top" id="view">
-                <a href=".?action=new-product.php" class="<?php echo $class_product ?>">New Product</a>
+                <ul class="nav">
+                    <li class="nav-item"><a href=".?action=new-product" class="<?php echo $class_product ?>">New Item</a></li>
+                </ul>
             </nav>
+            <!-- /.navigation -->
         </div>
     </div>
 </div>
