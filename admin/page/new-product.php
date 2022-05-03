@@ -1,8 +1,8 @@
 <!-- Register for an account-->
 
 <?php
-include('view/header.php');
-include('view/navigation.php')
+include('admin-view/header.php');
+include('admin-view/navigation.php')
 ?>
 
 <div class="container">
@@ -14,7 +14,7 @@ include('view/navigation.php')
     <div class="mb-3">
       <!-- General Info -->
       <div>
-        <form action="." method="post" >
+        <form action="." method="post">
           <div class="mb-3">
             <!-- name -->
             <div class="mb-3">
@@ -39,7 +39,7 @@ include('view/navigation.php')
               <label for="category" class="form-label">Category</label>
               <input type="category" class="form-control" id="category" name="category" placeholder="Create a category" required>
             </div>
-        
+
             <!-- color -->
             <div class="mb-3">
               <label for="color" class="form-label">Color</label>
@@ -51,7 +51,7 @@ include('view/navigation.php')
               <label for="material" class="form-label">Material</label>
               <input type="text" class="form-control" id="material" name="material" placeholder="Type in material..." required>
             </div>
-              
+
             <!-- description -->
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -68,7 +68,13 @@ include('view/navigation.php')
 
             <hr class="my-4">
 
+<<<<<<< HEAD
             <button class="w-100 btn btn-primary btn-lg" type="submit">Add Item</button>
+=======
+            <input type="hidden" name="action" value="new-product">
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Login</button>
+>>>>>>> c7bfa34fc2d842fffd485afe238ad82c32b6fb29
           </div>
         </form>
       </div>
@@ -77,4 +83,4 @@ include('view/navigation.php')
   </main>
 </div>
 
-<?php include('view/footer.php') ?>
+<?php include('admin-view/footer.php') ?>
