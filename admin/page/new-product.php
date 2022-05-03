@@ -68,7 +68,7 @@ include('view/navigation.php')
 
             <hr class="my-4">
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Login</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Add Item</button>
           </div>
         </form>
       </div>
