@@ -162,7 +162,6 @@ function addItem($name, $price, $quantity, $category, $color, $material, $descri
 
     $query = 'INSERT INTO item (name, price, quantity, category, color, material, description, tags)
               VALUES (:name, :price, :quantity, :category, :color, :material, :description, :tags)';
-    echo $query;
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);

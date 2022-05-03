@@ -16,6 +16,8 @@ include('admin-view/navigation.php')
       <div>
         <form action="." method="post" enctype="multipart/form-data">
           <div class="mb-3">
+            <input type="hidden" name="action" value="new-product">
+
             <!-- name -->
             <div class="mb-3">
               <label for="itemName" class="form-label">Item Name</label>
@@ -64,12 +66,13 @@ include('admin-view/navigation.php')
               <input type="text" class="form-control" id="tags" name="tags" placeholder="Type in tags..." required>
             </div>
 
+            <!-- Image Upload -->
             <input type="file" name="pic" id="pic" size=25>
+
 
             <hr class="my-4">
 
             <button class="w-100 btn btn-primary btn-lg" type="submit" name="addItem">Add Item</button>
-            <input type="hidden" name="action" value="update-product">
 
           </div>
         </form>

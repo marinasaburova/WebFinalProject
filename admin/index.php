@@ -123,8 +123,7 @@ switch ($action) {
         require_once('../utils/verify-admin.php');
 
         if (isset($_POST['addItem'])) {
-            $message = 'Item Added';
-            header('Location: .?action=inventory&msg=success');
+
             $name = filter_input(INPUT_POST, 'name');
             $price = filter_input(INPUT_POST, 'price');
             $quantity = filter_input(INPUT_POST, 'quantity');
@@ -134,9 +133,41 @@ switch ($action) {
             $description = filter_input(INPUT_POST, 'description');
             $tags = filter_input(INPUT_POST, 'tags');
             addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
+
+            // Adds image to files 
+            $itemID = $db->lastInsertId();
+            $length = 10;
+            $imagename = substr(str_repeat(0, $length) . $itemID, -$length);
+
+            $image = filter_input(INPUT_POST, 'pic');
+
+            //Stores the filetype e.g image/jpeg
+            $imagetype = $_FILES['pic']['type'];
+            // Get image extension
+            $extension = explode('/', $imagetype)[1];
+            //Stores any error codes from the upload.
+            $imageerror = $_FILES['pic']['error'];
+            //Stores the tempname as it is given by the host when uploaded.
+            $imagetemp = $_FILES['pic']['tmp_name'];
+
+            //The path you wish to upload the image to
+            $imagePath = "../media/";
+
+            if (is_uploaded_file($imagetemp)) {
+                if (move_uploaded_file($imagetemp, $imagePath . $imagename . '.' . $extension)) {
+                    echo "Sussecfully uploaded your image.";
+                } else {
+                    header('Location: .?action=inventory&msg=error');
+                    break;
+                }
+            } else {
+                header('Location: .?action=inventory&msg=error');
+                break;
+            }
+
+            header('Location: .?action=inventory&msg=success');
             break;
         } else {
-            echo 'not adding product';
             include 'page/new-product.php';
             break;
         }
