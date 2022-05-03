@@ -123,7 +123,8 @@ switch ($action) {
         require_once('../utils/verify-admin.php');
 
         if (isset($_POST['addItem'])) {
-            echo ' adding item';
+            $message = 'Item Added';
+            header('Location: .?action=inventory&msg=success');
             $name = filter_input(INPUT_POST, 'name');
             $price = filter_input(INPUT_POST, 'price');
             $quantity = filter_input(INPUT_POST, 'quantity');
@@ -132,7 +133,7 @@ switch ($action) {
             $material = filter_input(INPUT_POST, 'material');
             $description = filter_input(INPUT_POST, 'description');
             $tags = filter_input(INPUT_POST, 'tags');
-            addItem($name, $price, $quantity, $category, $color, $material);
+            addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
             break;
         } else {
             echo 'not adding product';
@@ -140,7 +141,51 @@ switch ($action) {
             break;
         }
 
+        //update product
+        case ('update-product'):
+            require_once('../utils/verify-admin.php');
+    
+            if (isset($_POST['updateItem'])) {
+                $message = 'Updated';
+                header('Location: .?action=inventory&msg=success');
+                $name = filter_input(INPUT_POST, 'name');
+                $price = filter_input(INPUT_POST, 'price');
+                $quantity = filter_input(INPUT_POST, 'quantity');
+                $category = filter_input(INPUT_POST, 'category');
+                $color = filter_input(INPUT_POST, 'color');
+                $material = filter_input(INPUT_POST, 'material');
+                $description = filter_input(INPUT_POST, 'description');
+                $tags = filter_input(INPUT_POST, 'tags');
+                addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
+                break;
+            } else {
+                echo 'not adding product';
+                include 'page/new-product.php';
+                break;
+            }
 
+        //update order
+        case ('update-order'):
+            require_once('../utils/verify-admin.php');
+    
+            if (isset($_POST['updateOrder'])) {
+                $message = 'Updated';
+                header('Location: .?action=inventory&msg=success');
+                $name = filter_input(INPUT_POST, 'name');
+                $price = filter_input(INPUT_POST, 'price');
+                $quantity = filter_input(INPUT_POST, 'quantity');
+                $category = filter_input(INPUT_POST, 'category');
+                $color = filter_input(INPUT_POST, 'color');
+                $material = filter_input(INPUT_POST, 'material');
+                $description = filter_input(INPUT_POST, 'description');
+                $tags = filter_input(INPUT_POST, 'tags');
+                addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
+                break;
+            } else {
+                echo 'Did not update';
+                include 'page/new-product.php';
+                break;
+            }
 
         // update password
     case ('update-password'):
@@ -194,5 +239,13 @@ switch ($action) {
         } else {
             echo "Failed to upload your image.";
         }
+        break;
+    
+    // show order details page 
+    case ('order-details'):
+        $orderID = filter_input(INPUT_GET, 'orderID');
+        $order = getOrderDetails($orderID);
+        $items = getOrderItems($orderID);
+        include 'page/order-details.php';
         break;
 }

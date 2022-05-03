@@ -16,44 +16,56 @@ include 'admin-view/navigation.php';
             <?php include 'admin-view/order-sidebar.php'; ?>
 
             <!-- Main Content -->
-            <div class="col-md-9">
-                <!-- Row 1 of Items -->
-                <div class="row align-items-start justify-content-center text-center">
-                    <div class="col-sm">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Order Number</h5>
-                                <p class="card-text">Status</p>
-                                <p class="card-text">Total Price</p>
-                                <a href=".?action=order-details&orderid=0000000026" class="btn btn-primary">Manage</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Order Number</h5>
-                                <p class="card-text">Status</p>
-                                <p class="card-text">Total Price</p>
-                                <a href="#" class="btn btn-primary">Manage</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Order Number</h5>
-                                <p class="card-text">Status</p>
-                                <p class="card-text">Total Price</p>
-                                <a href="#" class="btn btn-primary">Manage</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.col main content -->
+            <div class="col-md-7 col-lg-8">
+                <table class="table">
+                    <tbody>
+                        <?php
+                        if (empty($orders) || sizeof($orders) == 0) {
+                            echo '<p class="">No orders.</p>';
+                            echo '<a href="."><p class="my-0">No orders.</p></a>';
+                        }
+
+                        foreach ($orders as $order) {
+                            $totalPrice = $order['itemsPrice'] + $order['shipping'] + $order['tax'];
+                        ?>
+                            <tr>
+                                <th scope="row"> <a href=".?action=order-details&orderid=<?php echo $order['orderID'] ?>#view" class="text-reset text-decoration-none">
+                                        Order #<?php echo $order['orderID'] ?></a>
+                                    </td>
+                                <td><?php echo $order['timePlaced'] ?></td>
+                                <td><?php echo getOrderQuantity($order['orderID']) ?> items </td>
+                                <td>$<?php echo $totalPrice ?></td>
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+
+                        <!-- 
+                        <tr>
+                            <th scope="row">Order Number</td>
+                            <td>Date</td>
+                            <td>Items Ordered</td>
+                            <td>Order Total</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Order Number</td>
+                            <td>Date</td>
+                            <td>Items Ordered</td>
+                            <td>Order Total</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Order Number</td>
+                            <td>Date</td>
+                            <td>Items Ordered</td>
+                            <td>Order Total</td>
+                        </tr> -->
+                    </tbody>
+
+                </table>
+
             </div>
-            <!-- /.row -->
+            <!-- ./cart -->
     </main>
     <!-- /.main -->
 </div>

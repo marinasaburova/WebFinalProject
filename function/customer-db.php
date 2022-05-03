@@ -248,3 +248,14 @@ function getCartShipping()
 {
     return 5;
 }
+
+function updateStatus($orderID, $status)
+{
+    global $db;
+
+    $query = 'UPDATE orders SET `status` = :status WHERE `orderID` = :orderID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':status', $status);
+    $statement->execute();
+    $statement->closeCursor();
+}
