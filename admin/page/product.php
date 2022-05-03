@@ -23,7 +23,7 @@ include 'admin-view/navigation.php';
                 <div class="col-sm-4"></div>
                 <!-- main column-->
                 <div class="col-sm-4">
-                  <form method="post">
+                  <form action="." method="post">
                     <p class="card-text">Product name: </p>
                     <label for="productName" class="form-label"></label>
                     <input type="text" class="form-control" id="productName" placeholder="" required>
@@ -45,7 +45,9 @@ include 'admin-view/navigation.php';
                       Please enter description.
                     </div>
                     <br>
-                    <a href="#" class="btn btn-primary">Update</a>
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" name="updateItem">Update</button>
+                    <input type="hidden" name="action" value="update-product"> 
                   </form>
                 </div>
               </div>

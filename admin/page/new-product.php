@@ -69,7 +69,7 @@ include('admin-view/navigation.php')
             <hr class="my-4">
 
             <button class="w-100 btn btn-primary btn-lg" type="submit" name="addItem">Add Item</button>
-            <input type="hidden" name="action" value="new-product">
+            <input type="hidden" name="action" value="update-product">
 
           </div>
         </form>

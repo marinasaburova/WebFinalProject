@@ -137,11 +137,11 @@ function subtractItemQuantity($itemID, $quantity)
     $statement->closeCursor();
 }
 
-function updateItem($itemID, $name, $price, $quantity, $category, $color, $material)
+function updateItem($itemID, $name, $price, $quantity, $category, $color, $material, $description, $tags)
 {
     global $db;
 
-    $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quantity, `category` = :category, `color` = :color, `material` = :material WHERE `itemID` = :itemID';
+    $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quantity, `category` = :category, `color` = :color, `material` = :material, `description` = :description, `tags` = :tags WHERE `itemID` = :itemID';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
@@ -149,17 +149,19 @@ function updateItem($itemID, $name, $price, $quantity, $category, $color, $mater
     $statement->bindValue(':itemID', $itemID);
     $statement->bindValue(':category', $category);
     $statement->bindValue(':color', $color);
-    $statement->bindValue('material', $material);
+    $statement->bindValue(':material', $material);
+    $statement->bindValue(':description', $description);
+    $statement->bindValue(':tags', $tags);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function addItem($name, $price, $quantity, $category, $color, $material)
+function addItem($name, $price, $quantity, $category, $color, $material, $description, $tags)
 {
     global $db;
 
-    $query = 'INSERT INTO item (name, price, quantity, category, color, material)
-              VALUES (:name, :price, :quantity, :category, :color, :material)';
+    $query = 'INSERT INTO item (name, price, quantity, category, color, material, description, tags)
+              VALUES (:name, :price, :quantity, :category, :color, :material, :description, :tags)';
     echo $query;
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
@@ -168,6 +170,8 @@ function addItem($name, $price, $quantity, $category, $color, $material)
     $statement->bindValue(':category', $category);
     $statement->bindValue(':color', $color);
     $statement->bindValue(':material', $material);
+    $statement->bindValue(':description', $description);
+    $statement->bindValue(':tags', $tags);
     $statement->execute();
     $statement->closeCursor();
 }
