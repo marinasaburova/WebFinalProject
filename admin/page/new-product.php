@@ -14,7 +14,7 @@ include('admin-view/navigation.php')
     <div class="mb-3">
       <!-- General Info -->
       <div>
-        <form action="." method="post">
+        <form action="." method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <!-- name -->
             <div class="mb-3">
@@ -64,7 +64,7 @@ include('admin-view/navigation.php')
               <input type="text" class="form-control" id="tags" name="tags" placeholder="Type in tags..." required>
             </div>
 
-            <a href="register.php">Register</a>
+            <input type="file" name="pic" id="pic" size=25>
 
             <hr class="my-4">
 

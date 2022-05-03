@@ -214,6 +214,7 @@ switch ($action) {
         include 'page/image-upload-test.php';
         break;
 
+        // To upload image, test, but dont remove :)
     case ('test-img-upload'):
         $imagename = filter_input(INPUT_POST, 'itemid');
         $image = filter_input(INPUT_POST, 'pic');
