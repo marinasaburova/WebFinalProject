@@ -118,6 +118,13 @@ switch ($action) {
         header('Location: .?action=account');
         break;
 
+    case ('new-product'):
+        require_once('../utils/verify-admin.php');
+        
+        include 'page/new-product.php';
+        break;
+
+
         // update password
     case ('update-password'):
         require_once('../utils/verify-admin.php');
@@ -139,8 +146,6 @@ switch ($action) {
         logout();
         header('Location: ../');
         break;
-
-
 
         // TEST: can modify or remove 
     case ('img-upload-page'):
