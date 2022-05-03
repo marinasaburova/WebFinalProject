@@ -122,7 +122,8 @@ switch ($action) {
     case ('new-product'):
         require_once('../utils/verify-admin.php');
 
-        if (isset($_POST['additem'])) {
+        if (isset($_POST['addItem'])) {
+            echo ' adding item';
             $name = filter_input(INPUT_POST, 'name');
             $price = filter_input(INPUT_POST, 'price');
             $quantity = filter_input(INPUT_POST, 'quantity');
@@ -131,11 +132,15 @@ switch ($action) {
             $material = filter_input(INPUT_POST, 'material');
             $description = filter_input(INPUT_POST, 'description');
             $tags = filter_input(INPUT_POST, 'tags');
+            addItem($name, $price, $quantity, $category, $color, $material);
+            break;
+        } else {
+            echo 'not adding product';
+            include 'page/new-product.php';
+            break;
         }
 
-        addItem($name, $price, $quantity, $category, $color, $material);
-        include 'page/new-product.php';
-        break;
+
 
         // update password
     case ('update-password'):
