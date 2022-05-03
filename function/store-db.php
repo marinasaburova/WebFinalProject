@@ -160,12 +160,13 @@ function addItem($name, $price, $quantity, $category, $color, $material)
 
     $query = 'INSERT INTO item (name, price, quantity, category, color, material)
               VALUES (:name, :price, :quantity, :category, :color, :material)';
+    echo $query;
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
     $statement->bindValue('quantity', $quantity);
     $statement->bindValue(':category', $category);
-    $statement->bindValue(':color',$color);
+    $statement->bindValue(':color', $color);
     $statement->bindValue(':material', $material);
     $statement->execute();
     $statement->closeCursor();
@@ -173,7 +174,6 @@ function addItem($name, $price, $quantity, $category, $color, $material)
 
 function uploadItemPhoto($itemID, $image)
 {
-
 }
 
 function getItemImage($itemID)
@@ -193,7 +193,7 @@ function getItemImage($itemID)
 function deleteItem($itemID)
 {
     global $db;
-    
+
     $query = 'DELETE FROM item WHERE `itemID` = :itemID';
     $statement = $db->prepare($query);
     $statement->bindValue(':itemID', $itemID);
