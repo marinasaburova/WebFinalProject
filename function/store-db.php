@@ -187,12 +187,11 @@ function getItemImage($itemID)
     foreach ($exts as $ext) {
 
         if (file_exists("media/" . $itemID . "." . $ext)) {
-            if (isset($_SESSION['emploggedin'])) { 
-                $path = "../media/" . $itemID . "." . $ext;
-            } else { 
-                $path = "media/" . $itemID . "." . $ext;
+            $path = "media/" . $itemID . "." . $ext;
+        }
 
-            }
+        if (file_exists("../media/" . $itemID . "." . $ext)) {
+            $path = "../media/" . $itemID . "." . $ext;
         }
     }
 

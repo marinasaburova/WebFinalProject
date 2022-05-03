@@ -11,7 +11,7 @@ include 'admin-view/navigation.php';
       <!-- Main Content -->
       <div class="col-md-5">
         <div class="card mb-4 sticky-top" style="top: 72px; z-index:1018;">
-          <img class=" card-img-top" src="../../media/purse.jpg" alt="Image of product" />
+          <img class=" card-img-top" src="<?php echo getItemImage($product['itemID']) ?>" alt="Image of product" />
         </div>
       </div>
       <!-- ./col -->
@@ -47,7 +47,7 @@ include 'admin-view/navigation.php';
                     <br>
 
                     <button class="w-100 btn btn-primary btn-lg" type="submit" name="updateItem">Update</button>
-                    <input type="hidden" name="action" value="update-product"> 
+                    <input type="hidden" name="action" value="update-product">
                   </form>
                 </div>
               </div>

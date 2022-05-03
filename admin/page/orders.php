@@ -33,33 +33,15 @@ include 'admin-view/navigation.php';
                                         Order #<?php echo $order['orderID'] ?></a>
                                     </td>
                                 <td><?php echo $order['timePlaced'] ?></td>
+                                <td><?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] ?></td>
                                 <td><?php echo getOrderQuantity($order['orderID']) ?> items </td>
                                 <td>$<?php echo $totalPrice ?></td>
+                                <td><?php echo $order['status'] ?></td>
                             </tr>
 
                         <?php
                         }
                         ?>
-
-                        <!-- 
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr> -->
                     </tbody>
 
                 </table>
