@@ -1,4 +1,13 @@
 <!-- Sidebar -->
+
+<?php
+$class_product = 'nav-link';
+
+if (isset($action)) {
+    $class_product = 'nav-link active';
+}
+?>
+
 <div class="col-md-3">
     <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
         <div class="card-body">
@@ -17,7 +26,9 @@
         </div>
 
         <div class="card-footer">
-            <a href="../page/new-product.php" class="btn btn-secondary">Add Item</a>
+            <nav class="sticky-top" id="view">
+                <a href=".?action=new-product.php" class="<?php echo $class_product ?>">New Product</a>
+            </nav>
         </div>
     </div>
 </div>
