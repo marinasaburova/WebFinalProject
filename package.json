@@ -1,0 +1,22 @@
+{
+  "name": "webfinalproject",
+  "version": "1.0.0",
+  "description": "Final Project for CSIT 337",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marinasaburova/WebFinalProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marinasaburova/WebFinalProject/issues"
+  },
+  "homepage": "https://github.com/marinasaburova/WebFinalProject#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}
