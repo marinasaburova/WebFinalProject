@@ -1,8 +1,8 @@
 <!-- Shows item details and allows employee to edit them -->
 
 <?php
-include ('../admin-view/header.php');
-include ('../admin-view/navigation.php');
+include '../admin-view/header.php';
+include '../admin-view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
@@ -38,13 +38,14 @@ include ('../admin-view/navigation.php');
                       Please enter price.
                     </div>
                     <br>
-                    <a href="#" class="btn btn-primary">Add to cart</a>
                     <p class="card-text pt-3">Description...</p>
                     <label for="description" class="form-label"></label>
-                      <input type="text" class="form-control" id="description" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Please enter description.
-                      </div>
+                    <input type="text" class="form-control" id="description" placeholder="" required>
+                    <div class="invalid-feedback">
+                      Please enter description.
+                    </div>
+                    <br>
+                    <a href="#" class="btn btn-primary">Update</a>
                   </form>
                 </div>
               </div>
