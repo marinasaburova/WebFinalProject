@@ -115,27 +115,7 @@ include 'admin-view/navigation.php';
                     <h6 class="my-0"><?php echo $item['name'] ?></h6>
                 </div>
                 <div>
-                    <p class="text-muted my-0">
-                        <form action="." method="post">
-                            <input type="hidden" name="itemid" value="<?php echo $item ?>">
-                            <input type="hidden" name="action" value="change-cart-quantity">
-
-                            <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="submit" name="remove1">-</button>
-                            </div>
-
-                            <input class="text-center bg-light border-0" value="<?php echo $quantity ?>" size="1" aria-describedby="basic-addon1" readonly>
-
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" name="add1">+</button>
-                            </div>
-                            </div>
-                        </form>
-                    </p>
-                    <div>
-                        <small class="opacity-50 my-0">$<?php echo $item['price'] . ' * ' . $item['quantity'] ?></small>
-                    </div>
+                    <small class="opacity-50 my-0">$<?php echo $item['price'] . ' * ' . $item['quantity'] ?></small>
                 </div>
             </div>
         </a>
