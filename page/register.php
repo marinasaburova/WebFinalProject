@@ -7,7 +7,7 @@ include('view/navigation.php')
 
 <body>
   <div class="container text-center">
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-sm-4"></div>
       <!-- Center column-->
       <div class="col-sm-4">
@@ -40,7 +40,7 @@ include('view/navigation.php')
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
-            <a href=".?action=login">
+            <a href=".?action=login#view">
               <p class="mt-4 mb-3 text-muted">Login</p>
             </a>
             <a href=".?action=order-search">

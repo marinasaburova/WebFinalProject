@@ -7,6 +7,7 @@ include 'view/navigation.php';
   <div class="row">
 
     <div class="py-3 text-center">
+      <!-- Display current search parameters -->
       <h2><?php echo ucfirst($category) ?></h2>
       <?php if ($color != 'all') echo "<span class='lead mb-4 mx-2'>Color:<i> $color </i></span>"
       ?>
@@ -37,11 +38,22 @@ include 'view/navigation.php';
         foreach ($products as $p) {
         ?>
           <div class="col-sm-6 col-md-4">
-            <div class="card mb-4">
+            <div class="card mb-4" id="<?php echo $p['itemID'] ?>">
               <a href=".?action=product&itemid=<?php echo $p['itemID'] ?>#view"><img class="card-img-top" src="<?php echo getItemImage($p['itemID']) ?>" alt="Image of product" height="360px" style="object-fit: cover" /></a>
               <div class="card-body">
                 <h5 class="card-title"><?php echo $p['name'] ?></h5>
                 <p class="card-text">$<?php echo $p['price'] ?></p>
+                <?php if (isset($_GET['msg'])) {
+                  if ($itemID == $p['itemID']) {
+                    if ($_GET['msg'] == 'success') {
+                      echo '<p class="card-text text-success">Added to cart!</p>';
+                    }
+                    if ($_GET['msg'] == 'error') {
+                      echo '<p class="card-text text-danger">Could not add item to cart</p>';
+                    }
+                  }
+                } ?>
+
                 <form action="." method="post" class="needs-validation">
                   <input type="hidden" class="form-control" id="action" name="action" value="home-add-to-cart" />
                   <input type="hidden" class="form-control" id="itemid" name="itemid" value="<?php echo $p['itemID'] ?>" />

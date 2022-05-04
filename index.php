@@ -57,6 +57,8 @@ switch ($action) {
       $products = keywordSearch($searchterm, $category);
     }
 
+    $itemID = trim(filter_input(INPUT_GET, 'itemid', FILTER_SANITIZE_NUMBER_INT));
+
     include 'page/home.php';
     break;
 
@@ -81,7 +83,7 @@ switch ($action) {
       $message = 'Added to cart!';
     }
     if (isset($_GET['msg']) && ($_GET['msg'] == 'error')) {
-      $outofstock_msg = 'Could not add item to cart: item is out of stock!';
+      $outofstock_msg = 'Could not add item to cart: You already have all in-stock items in your cart!';
     }
 
     include 'page/product.php';
@@ -237,16 +239,16 @@ switch ($action) {
     $itemID = trim(filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT));
     $quantity = trim(filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT));
 
-    $link = $_SERVER['HTTP_REFERER'];
+    $link = "./?action=list_products";
 
     if (!canAddToCart($itemID, $quantity)) {
       $products = getProducts($category, $color, $material);
-      header("Location: " . $link . "&msg=error#view");
+      header("Location: " . $link . "&itemid=" . $itemID . "&msg=error#" . $itemID);
       break;
     }
 
     addToCart($itemID, $quantity);
-    header("Location: " . $link . "&msg=success#view");
+    header("Location: " . $link . "&itemid=" . $itemID . "&msg=success#" . $itemID);
     break;
 
     // change quantity of items in cart
@@ -283,8 +285,8 @@ switch ($action) {
 
     // removes item from cart
   case ('remove-item'):
-    if (isset($_POST['itemID'])) {
-      $itemID = trim(filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT));
+    $itemID = trim(filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT));
+    if ($itemID != NULL && $itemID != FALSE) {
       removeFromCart($itemID);
     }
     header('Location: .?action=cart#view');

@@ -88,7 +88,7 @@ foreach ($cart as $item => $quantity) {
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="cart">
-              <button class="w-100 btn btn-secondary" type="submit">Edit Cart</button>
+              <button class="w-100 btn btn-primary" type="submit">Edit Cart</button>
             </div>
           </form>
         </div>
@@ -125,7 +125,7 @@ foreach ($cart as $item => $quantity) {
 
             <div class="col-12">
               <label for="street2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="street2" name="street2" maxlength="30" placeholder="" value=" <?php echo ($info['shipStreet2'] ?? '') ?>">
+              <input type="text" class="form-control" id="street2" name="street2" maxlength="30" placeholder="Apartment or suite" value="<?php echo ($info['shipStreet2'] ?? '') ?>">
             </div>
 
             <div class="col-12">
@@ -222,7 +222,7 @@ foreach ($cart as $item => $quantity) {
           <h4 class="mb-3">Billing address</h4>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="same-address" name="same-address" onclick="fillBillingAddress()">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+            <label class="form-check-label" for="same-address">Billing address is the same as my shipping address</label>
           </div>
 
           <hr class="my-4">

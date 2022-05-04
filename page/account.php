@@ -66,7 +66,7 @@ include('view/navigation.php');
                     <form class="card p-2" action=".#view">
                         <input type="hidden" name="action" value="editaccount">
                         <div class="input-group">
-                            <button class="w-100 btn btn-secondary" type="submit">Edit</button>
+                            <button class="w-100 btn btn-primary" type="submit">Edit</button>
                         </div>
                     </form>
                 </div>

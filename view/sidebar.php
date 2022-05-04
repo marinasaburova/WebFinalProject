@@ -38,7 +38,7 @@ $materials = getMaterials();
 
       <form action="." method="get">
         <label for="searchterm" class="form-label">Search by Keyword:</label>
-        <input name="searchterm" type="text" maxlength="30" class="form-control mb-3">
+        <input name="searchterm" type="text" maxlength="30" class="form-control mb-3" required>
         <input type="hidden" name="category" value=<?php echo $category ?>>
         <button class="btn btn-primary mb-3" type="submit" name="search">Search</button>
       </form>
