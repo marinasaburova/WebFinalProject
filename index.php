@@ -237,15 +237,16 @@ switch ($action) {
     $itemID = trim(filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT));
     $quantity = trim(filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT));
 
+    $link = $_SERVER['HTTP_REFERER'];
+
     if (!canAddToCart($itemID, $quantity)) {
-      $products = getProducts('all', 'all', 'all');
-      header("Location: .?action=product&itemid=$itemID&msg=error#view");
+      $products = getProducts($category, $color, $material);
+      header("Location: " . $link . "&msg=error#view");
       break;
     }
 
     addToCart($itemID, $quantity);
-    $products = getProducts('all', 'all', 'al;');
-    header("Location: .?msg=success#view");
+    header("Location: " . $link . "&msg=success#view");
     break;
 
     // change quantity of items in cart
