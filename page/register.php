@@ -15,6 +15,7 @@ include('view/navigation.php')
           <!-- Register form -->
           <form action=".#view" class="needs-validation" method="post" oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'>
             <h1 class="h3 mb-3 fw-normal">Register</h1>
+            <p><?php echo $register_message; ?></p>
             <input type="hidden" name="action" value="register">
             <div class="form-floating my-2">
               <input type="text" name="firstName" class="form-control" id="floatingFirstName" maxlength="30" placeholder="Type your first name" required>

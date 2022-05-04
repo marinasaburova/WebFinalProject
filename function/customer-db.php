@@ -28,14 +28,20 @@ function registerCustomer($email, $password, $firstName, $lastName)
 {
     global $db;
     $hash = password_hash($password, PASSWORD_BCRYPT);
-    $query = 'INSERT INTO customer (email, password, firstName, lastName)
+    $query = 'INSERT INTO `customer` (`email`, `password`, `firstName`, `lastName`)
               VALUES (:email, :password, :firstName, :lastName)';
     $statement = $db->prepare($query);
     $statement->bindValue(':email', $email);
     $statement->bindValue(':password', $hash);
     $statement->bindValue(':firstName', $firstName);
     $statement->bindValue(':lastName', $lastName);
-    $statement->execute();
+    try {
+        $statement->execute();
+    } catch (Exception $e) {
+        $statement->closeCursor();
+        header('Location: .?action=register&msg=dup');
+        exit;
+    }
     $statement->closeCursor();
 }
 

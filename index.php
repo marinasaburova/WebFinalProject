@@ -149,12 +149,21 @@ switch ($action) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password');
 
-    if (!isset($_POST['email'])) {
+    // shows error message if email is in use
+    if (isset($_GET['msg']) && $_GET['msg'] == 'dup') {
+      $register_message = '<span class="text-danger">There is an account with this email already!</span>';
+      include 'page/register.php';
+      break;
+    }
+
+    // default page if nothing is submitted
+    if ($email == NULL || $email == FALSE || $password == NULL || $password == FALSE) {
       $register_message = 'Create an account for a better shopping experience!';
       include 'page/register.php';
       break;
     }
 
+    // registers customer
     registerCustomer($email, $password, $firstName, $lastName);
 
     // logs in registered customer

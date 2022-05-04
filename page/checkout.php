@@ -9,10 +9,10 @@ include 'view/navigation.php';
 
 $cart = $_SESSION['cart'];
 
-$price = getCartTotal();
-$tax = $price * .05;
-$shipping = 5;
-$total = $price + $tax + $shipping;
+$price = number_format(getCartTotal(), 2);
+$tax = number_format($price * .05, 2);
+$shipping = number_format(5, 2);
+$total = number_format($price + $tax + $shipping, 2);
 
 $numOfItems = 0;
 foreach ($cart as $item => $quantity) {
@@ -48,7 +48,7 @@ foreach ($cart as $item => $quantity) {
                   <h6 class="my-0"><?php echo $product['name'] ?></h6>
                   <small class="text-muted"><?php echo '$' . $product['price'] . ' * ' . $quantity  ?></small>
                 </div>
-                <span class="text-muted">$<?php echo ($product['price'] * $quantity) ?></span>
+                <span class="text-muted">$<?php echo number_format(($product['price'] * $quantity), 2) ?></span>
               </li>
 
             <?php } ?>
@@ -69,7 +69,7 @@ foreach ($cart as $item => $quantity) {
                 <h6 class="my-0">Estimated Tax</h6>
                 <small class="text-muted">Sales tax: 5%</small>
               </div>
-              <span class="text-muted">$<?php echo $tax ?>1</span>
+              <span class="text-muted">$<?php echo $tax ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
               <div>
