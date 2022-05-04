@@ -187,7 +187,7 @@ switch ($action) {
             $material = filter_input(INPUT_POST, 'material');
             $description = filter_input(INPUT_POST, 'description');
             $tags = filter_input(INPUT_POST, 'tags');
-            addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
+            updateItem($itemID, $name, $price, $quantity, $category, $color, $material, $description, $tags);
             break;
         } else {
             echo 'not adding product';
