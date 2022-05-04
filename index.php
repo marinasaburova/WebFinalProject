@@ -25,6 +25,8 @@ switch ($action) {
   case ('list_products'):
     // gets category
     $category = filter_input(INPUT_GET, 'category');
+
+    // checks if valid category
     $categories = getCategories();
     $cArray = array();
     foreach ($categories as $c) {
@@ -35,13 +37,13 @@ switch ($action) {
     }
 
     // gets color
-    $color = filter_input(INPUT_GET, 'colorsearch');
+    $color = filter_input(INPUT_GET, 'colorsearch', FILTER_SANITIZE_ADD_SLASHES);
     if ($color == NULL || $color == FALSE) {
       $color = 'all';
     }
 
     // gets material
-    $material = filter_input(INPUT_GET, 'materialsearch');
+    $material = filter_input(INPUT_GET, 'materialsearch', FILTER_SANITIZE_ADD_SLASHES);
     if ($material == NULL || $material == FALSE) {
       $material = 'all';
     }
@@ -51,7 +53,7 @@ switch ($action) {
 
     // searches for products by keyword
     if (isset($_GET['search'])) {
-      $searchterm = filter_input(INPUT_GET, 'searchterm');
+      $searchterm = filter_input(INPUT_GET, 'searchterm', FILTER_SANITIZE_ADD_SLASHES);
       $products = keywordSearch($searchterm, $category);
     }
 
@@ -64,13 +66,24 @@ switch ($action) {
       header('Location: .?action=list_products');
       break;
     }
+
+    $itemID = filter_input(INPUT_GET, 'itemid', FILTER_SANITIZE_NUMBER_INT);
+    $product = getProductDetails($itemID);
+
+    // checks for valid products
+    if ($product == NULL || $product == FALSE) {
+      $error = 'Sorry, this product was not found';
+      include 'view/error.php';
+      break;
+    }
+
     if (isset($_GET['msg']) && ($_GET['msg'] == 'success')) {
       $message = 'Added to cart!';
     }
     if (isset($_GET['msg']) && ($_GET['msg'] == 'error')) {
       $outofstock_msg = 'Could not add item to cart: item is out of stock!';
     }
-    $product = getProductDetails($_GET['itemid']);
+
     include 'page/product.php';
     break;
 
@@ -83,12 +96,13 @@ switch ($action) {
   case ('checkout'):
     if (empty($_SESSION['cart']) || !canPurchaseCart()) {
       include 'page/cart.php';
-    } else {
-      if (isset($_SESSION['loggedin'])) {
-        $info = getCustomerData($_SESSION['customerID']);
-      }
-      include 'page/checkout.php';
+      break;
     }
+
+    if (isset($_SESSION['loggedin'])) {
+      $info = getCustomerData($_SESSION['customerID']);
+    }
+    include 'page/checkout.php';
     break;
 
     // show customer's account
@@ -111,7 +125,7 @@ switch ($action) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password');
 
-    if (!isset($_POST['email'])) {
+    if ($email == NULL || $email == FALSE || $password == NULL || $password == FALSE) {
       $login_message = 'Sign in to view your account.';
       include 'page/login.php';
       break;
@@ -143,6 +157,7 @@ switch ($action) {
 
     registerCustomer($email, $password, $firstName, $lastName);
 
+    // logs in registered customer
     if (isValidLogin($email, $password)) {
       $_SESSION['loggedin'] = true;
       $_SESSION['customerID'] = getCustomerID($email);
@@ -183,9 +198,16 @@ switch ($action) {
 
     // show order details page 
   case ('order-details'):
-    $orderID = filter_input(INPUT_GET, 'orderid');
+    $orderID = filter_input(INPUT_GET, 'orderid', FILTER_SANITIZE_NUMBER_INT);
     $order = getOrderDetails($orderID);
     $items = getOrderItems($orderID);
+
+    if ($order == NULL || $order == FALSE || $items == NULL || $items == FALSE) {
+      $error = 'Sorry, this order was not found.';
+      include 'view/error.php';
+      break;
+    }
+
     include 'page/order-details.php';
     break;
 
