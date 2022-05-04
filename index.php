@@ -108,7 +108,7 @@ switch ($action) {
 
     // show login page
   case ('login'):
-    $email = filter_input(INPUT_POST, 'email');
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password');
 
     if (!isset($_POST['email'])) {
@@ -130,9 +130,9 @@ switch ($action) {
 
     // show register page 
   case ('register'):
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $email = filter_input(INPUT_POST, 'email');
+    $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES);
+    $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password');
 
     if (!isset($_POST['email'])) {
@@ -166,8 +166,8 @@ switch ($action) {
     if (isset($_POST['orderid']) && isset($_POST['email'])) {
       $order_message = '<span class="text-danger">This order was not found.</span>';
 
-      $orderID = filter_input(INPUT_POST, 'orderid');
-      $email = filter_input(INPUT_POST, 'email');
+      $orderID = filter_input(INPUT_POST, 'orderid', FILTER_SANITIZE_NUMBER_INT);
+      $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
       if (searchOrder($email, $orderID)) {
         $order = getOrderDetails($orderID);
@@ -191,8 +191,8 @@ switch ($action) {
 
     // add item to cart
   case ('add-to-cart'):
-    $itemID = filter_input(INPUT_POST, 'itemid');
-    $quantity = filter_input(INPUT_POST, 'quantity');
+    $itemID = filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
 
     if (!canAddToCart($itemID, $quantity)) {
       $products = getProducts('all', 'all', 'all');
@@ -206,8 +206,8 @@ switch ($action) {
     break;
 
   case ('home-add-to-cart'):
-    $itemID = filter_input(INPUT_POST, 'itemid');
-    $quantity = filter_input(INPUT_POST, 'quantity');
+    $itemID = filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
 
     if (!canAddToCart($itemID, $quantity)) {
       $products = getProducts('all', 'all', 'all');
@@ -220,12 +220,18 @@ switch ($action) {
     header("Location: .?msg=success#view");
     break;
 
+    // change quantity of items in cart
   case ('change-cart-quantity'):
-    $itemID = filter_input(INPUT_POST, 'itemid');
+    $itemID = filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT);
+
+    // remove an item
     if (isset($_POST['remove1'])) {
       removeOneFromCart($itemID);
       header("Location: .?action=cart#view");
+      break;
     }
+
+    // add an item
     if (isset($_POST['add1'])) {
 
       if (!canAddToCart($itemID, 1)) {
@@ -235,33 +241,40 @@ switch ($action) {
 
       addToCart($itemID, 1);
       header("Location: .?action=cart#view");
+      break;
     }
-
+    header('Location: .');
     break;
 
+    // empties cart
   case ('clear-cart'):
     clearCart();
     header('Location: .?action=cart#view');
     break;
 
+    // removes item from cart
   case ('remove-item'):
-    $itemID = filter_input(INPUT_POST, 'itemid');
-    removeFromCart($itemID);
+    if (isset($_POST['itemID'])) {
+      $itemID = filter_input(INPUT_POST, 'itemid', FILTER_SANITIZE_NUMBER_INT);
+      removeFromCart($itemID);
+    }
     header('Location: .?action=cart#view');
     break;
 
   case ('update-personal'):
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $email = filter_input(INPUT_POST, 'email');
+    if (isset($_POST['firstName'])) {
+      $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES);
+      $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES);
+      $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
-    updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
+      updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
+    }
     header('Location: .?action=account');
     break;
 
   case ('update-password'):
     $current = filter_input(INPUT_POST, 'currentPassword');
-    $email = filter_input(INPUT_POST, 'email');
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
     if (isValidLogin($email, $current)) {
       $newPassword = filter_input(INPUT_POST, 'newPassword');
@@ -273,19 +286,22 @@ switch ($action) {
     }
     break;
 
+
+    // Updates customer shipping information
   case ('update-shipping'):
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $street = filter_input(INPUT_POST, 'street');
-    $street2 = filter_input(INPUT_POST, 'street2');
-    $city = filter_input(INPUT_POST, 'city');
-    $state = filter_input(INPUT_POST, 'state');
-    $zip = filter_input(INPUT_POST, 'zip');
+    $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES);
+    $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES);
+    $street = filter_input(INPUT_POST, 'street', FILTER_SANITIZE_ADD_SLASHES);
+    $street2 = filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_ADD_SLASHES);
+    $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_ADD_SLASHES);
+    $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_ADD_SLASHES);
+    $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT);
 
     updateDefaultAddr($_SESSION['customerID'], $firstName, $lastName, $street, $street2, $city, $state, $zip);
     header('Location: .?action=account');
     break;
 
+    // Places an order 
   case ('place-order'):
     $cart = $_SESSION['cart'];
     if (!canPurchaseCart()) {
@@ -304,18 +320,18 @@ switch ($action) {
       $customerID = null;
     }
 
-    $email = filter_input(INPUT_POST, 'email');
-    $firstName = filter_input(INPUT_POST, 'firstName');
-    $lastName = filter_input(INPUT_POST, 'lastName');
-    $street = filter_input(INPUT_POST, 'street');
-    $city = filter_input(INPUT_POST, 'city');
-    $state = filter_input(INPUT_POST, 'state');
-    $zip = filter_input(INPUT_POST, 'zip');
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES);
+    $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES);
+    $street = filter_input(INPUT_POST, 'street', FILTER_SANITIZE_ADD_SLASHES);
+    $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_ADD_SLASHES);
+    $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_ADD_SLASHES);
+    $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT);
 
     if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
       $street2 = null;
     } else {
-      $street2 = filter_input(INPUT_POST, 'street2');
+      $street2 = filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_ADD_SLASHES);
     }
 
     $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
@@ -327,68 +343,46 @@ switch ($action) {
 
     // Variables for confirmation page
     if (!isset($_POST['same-address'])) {
-      $billFirstName = filter_input(INPUT_POST, 'billFirstName');
-      $billLastName = filter_input(INPUT_POST, 'billLastName');
-      $billStreet = filter_input(INPUT_POST, 'billStreet');
-      $billCity = filter_input(INPUT_POST, 'billCity');
-      $billState = filter_input(INPUT_POST, 'billState');
-      $billZip = filter_input(INPUT_POST, 'billZip');
+      $billFirstName = filter_input(INPUT_POST, 'billFirstName', FILTER_SANITIZE_ADD_SLASHES);
+      $billLastName = filter_input(INPUT_POST, 'billLastName', FILTER_SANITIZE_ADD_SLASHES);
+      $billStreet = filter_input(INPUT_POST, 'billStreet', FILTER_SANITIZE_ADD_SLASHES);
+      $billCity = filter_input(INPUT_POST, 'billCity', FILTER_SANITIZE_ADD_SLASHES);
+      $billState = filter_input(INPUT_POST, 'billState', FILTER_SANITIZE_ADD_SLASHES);
+      $billZip = filter_input(INPUT_POST, 'billZip', FILTER_SANITIZE_NUMBER_INT);
       if (!isset($_POST['billStreet2']) || trim($_POST['billStreet2']) == '') {
         $billStreet2 = null;
       } else {
-        $billStreet2 = filter_input(INPUT_POST, 'billStreet2');
+        $billStreet2 = filter_input(INPUT_POST, 'billStreet2', FILTER_SANITIZE_ADD_SLASHES);
       }
     } else {
-      $billFirstName = filter_input(INPUT_POST, 'firstName');
-      $billLastName = filter_input(INPUT_POST, 'lastName');
-      $billStreet = filter_input(INPUT_POST, 'street');
-      $billCity = filter_input(INPUT_POST, 'city');
-      $billState = filter_input(INPUT_POST, 'state');
-      $billZip = filter_input(INPUT_POST, 'zip');
+      $billFirstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES);
+      $billLastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES);
+      $billStreet = filter_input(INPUT_POST, 'street', FILTER_SANITIZE_ADD_SLASHES);
+      $billCity = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_ADD_SLASHES);
+      $billState = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_ADD_SLASHES);
+      $billZip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT);
       if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
         $billStreet2 = null;
       } else {
-        $billStreet2 = filter_input(INPUT_POST, 'street2');
+        $billStreet2 = filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_ADD_SLASHES);
       }
     }
 
-    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod');
-    $cardNum = '*' . substr(filter_input(INPUT_POST, 'cardNum'), -4);
+    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod', FILTER_SANITIZE_ADD_SLASHES);
+    $cardNum = '*' . substr(filter_input(INPUT_POST, 'cardNum', FILTER_SANITIZE_NUMBER_INT), -4);
 
     $order = getOrderDetails($orderID);
     $items = getOrderItems($orderID);
     include 'page/confirmation.php';
     break;
 
-  case ('modal'):
-
-    $email = filter_input(INPUT_POST, 'email');
-    $password = filter_input(INPUT_POST, 'password');
-
-    if (!isset($_POST['email'])) {
-      $login_message = 'Sign in to save your information for next time!';
-      include 'page/modal.php';
-      break;
-    }
-
-    if (isValidLogin($email, $password)) {
-      $_SESSION['loggedin'] = true;
-      $_SESSION['customerID'] = getCustomerID($email);
-      $info = getCustomerData($_SESSION['customerID']);
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
-    } else {
-      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
-      include('page/modal.php');
-    }
-
-    break;
-
-    // ADMIN STUFF
+    // Goes to admin side
   case ('admin'):
     logout();
     header('Location: admin/index.php');
     break;
 
+    // Shows homepage
   default:
     header('Location: .?action=list_products');
     break;
