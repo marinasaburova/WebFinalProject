@@ -15,11 +15,11 @@ include('view/header.php');
           <p><?php echo $login_message; ?></p>
           <input type="hidden" name="action" value="login">
           <div class="form-floating my-2">
-            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" name="email" class="form-control" id="floatingInput" maxlength="60" placeholder="name@example.com" required>
             <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating my-2">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" id="floatingPassword" maxlength="60" placeholder="Password" required>
             <label for="floatingPassword">Password</label>
           </div>
 

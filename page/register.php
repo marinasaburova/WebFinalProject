@@ -17,23 +17,23 @@ include('view/navigation.php')
             <h1 class="h3 mb-3 fw-normal">Register</h1>
             <input type="hidden" name="action" value="register">
             <div class="form-floating my-2">
-              <input type="text" name="firstName" class="form-control" id="floatingFirstName" placeholder="Type your first name" required>
+              <input type="text" name="firstName" class="form-control" id="floatingFirstName" maxlength="30" placeholder="Type your first name" required>
               <label for="floatingFirstName">First Name</label>
             </div>
             <div class="form-floating my-2">
-              <input type="text" name="lastName" class="form-control" id="floatingLastName" placeholder="Type your last name" required>
+              <input type="text" name="lastName" class="form-control" id="floatingLastName" maxlength="30" placeholder="Type your last name" required>
               <label for="floatingLastName">Last Name</label>
             </div>
             <div class="form-floating my-2">
-              <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+              <input type="email" name="email" class="form-control" id="floatingInput" maxlength="60" placeholder="name@example.com" required>
               <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating my-2">
-              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Create a Password" required>
+              <input type="password" name="password" class="form-control" id="floatingPassword" maxlength="60" placeholder="Create a Password" required>
               <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating my-2">
-              <input type="password" name="password2" class="form-control" id="floatingPassword2" placeholder="Confirm Password" required>
+              <input type="password" name="password2" class="form-control" id="floatingPassword2" maxlength="60" placeholder="Confirm Password" required>
               <label for="floatingPassword2">Confirm Password</label>
             </div>
 

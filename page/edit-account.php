@@ -25,17 +25,17 @@ include('view/navigation.php');
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="" value="<?php echo $info['firstName'] ?>">
+              <input type="text" class="form-control" id="firstName" name="firstName" maxlength="30" required placeholder="" value="<?php echo $info['firstName'] ?>">
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="" value="<?php echo $info['lastName'] ?>">
+              <input type="text" class="form-control" id="lastName" name="lastName" maxlength="30" required placeholder="" value="<?php echo $info['lastName'] ?>">
             </div>
 
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required placeholder="" value="<?php echo $info['email'] ?>">
+              <input type="email" class="form-control" id="email" name="email" maxlength="60" required placeholder="" value="<?php echo $info['email'] ?>">
             </div>
 
             <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
@@ -61,7 +61,7 @@ include('view/navigation.php');
           <div class="row g-3">
             <div class="col-12">
               <label for="currentPassword" class="form-label">Current Password</label>
-              <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+              <input type="password" class="form-control" id="currentPassword" maxlength="60" name="currentPassword" required>
             </div>
 
             <?php
@@ -72,12 +72,12 @@ include('view/navigation.php');
 
             <div class="col-12">
               <label for="newPassword" class="form-label">New Password</label>
-              <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+              <input type="password" class="form-control" id="newPassword" name="newPassword" maxlength="60" required>
             </div>
 
             <div class="col-12">
               <label for="newPassword2" class="form-label">Confirm New Password</label>
-              <input type="password" class="form-control" id="newPassword2" name="newPassword2" required>
+              <input type="password" class="form-control" id="newPassword2" name="newPassword2" maxlength="60" required>
             </div>
 
             <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
@@ -96,27 +96,27 @@ include('view/navigation.php');
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="" value="<?php echo ($info['shipFirstName'] ?? ($info['firstName'] ?? '')) ?>">
+              <input type="text" class="form-control" id="firstName" name="firstName" required maxlength="30" value="<?php echo ($info['shipFirstName'] ?? ($info['firstName'] ?? '')) ?>">
             </div>
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label></label>
-              <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="" value="<?php echo ($info['shipLastName'] ?? ($info['lastName'] ?? ''))  ?>">
+              <input type="text" class="form-control" id="lastName" name="lastName" required maxlength="30" value="<?php echo ($info['shipLastName'] ?? ($info['lastName'] ?? ''))  ?>">
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">Street</label>
-              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St" value="<?php echo ($info['shipStreet'] ?? '') ?>">
+              <input type="text" class="form-control" id="street" name="street" required placeholder="1234 Main St" maxlength="30" value="<?php echo ($info['shipStreet'] ?? '') ?>">
             </div>
 
             <div class="col-12">
               <label for="address2" class="form-label">Street 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="street2" name="street2" placeholder="Apartment or suite" value="<?php echo ($info['shipStreet2'] ?? '') ?>">
+              <input type="text" class="form-control" id="street2" name="street2" placeholder="Apartment or suite" maxlength="30" value="<?php echo ($info['shipStreet2'] ?? '') ?>">
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">City</label>
-              <input type="text" class="form-control" id="city" name="city" required placeholder="" value="<?php echo ($info['shipCity'] ?? '') ?>">
+              <input type="text" class="form-control" id="city" name="city" required maxlength="30" value="<?php echo ($info['shipCity'] ?? '') ?>">
             </div>
 
             <div class="col-md-5">
@@ -129,12 +129,12 @@ include('view/navigation.php');
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <input type="text" class="form-control" minlength="2" maxlength="2" id="state" name="state" required value="<?php echo ($info['shipState'] ?? '') ?>">
+              <input type="text" class="form-control" minlength="2" maxlength="2" id="state" name="state" required pattern="[a-zA-Z]{2}" value="<?php echo ($info['shipState'] ?? '') ?>">
             </div>
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required placeholder="" value="<?php echo ($info['shipZip'] ?? '') ?>">
+              <input type="text" class="form-control" id="zip" name="zip" minlength="5" maxlength="5" required pattern="[0-9]{5}" value="<?php echo ($info['shipZip'] ?? '') ?>">
             </div>
 
             <button class="w-100 btn btn-primary btn-lg" type="submit">Update</button>
