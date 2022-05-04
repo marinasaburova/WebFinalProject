@@ -5,6 +5,12 @@ require('function/customer-db.php');
 require('function/store-db.php');
 require('function/cart-functions.php');
 
+// Logs out employees 
+if (isset($_SESSION['emploggedin'])) {
+  unset($_SESSION['emploggedin']);
+}
+
+// Gets action
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
   $action = filter_input(INPUT_GET, 'action');
@@ -17,23 +23,33 @@ switch ($action) {
 
     // show homepage with products
   case ('list_products'):
+    // gets category
     $category = filter_input(INPUT_GET, 'category');
-    if ($category == NULL || $category == FALSE) {
+    $categories = getCategories();
+    $cArray = array();
+    foreach ($categories as $c) {
+      array_push($cArray, $c['category']);
+    }
+    if (!in_array($category, $cArray)) {
       $category = 'all';
     }
 
+    // gets color
     $color = filter_input(INPUT_GET, 'colorsearch');
     if ($color == NULL || $color == FALSE) {
       $color = 'all';
     }
 
+    // gets material
     $material = filter_input(INPUT_GET, 'materialsearch');
     if ($material == NULL || $material == FALSE) {
       $material = 'all';
     }
 
+    // gets array of products with specific categories
     $products = getProducts($category, $color, $material);
 
+    // searches for products by keyword
     if (isset($_GET['search'])) {
       $searchterm = filter_input(INPUT_GET, 'searchterm');
       $products = keywordSearch($searchterm, $category);
@@ -45,7 +61,7 @@ switch ($action) {
     // show product details
   case ('product'):
     if (!isset($_GET['itemid'])) {
-      include 'page/home.php';
+      header('Location: .?action=list_products');
       break;
     }
     if (isset($_GET['msg']) && ($_GET['msg'] == 'success')) {
@@ -371,5 +387,9 @@ switch ($action) {
   case ('admin'):
     logout();
     header('Location: admin/index.php');
+    break;
+
+  default:
+    header('Location: .?action=list_products');
     break;
 }

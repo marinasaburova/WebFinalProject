@@ -3,6 +3,14 @@
 function getCategories()
 {
     // bags, belts, sunglasses, watches, scarves
+    global $db;
+
+    $query = "SELECT DISTINCT `category` FROM `item`";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $categories = $statement->fetchAll();
+    $statement->closeCursor();
+    return $categories;
 }
 
 function getProducts($category, $color, $material)

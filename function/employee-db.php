@@ -23,6 +23,7 @@ function logoutAdmin()
     $_SESSION = array();
     session_destroy();
     header('Location: .');
+    exit;
 }
 
 function registerEmployee($email, $password, $firstName, $lastName)

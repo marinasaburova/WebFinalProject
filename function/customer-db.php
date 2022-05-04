@@ -21,6 +21,7 @@ function logout()
 {
     session_destroy();
     header('Location: .');
+    exit;
 }
 
 function registerCustomer($email, $password, $firstName, $lastName)
