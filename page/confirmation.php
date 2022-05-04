@@ -43,7 +43,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Shipping to</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">
                 <?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] . '</br>' ?>
@@ -57,7 +57,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Billing to</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">
                 <?php echo $billFirstName . ' ' . $billLastName . '</br>' ?>
@@ -71,7 +71,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Payment Info</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">Method: <?php echo $paymentMethod . '</br>' ?>
                 <?php echo $cardNum ?></span>
@@ -89,24 +89,24 @@ foreach ($cart as $item => $quantity) {
 
           <ul class="list-group mb-3">
 
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">$<?php echo $order['itemsPrice'] ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Tax</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">$<?php echo $order['tax'] ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">$<?php echo $order['shipping'] ?></span>
             </li>
