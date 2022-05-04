@@ -1,25 +1,14 @@
-
--- create user to query product database --
-/* 
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON kelarinadatabase.*
-TO kelarina@localhost
-IDENTIFIED BY 'kelarinapass';
-*/
+DROP DATABASE IF EXISTS kelarinadatabase;
+CREATE DATABASE kelarinadatabase;
+USE kelarinadatabase;  -- MySQL command
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2022 at 12:30 AM
+-- Generation Time: May 04, 2022 at 03:12 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
-
-
-DROP DATABASE IF EXISTS kelarinadatabase;
-CREATE DATABASE kelarinadatabase;
-USE kelarinadatabase;  -- MySQL command
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -119,7 +108,12 @@ INSERT INTO `item` (`itemID`, `name`, `price`, `quantity`, `category`, `color`, 
 (0000000001, 'Bag1', '10.00', 1, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. ', 'leather, bag, purse, minimal'),
 (0000000002, 'Belt1', '15.00', 49, 'belt', 'white', 'faux leather', 'A simple faux leather belt with gold details. ', 'gold, faux leather, belt, simple, minimal'),
 (0000000003, 'Sunglasses1', '10.00', 77, 'sunglasses', 'pink', 'metal', 'Metal frame sunglasses with a pink border. ', 'girly, cute, pink, feminine'),
-(0000000004, 'Sunglasses2', '10.00', 79, 'sunglasses', 'blue', 'metal', 'Metal frame sunglasses with a teal border. ', 'beachy, cute, teal, blue, feminine');
+(0000000004, 'Sunglasses2', '10.00', 79, 'sunglasses', 'blue', 'metal', 'Metal frame sunglasses with a teal border. ', 'beachy, cute, teal, blue, feminine'),
+(0000000005, 'Silver Watch', '50.00', 50, 'watches', 'silver', 'metal', 'silver simple watch', 'minimal'),
+(0000000006, 'Rose Gold Watch', '50.00', 50, 'watches', 'rose gold', 'metal', 'Cute rose gold watch', 'rose gold, cute, girly'),
+(0000000007, 'Pink Wallet', '50.00', 50, 'bags', 'pink', 'faux leather', 'Cute pink wallet', 'girly, pink'),
+(0000000008, 'White Belt with Gold Details', '20.00', 50, 'belts', 'white', 'faux leather', 'Minimal white belt with gold details', 'simple, minimal, clean'),
+(0000000009, 'Pink Belt', '20.00', 50, 'belts', 'pink', 'faux leather', 'Girly pink belt', 'girly, pink, feminine');
 
 -- --------------------------------------------------------
 
@@ -295,7 +289,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `itemID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -324,6 +318,7 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 GRANT SELECT, INSERT, DELETE, UPDATE
 ON kelarinadatabase.*
