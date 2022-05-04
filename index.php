@@ -144,8 +144,8 @@ switch ($action) {
 
     // show register page 
   case ('register'):
-    $firstName = trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES));
-    $lastName = trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES));
+    $firstName = strip_tags(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES)));
+    $lastName = strip_tags(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES)));
     $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
     $password = filter_input(INPUT_POST, 'password');
 
@@ -294,9 +294,9 @@ switch ($action) {
 
   case ('update-personal'):
     if (isset($_POST['firstName'])) {
-      $firstName = trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES));
-      $lastName = trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES));
-      $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+      $firstName = strip_tags(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES)));
+      $lastName = strip_tags(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES)));
+      $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
 
       updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
     }
