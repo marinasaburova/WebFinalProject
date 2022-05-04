@@ -45,14 +45,14 @@ include('view/navigation.php')
                 <?php
                 foreach ($items as $item) { ?>
                     <a href=".?action=product&itemid=<?php echo $item['itemID'] ?>#view" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                        <img src="<?php echo getItemImage($item['itemID']) ?>" alt="twbs" height="60px" class="rounded flex-shrink-0">
+                        <img src="<?php echo getItemImage($item['itemID']) ?>" alt="twbs" height="60px" width="60px" style="object-fit: cover" class="rounded flex-shrink-0">
                         <div class="d-flex gap-2 w-100 justify-content-between">
                             <div>
                                 <h6 class="my-0"><?php echo $item['name'] ?></h6>
                             </div>
                             <div>
-                                <p class="text-muted my-0">$<?php echo ($item['price'] * $item['quantity']) ?></p>
-                                <small class="opacity-50 my-0">$<?php echo $item['price'] . ' * ' . $item['quantity'] ?></small>
+                                <p class="text-muted my-0">$<?php echo number_format($item['price'] * $item['quantity'], 2) ?></p>
+                                <small class="opacity-50 my-0">$<?php echo number_format($item['price'], 2) . ' * ' . $item['quantity'] ?></small>
 
                             </div>
                         </div>
@@ -65,10 +65,10 @@ include('view/navigation.php')
                 <div class="card bg-light sticky-top mb-4 border-light" style="top: 72px">
                     <div class="card-body">
                         <h5 class="card-title"><b>Order Total</b></h5>
-                        <p class="card-text my-0">Item Total: $<?php echo $order['itemsPrice'] ?></p>
-                        <p class="card-text my-0">Tax: $<?php echo $order['tax'] ?></p>
-                        <p class="card-text my-0">Shipping: $<?php echo $order['shipping'] ?></p>
-                        <p class="card-text my-0">Total: $<?php echo ($order['itemsPrice'] + $order['tax'] + $order['shipping']) ?></p>
+                        <p class="card-text my-0">Item Total: $<?php echo number_format($order['itemsPrice'], 2) ?></p>
+                        <p class="card-text my-0">Tax: $<?php echo number_format($order['tax'], 2) ?></p>
+                        <p class="card-text my-0">Shipping: $<?php echo number_format($order['shipping'], 2) ?></p>
+                        <p class="card-text my-0">Total: $<?php echo number_format(($order['itemsPrice'] + $order['tax'] + $order['shipping']), 2) ?></p>
                     </div>
                 </div>
             </div>

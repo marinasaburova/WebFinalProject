@@ -15,11 +15,11 @@ include('view/header.php');
                     <p><?php echo $order_message; ?></p>
                     <input type="hidden" name="action" value="order-search">
                     <div class="form-floating my-2">
-                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                        <input type="email" name="email" class="form-control" id="floatingInput" maxlength="60" placeholder="name@example.com" required>
                         <label for="floatingInput">Email address</label>
                     </div>
                     <div class="form-floating my-2">
-                        <input type="text" name="orderid" class="form-control" id="floatingInput" minlength="10" maxlength="10" placeholder="xxxxxxxxxx" required>
+                        <input type="text" name="orderid" class="form-control" id="floatingInput" minlength="10" maxlength="10" pattern="[0-9]{10}" placeholder="xxxxxxxxxx" required>
                         <label for="floatingInput">Order Number</label>
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">View Order</button>

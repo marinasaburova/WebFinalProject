@@ -8,10 +8,10 @@ include 'view/header.php';
 include 'view/navigation.php';
 $cart = $_SESSION['cart'];
 
-$price = getCartTotal();
-$tax = getTax();
-$shipping = getShipping();
-$total = getTotal();
+$price = number_format(getCartTotal(), 2);
+$tax = number_format(getTax(), 2);
+$shipping = number_format(getShipping(), 2);
+$total = number_format(getTotal(), 2);
 $numOfItems = getCartNumOfItems();
 
 ?>
@@ -64,7 +64,7 @@ $numOfItems = getCartNumOfItems();
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="checkout">
-              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
+              <button class="w-100 btn btn-primary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
 
             </div>
           </form>
@@ -87,7 +87,7 @@ $numOfItems = getCartNumOfItems();
               $isInStock = canPurchaseItem($item);
             ?>
               <tr <?php if (!$isInStock) echo 'class="table-secondary"' ?>>
-                <td class="align-middle"><img src="<?php echo getItemImage($item) ?>" alt="product image" height="60px" class="rounded"></td>
+                <td class="align-middle"><img src="<?php echo getItemImage($item) ?>" alt="product image" height="60px" width="60px" style="object-fit: cover" class="rounded"></td>
                 <td class="align-middle"><b><a href=".?action=product&itemid=<?php echo $item ?>" class="text-reset text-decoration-none"><?php echo $product['name'] ?></b></a></td>
                 <td class="align-middle">
                   <form action="." method="post">
@@ -115,10 +115,10 @@ $numOfItems = getCartNumOfItems();
 
                   <td class="align-middle">
                     <div>
-                      <p class="mb-0">$<?php echo $product['price'] * $quantity ?>
+                      <p class="mb-0">$<?php echo number_format($product['price'] * $quantity, 2) ?>
                       </p>
 
-                      <small class="text-muted">$<?php echo $product['price'] ?> * <?php echo $quantity ?></small>
+                      <small class="text-muted">$<?php echo number_format($product['price'], 2) ?> * <?php echo $quantity ?></small>
                     </div>
                   </td>
                 <?php } ?>

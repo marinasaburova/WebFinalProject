@@ -9,10 +9,10 @@ include 'view/navigation.php';
 
 $cart = $_SESSION['cart'];
 
-$price = getCartTotal();
-$tax = $price * .05;
-$shipping = 5;
-$total = $price + $tax + $shipping;
+$price = number_format(getCartTotal(), 2);
+$tax = number_format($price * .05, 2);
+$shipping = number_format(5, 2);
+$total = number_format($price + $tax + $shipping, 2);
 
 $numOfItems = 0;
 foreach ($cart as $item => $quantity) {
@@ -43,7 +43,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Shipping to</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">
                 <?php echo $order['shipFirstName'] . ' ' . $order['shipLastName'] . '</br>' ?>
@@ -57,7 +57,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Billing to</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">
                 <?php echo $billFirstName . ' ' . $billLastName . '</br>' ?>
@@ -71,7 +71,7 @@ foreach ($cart as $item => $quantity) {
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Payment Info</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
               <span class="text-muted">Method: <?php echo $paymentMethod . '</br>' ?>
                 <?php echo $cardNum ?></span>
@@ -89,30 +89,30 @@ foreach ($cart as $item => $quantity) {
 
           <ul class="list-group mb-3">
 
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Product total</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
-              <span class="text-muted">$<?php echo $order['itemsPrice'] ?></span>
+              <span class="text-muted">$<?php echo number_format($order['itemsPrice'], 2) ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Tax</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
-              <span class="text-muted">$<?php echo $order['tax'] ?></span>
+              <span class="text-muted">$<?php echo number_format($order['tax'], 2) ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
+            <li class="list-group-item d-flex justify-content-between lh-sm bg-light pb-4">
               <div>
                 <h6 class="my-0">Shipping</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted"></small>
               </div>
-              <span class="text-muted">$<?php echo $order['shipping'] ?></span>
+              <span class="text-muted">$<?php echo number_format($order['shipping'], 2) ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between ">
               <span>Total (USD)</span>
-              <strong>$<?php echo ($order['itemsPrice'] + $order['tax'] + $order['shipping']) ?></strong>
+              <strong>$<?php echo number_format(($order['itemsPrice'] + $order['tax'] + $order['shipping']), 2) ?></strong>
             </li>
           </ul>
         </div>
@@ -132,9 +132,9 @@ foreach ($cart as $item => $quantity) {
               <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
                   <h6 class="my-0"><?php echo $item['name'] ?></h6>
-                  <small class="text-muted"><?php echo '$' . $item['price'] . ' * ' . $item['quantity']  ?></small>
+                  <small class="text-muted"><?php echo '$' . number_format($item['price'], 2) . ' * ' . $item['quantity']  ?></small>
                 </div>
-                <span class="text-muted">$<?php echo ($item['price'] * $item['quantity']) ?></span>
+                <span class="text-muted">$<?php echo number_format(($item['price'] * $item['quantity']), 2) ?></span>
               </li>
 
             <?php } ?>

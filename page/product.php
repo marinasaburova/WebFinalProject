@@ -4,6 +4,11 @@
 <?php
 include 'view/header.php';
 include 'view/navigation.php';
+if (empty($product)) {
+  $error = 'Product not found';
+  include 'view/error.php';
+  exit;
+}
 ?>
 <!-- Middle Container -->
 <div class="container">

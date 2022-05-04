@@ -3,6 +3,14 @@
 function getCategories()
 {
     // bags, belts, sunglasses, watches, scarves
+    global $db;
+
+    $query = "SELECT DISTINCT `category` FROM `item`";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $categories = $statement->fetchAll();
+    $statement->closeCursor();
+    return $categories;
 }
 
 function getProducts($category, $color, $material)
@@ -22,6 +30,8 @@ function getProducts($category, $color, $material)
     if ($material != 'all') {
         $query .= " AND `material` = :material";
     }
+
+    $query .= " ORDER BY `itemID` DESC";
 
     $statement = $db->prepare($query);
 

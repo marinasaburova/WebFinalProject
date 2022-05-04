@@ -1,5 +1,4 @@
-<!-- Displays all products based on filters/categories -->
-<!-- Use GET for this page, so that users can bookmark it -->
+<!-- FOR TESTING, does not work -->
 
 <!DOCTYPE html>
 <html lang="en">

@@ -24,7 +24,7 @@ include('view/navigation.php');
                         <span class="text-primary">Your Info</span>
                     </h4>
                     <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm  pb-4">
+                        <li class="list-group-item d-flex justify-content-between lh-sm pb-4">
                             <div>
                                 <h6 class="my-0">Name</h6>
                                 <small class="text-muted"></small>
@@ -66,7 +66,7 @@ include('view/navigation.php');
                     <form class="card p-2" action=".#view">
                         <input type="hidden" name="action" value="editaccount">
                         <div class="input-group">
-                            <button class="w-100 btn btn-secondary" type="submit">Edit</button>
+                            <button class="w-100 btn btn-primary" type="submit">Edit</button>
                         </div>
                     </form>
                 </div>

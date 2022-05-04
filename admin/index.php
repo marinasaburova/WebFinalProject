@@ -5,6 +5,11 @@ require('../function/customer-db.php');
 require('../function/store-db.php');
 require('../function/employee-db.php');
 
+// logs out customer
+if (isset($_SESSION['loggedin'])) {
+    unset($_SESSION['loggedin']);
+}
+
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
@@ -236,7 +241,6 @@ switch ($action) {
 
         // Back to customer page
     case ('customer'):
-        logout();
         header('Location: ../');
         break;
 

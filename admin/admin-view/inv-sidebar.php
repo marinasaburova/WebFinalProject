@@ -1,6 +1,7 @@
 <!-- Sidebar -->
 <?php
-$class_product = 'nav-link active';
+$colors = getColors();
+$materials = getMaterials();
 ?>
 
 <div class="col-md-3">
@@ -12,20 +13,20 @@ $class_product = 'nav-link active';
             <form action="." method="get">
                 <label for="colorsearch" class="form-label">Color:</label>
                 <select class="form-control mb-3" name="colorsearch">
-                <option value="all">All</option>
-                <?php
-                foreach ($colors as $color) { ?>
-                    <option value="<?php echo $color['color'] ?>"><?php echo $color['color'] ?></option>
-                <?php } ?>
+                    <option value="all">All</option>
+                    <?php
+                    foreach ($colors as $color) { ?>
+                        <option value="<?php echo $color['color'] ?>"><?php echo $color['color'] ?></option>
+                    <?php } ?>
                 </select>
 
                 <label for="materialsearch" class="form-label">Material:</label>
                 <select class="form-control mb-3" name="materialsearch">
-                <option value="all">All</option>
-                <?php
-                foreach ($materials as $material) { ?>
-                    <option value="<?php echo $material['material'] ?>"><?php echo $material['material'] ?></option>
-                <?php } ?>
+                    <option value="all">All</option>
+                    <?php
+                    foreach ($materials as $material) { ?>
+                        <option value="<?php echo $material['material'] ?>"><?php echo $material['material'] ?></option>
+                    <?php } ?>
                 </select>
 
                 <input type="hidden" name="category" value=<?php echo $category ?>>
@@ -47,7 +48,7 @@ $class_product = 'nav-link active';
             <!-- Navigation -->
             <nav class="sticky-top" id="view">
                 <ul class="nav">
-                    <li class="nav-item"><a href=".?action=new-product" class="<?php echo $class_product ?>">New Item</a></li>
+                    <li class="nav-item"><a href=".?action=new-product" class="nav-link active">New Item</a></li>
                 </ul>
             </nav>
             <!-- /.navigation -->

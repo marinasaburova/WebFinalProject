@@ -2,10 +2,11 @@
 
 <?php
 include('view/header.php');
+include('view/navigation.php');
 ?>
 
 <div class="container text-center">
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-sm-4"></div>
     <!-- main column-->
     <div class="col-sm-4">
@@ -15,18 +16,16 @@ include('view/header.php');
           <p><?php echo $login_message; ?></p>
           <input type="hidden" name="action" value="login">
           <div class="form-floating my-2">
-            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" name="email" class="form-control" id="floatingInput" maxlength="60" placeholder="name@example.com" required>
             <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating my-2">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" id="floatingPassword" maxlength="60" placeholder="Password" required>
             <label for="floatingPassword">Password</label>
           </div>
 
           <div class="checkbox my-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
+
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
           <a href=".?action=register#view">
