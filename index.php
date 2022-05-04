@@ -406,7 +406,6 @@ switch ($action) {
 
     // Goes to admin side
   case ('admin'):
-    logout();
     header('Location: admin/index.php');
     break;
 

@@ -241,7 +241,6 @@ switch ($action) {
 
         // Back to customer page
     case ('customer'):
-        logout();
         header('Location: ../');
         break;
 
