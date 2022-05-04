@@ -149,13 +149,6 @@ switch ($action) {
     $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
     $password = filter_input(INPUT_POST, 'password');
 
-    // shows error message if email is in use
-    if (isset($_GET['msg']) && $_GET['msg'] == 'dup') {
-      $register_message = '<span class="text-danger">There is an account with this email already!</span>';
-      include 'page/register.php';
-      break;
-    }
-
     // default page if nothing is submitted
     if ($email == NULL || $email == FALSE || $password == NULL || $password == FALSE) {
       $register_message = 'Create an account for a better shopping experience!';
@@ -164,17 +157,21 @@ switch ($action) {
     }
 
     // registers customer
-    registerCustomer($email, $password, $firstName, $lastName);
+    if (registerCustomer($email, $password, $firstName, $lastName)) {
 
-    // logs in registered customer
-    if (isValidLogin($email, $password)) {
-      $_SESSION['loggedin'] = true;
-      $_SESSION['customerID'] = getCustomerID($email);
-      $info = getCustomerData($_SESSION['customerID']);
-      header('Location: .?action=account');
+      // logs in registered customer
+      if (isValidLogin($email, $password)) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['customerID'] = getCustomerID($email);
+        $info = getCustomerData($_SESSION['customerID']);
+        header('Location: .?action=account');
+      } else {
+        $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
+        include('page/login.php');
+      }
     } else {
-      $login_message = '<span class="text-danger">Your email and/or password was not recognized.</span>';
-      include('page/login.php');
+      $register_message = '<span class="text-danger">There is an account with this email already!</span>';
+      include 'page/register.php';
     }
     break;
 

@@ -39,10 +39,10 @@ function registerCustomer($email, $password, $firstName, $lastName)
         $statement->execute();
     } catch (Exception $e) {
         $statement->closeCursor();
-        header('Location: .?action=register&msg=dup');
-        exit;
+        return false;
     }
     $statement->closeCursor();
+    return true;
 }
 
 function updateCustomer($customerID, $email, $firstName, $lastName)
