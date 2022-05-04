@@ -282,6 +282,7 @@ foreach ($cart as $item => $quantity) {
   </main>
 
   <script>
+    // function to show/hide billing address as needed
     function fillBillingAddress() {
 
       // Get the checkbox
@@ -313,6 +314,8 @@ foreach ($cart as $item => $quantity) {
         document.getElementById("billZip").setAttribute("required", "true");
       }
     }
+
+    document.addEventListener("load", fillBillingAddress, false);
   </script>
 
   <?php
