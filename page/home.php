@@ -8,6 +8,12 @@ include 'view/navigation.php';
 
     <div class="py-3 text-center">
       <h2><?php echo ucfirst($category) ?></h2>
+      <?php if ($color != 'all') echo "<span class='lead mb-4 mx-2'>Color:<i> $color </i></span>"
+      ?>
+      <?php if ($material != 'all') echo "<span class='lead mb-4 mx-2'>Material:<i> $material </i></span>"
+      ?>
+      <?php if (isset($searchterm)) echo "<span class='lead mb-4'>Searching for:<i> $searchterm </i></span>"
+      ?>
     </div>
 
     <!-- Sidebar -->

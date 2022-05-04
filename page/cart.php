@@ -64,7 +64,7 @@ $numOfItems = getCartNumOfItems();
           <form class="card p-2" action=".#view">
             <div class="input-group">
               <input type="hidden" name="action" value="checkout">
-              <button class="w-100 btn btn-secondary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
+              <button class="w-100 btn btn-primary" type="submit" <?php if (empty($cart) || !canPurchaseCart()) echo 'disabled' ?>>Continue to checkout</button>
 
             </div>
           </form>

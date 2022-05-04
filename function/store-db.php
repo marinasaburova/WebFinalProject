@@ -31,6 +31,8 @@ function getProducts($category, $color, $material)
         $query .= " AND `material` = :material";
     }
 
+    $query .= " ORDER BY `itemID` DESC";
+
     $statement = $db->prepare($query);
 
     if ($category != 'all') {
