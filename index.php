@@ -355,18 +355,18 @@ switch ($action) {
       $customerID = null;
     }
 
-    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-    $firstName = trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES));
-    $lastName = trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES));
-    $street = trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_ADD_SLASHES));
-    $city = trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_ADD_SLASHES));
-    $state = trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_ADD_SLASHES));
-    $zip = trim(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT));
+    $email = strip_tags(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
+    $firstName = strip_tags(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_SPECIAL_CHARS)));
+    $lastName = strip_tags(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_SPECIAL_CHARS)));
+    $street = strip_tags(trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_SPECIAL_CHARS)));
+    $city = strip_tags(trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_SPECIAL_CHARS)));
+    $state = strip_tags(trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_SPECIAL_CHARS)));
+    $zip = strip_tags(trim(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT)));
 
     if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
       $street2 = null;
     } else {
-      $street2 = trim(filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_ADD_SLASHES));
+      $street2 = strip_tags(trim(filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_SPECIAL_CHARS)));
     }
 
     $orderID = placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip);
@@ -378,32 +378,32 @@ switch ($action) {
 
     // Variables for confirmation page
     if (!isset($_POST['same-address'])) {
-      $billFirstName = trim(filter_input(INPUT_POST, 'billFirstName', FILTER_SANITIZE_ADD_SLASHES));
-      $billLastName = trim(filter_input(INPUT_POST, 'billLastName', FILTER_SANITIZE_ADD_SLASHES));
-      $billStreet = trim(filter_input(INPUT_POST, 'billStreet', FILTER_SANITIZE_ADD_SLASHES));
-      $billCity = trim(filter_input(INPUT_POST, 'billCity', FILTER_SANITIZE_ADD_SLASHES));
-      $billState = trim(filter_input(INPUT_POST, 'billState', FILTER_SANITIZE_ADD_SLASHES));
-      $billZip = trim(filter_input(INPUT_POST, 'billZip', FILTER_SANITIZE_NUMBER_INT));
+      $billFirstName = strip_tags(trim(filter_input(INPUT_POST, 'billFirstName', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billLastName = strip_tags(trim(filter_input(INPUT_POST, 'billLastName', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billStreet = strip_tags(trim(filter_input(INPUT_POST, 'billStreet', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billCity = strip_tags(trim(filter_input(INPUT_POST, 'billCity', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billState = strip_tags(trim(filter_input(INPUT_POST, 'billState', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billZip = strip_tags(trim(filter_input(INPUT_POST, 'billZip', FILTER_SANITIZE_NUMBER_INT)));
       if (!isset($_POST['billStreet2']) || trim($_POST['billStreet2']) == '') {
         $billStreet2 = null;
       } else {
-        $billStreet2 = trim(filter_input(INPUT_POST, 'billStreet2', FILTER_SANITIZE_ADD_SLASHES));
+        $billStreet2 = strip_tags(trim(filter_input(INPUT_POST, 'billStreet2', FILTER_SANITIZE_SPECIAL_CHARS)));
       }
     } else {
-      $billFirstName = trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_ADD_SLASHES));
-      $billLastName = trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES));
-      $billStreet = trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_ADD_SLASHES));
-      $billCity = trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_ADD_SLASHES));
-      $billState = trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_ADD_SLASHES));
-      $billZip = trim(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT));
+      $billFirstName = strip_tags(trim(filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billLastName = strip_tags(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billStreet = strip_tags(trim(filter_input(INPUT_POST, 'street', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billCity = strip_tags(trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billState = strip_tags(trim(filter_input(INPUT_POST, 'state', FILTER_SANITIZE_SPECIAL_CHARS)));
+      $billZip = strip_tags(trim(filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_NUMBER_INT)));
       if (!isset($_POST['street2']) || trim($_POST['street2']) == '') {
         $billStreet2 = null;
       } else {
-        $billStreet2 = trim(filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_ADD_SLASHES));
+        $billStreet2 = strip_tags(trim(filter_input(INPUT_POST, 'street2', FILTER_SANITIZE_SPECIAL_CHARS)));
       }
     }
 
-    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod', FILTER_SANITIZE_ADD_SLASHES);
+    $paymentMethod = filter_input(INPUT_POST, 'paymentMethod', FILTER_SANITIZE_SPECIAL_CHARS);
     $cardNum = trim('*' . substr(filter_input(INPUT_POST, 'cardNum', FILTER_SANITIZE_NUMBER_INT), -4));
 
     $order = getOrderDetails($orderID);
