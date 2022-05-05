@@ -25,6 +25,7 @@ include 'admin-view/navigation.php';
                 <div class="col-sm-4">
                   <form action="." method="post" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="update-product">
+                    <input type="hidden" name="orderID" value="<?php echo $order['itemID'] ?>">
 
                     <p class="card-text">Product name: </p>
                     <label for="productName" class="form-label"></label>
