@@ -23,7 +23,8 @@ include 'admin-view/navigation.php';
                 <div class="col-sm-4"></div>
                 <!-- main column-->
                 <div class="col-sm-4">
-                  <form action="." method="post">
+                  <form action="." method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="update-product">
                     <p class="card-text">Product name: </p>
                     <label for="productName" class="form-label"></label>
                     <input type="text" class="form-control" id="productName" placeholder="" value="<?php echo $product['name'] ?>" required>

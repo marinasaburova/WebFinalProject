@@ -218,14 +218,20 @@ function deleteItem($itemID)
     $statement->closeCursor();
 }
 
-function updateOrderStatus($orderID, $status)
+function updateOrder($orderID, $status, $email, $shipStreet, $shipStreet2, $shipCity, $shipState, $shipZip)
 {
     global $db;
 
-    $query = 'UPDATE orders SET `status` = :status  WHERE `orderID` = :orderID';
+    $query = 'UPDATE orders SET `status` = :status `email` = :email `shipStreet` = :shipStreet `shipStreet2` = :shipStreet2 `shipCity` = :shipCity `shipState` = :shipState `shipZip` = :shipZip  WHERE `orderID` = :orderID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':status', $status);
     $statement->bindValue(':orderID', $orderID);
+    $statement->bindValue(':status', $status);
+    $statement->bindValue('email', $email);
+    $statement->bindValue('shipStreet', $shipStreet);
+    $statement->bindValue('shipStreet2', $shipStreet2);
+    $statement->bindValue('shipCity', $shipCity);
+    $statement->bindValue('shipState', $shipState);
+    $statement->bindValue('shipZip', $shipZip);
     $statement->execute();
     $statement->closeCursor();
 }

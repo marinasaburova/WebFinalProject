@@ -207,19 +207,18 @@ switch ($action) {
         if (isset($_POST['updateOrder'])) {
             $message = 'Updated';
             header('Location: .?action=inventory&msg=success');
-            $name = filter_input(INPUT_POST, 'name');
-            $price = filter_input(INPUT_POST, 'price');
-            $quantity = filter_input(INPUT_POST, 'quantity');
-            $category = filter_input(INPUT_POST, 'category');
-            $color = filter_input(INPUT_POST, 'color');
-            $material = filter_input(INPUT_POST, 'material');
-            $description = filter_input(INPUT_POST, 'description');
-            $tags = filter_input(INPUT_POST, 'tags');
-            addItem($name, $price, $quantity, $category, $color, $material, $description, $tags);
+            $status = filter_input(INPUT_POST, 'status');
+            $email = filter_input(INPUT_POST, 'email');
+            $shipStreet = filter_input(INPUT_POST, 'shipStreet');
+            $shipStreet2 = filter_input(INPUT_POST, 'shipStreet2');
+            $shipCity = filter_input(INPUT_POST, 'shipCity');
+            $shipState = filter_input(INPUT_POST, 'shipState');
+            $shipZip = filter_input(INPUT_POST, 'shipZip');
+            updateOrder($orderID, $status, $email, $shipStreet, $shipStreet2, $shipCity, $shipState, $shipZip);
             break;
         } else {
             echo 'Did not update';
-            include 'page/new-product.php';
+            include 'page/update-order.php';
             break;
         }
 
