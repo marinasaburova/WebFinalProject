@@ -195,7 +195,7 @@ switch ($action) {
             updateItem($itemID, $name, $price, $quantity, $category, $color, $material, $description, $tags);
             break;
         } else {
-            echo 'not adding product';
+            echo 'not updating product';
             include 'page/new-product.php';
             break;
         }
