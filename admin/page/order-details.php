@@ -18,7 +18,6 @@ include 'admin-view/navigation.php';
             <div class="card-body">
                 <div class="container text-center">
                     <div class="row">
-                        <div class="col-sm-4"></div>
                         <!-- main column-->
                         <div class="col-sm-4">
                             <form action="." method="post" enctype="multipart/form-data">
