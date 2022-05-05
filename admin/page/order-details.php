@@ -82,7 +82,7 @@ include 'admin-view/navigation.php';
 
                                     <div class="col-12">
                                         <label for="shipZip" class="form-label">Zip</label>
-                                        <input type="text" class="form-control" id="shipZip" nameshipZip placeholder="" value="<?php echo $order['shipZip'] ?>" required>
+                                        <input type="text" class="form-control" id="shipZip" name="shipZip" placeholder="" value="<?php echo $order['shipZip'] ?>" required>
                                         <div class="invalid-feedback">
                                             Zip code required.
                                         </div>

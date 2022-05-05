@@ -183,7 +183,6 @@ switch ($action) {
 
         if (isset($_POST['updateItem'])) {
             $message = 'Updated';
-            header('Location: .?action=inventory&msg=success');
             $name = filter_input(INPUT_POST, 'name');
             $price = filter_input(INPUT_POST, 'price');
             $quantity = filter_input(INPUT_POST, 'quantity');
@@ -193,6 +192,7 @@ switch ($action) {
             $description = filter_input(INPUT_POST, 'description');
             $tags = filter_input(INPUT_POST, 'tags');
             updateItem($itemID, $name, $price, $quantity, $category, $color, $material, $description, $tags);
+            header('Location: .?action=inventory&msg=success');
             break;
         } else {
             echo 'not updating product';
@@ -206,7 +206,6 @@ switch ($action) {
 
         if (isset($_POST['updateOrder'])) {
             $message = 'Updated';
-            header('Location: .?action=inventory&msg=success');
             $orderID = filter_input(INPUT_POST, 'orderID');
             $status = filter_input(INPUT_POST, 'status');
             $email = filter_input(INPUT_POST, 'email');
@@ -216,6 +215,7 @@ switch ($action) {
             $shipState = filter_input(INPUT_POST, 'shipState');
             $shipZip = filter_input(INPUT_POST, 'shipZip');
             updateOrder($orderID, $status, $email, $shipStreet, $shipStreet2, $shipCity, $shipState, $shipZip);
+            header('Location: .?action=inventory&msg=success');
             break;
         } else {
             echo 'Did not update';
