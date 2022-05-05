@@ -131,7 +131,6 @@ include('view/navigation.php');
             <div class="col-md-5">
               <label for="country" class="form-label">Country</label>
               <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
                 <option>United States</option>
               </select>
             </div>
