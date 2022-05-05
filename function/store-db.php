@@ -153,10 +153,10 @@ function updateItem($itemID, $name, $price, $quantity, $category, $color, $mater
 
     $query = 'UPDATE item SET `name` = :name, `price` = :price, `quantity` = :quantity, `category` = :category, `color` = :color, `material` = :material, `description` = :description, `tags` = :tags WHERE `itemID` = :itemID';
     $statement = $db->prepare($query);
+    $statement->bindValue(':itemID', $itemID);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
     $statement->bindValue(':quantity', $quantity);
-    $statement->bindValue(':itemID', $itemID);
     $statement->bindValue(':category', $category);
     $statement->bindValue(':color', $color);
     $statement->bindValue(':material', $material);

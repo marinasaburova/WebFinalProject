@@ -183,6 +183,7 @@ switch ($action) {
 
         if (isset($_POST['updateItem'])) {
             $message = 'Updated';
+            $itemID = filter_input(INPUT_POST, 'itemID');
             $name = filter_input(INPUT_POST, 'name');
             $price = filter_input(INPUT_POST, 'price');
             $quantity = filter_input(INPUT_POST, 'quantity');

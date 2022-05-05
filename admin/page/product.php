@@ -25,64 +25,79 @@ include 'admin-view/navigation.php';
                 <div class="col-sm-4">
                   <form action="." method="post" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="update-product">
-
-                    <p class="card-text">Product name: </p>
-                    <label for="productName" class="form-label"></label>
-                    <input type="text" class="form-control" id="productName" name="name" placeholder="" value="<?php echo $product['name'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter product name.
+                    <input type="hidden" name="itemID" value="<?php echo $product['itemID'] ?>">
+                    <div>
+                      <p class="card-text">Product name: </p>
+                      <label for="productName" class="form-label"></label>
+                      <input type="text" class="form-control" id="productName" name="name" placeholder="" value="<?php echo $product['name'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter product name.
+                      </div>
                     </div>
                     <br>
+                    <div>
                     <p class="card-text">Price: </p>
-                    <label for="price" class="form-label"></label>
-                    <input type="text" class="form-control" id="price" name="price" placeholder="" value="<?php echo $product['price'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter price.
+                      <label for="price" class="form-label"></label>
+                      <input type="text" class="form-control" id="price" name="price" placeholder="" value="<?php echo $product['price'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter price.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text">Quantity: </p>
-                    <label for="quantity" class="form-label"></label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="" value="<?php echo $product['quantity'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter quantity.
+                    <div>
+                      <p class="card-text">Quantity: </p>
+                      <label for="quantity" class="form-label"></label>
+                      <input type="text" class="form-control" id="quantity" name="quantity" placeholder="" value="<?php echo $product['quantity'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter quantity.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text">Category: </p>
-                    <label for="category" class="form-label"></label>
-                    <input type="text" class="form-control" id="category" name="category" placeholder="" value="<?php echo $product['category'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter category.
+                    <div>
+                      <p class="card-text">Category: </p>
+                      <label for="category" class="form-label"></label>
+                      <input type="text" class="form-control" id="category" name="category" placeholder="" value="<?php echo $product['category'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter category.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text pt-3">Color: </p>
-                    <label for="color" class="form-label"></label>
-                    <input type="text" class="form-control" id="color" name="color" placeholder="" value="<?php echo $product['color'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter color.
+                    <div>
+                      <p class="card-text pt-3">Color: </p>
+                      <label for="color" class="form-label"></label>
+                      <input type="text" class="form-control" id="color" name="color" placeholder="" value="<?php echo $product['color'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter color.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text pt-3">Material: </p>
-                    <label for="material" class="form-label"></label>
-                    <input type="text" class="form-control" id="material" name="material" placeholder="" value="<?php echo $product['material'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter material.
+                    <div>
+                      <p class="card-text pt-3">Material: </p>
+                      <label for="material" class="form-label"></label>
+                      <input type="text" class="form-control" id="material" name="material" placeholder="" value="<?php echo $product['material'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter material.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text pt-3">Description...</p>
-                    <label for="description" class="form-label"></label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="" value="<?php echo $product['description'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter description.
+                    <div>
+                      <p class="card-text pt-3">Description...</p>
+                      <label for="description" class="form-label"></label>
+                      <input type="text" class="form-control" id="description" name="description" placeholder="" value="<?php echo $product['description'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter description.
+                      </div>
                     </div>
                     <br>
-                    <p class="card-text pt-3">Tags: </p>
-                    <label for="tags" class="form-label"></label>
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="" value="<?php echo $product['tags'] ?>" required>
-                    <div class="invalid-feedback">
-                      Please enter material.
+                    <div>
+                      <p class="card-text pt-3">Tags: </p>
+                      <label for="tags" class="form-label"></label>
+                      <input type="text" class="form-control" id="tags" name="tags" placeholder="" value="<?php echo $product['tags'] ?>" required>
+                      <div class="invalid-feedback">
+                        Please enter material.
+                      </div>
                     </div>
                     <br>
-
                     <button class="w-100 btn btn-primary btn-lg" type="submit" name="updateItem">Update</button>
                   </form>
                 </div>
