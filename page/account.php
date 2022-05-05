@@ -99,35 +99,13 @@ include('view/navigation.php');
                         <?php
                         }
                         ?>
-
-                        <!-- 
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Number</td>
-                            <td>Date</td>
-                            <td>Items Ordered</td>
-                            <td>Order Total</td>
-                        </tr> -->
                     </tbody>
-
                 </table>
-
             </div>
             <!-- ./cart -->
         </div>
     </main>
-
-    <?php
-    include 'view/footer.php';
-    ?>
+</div>
+<?php
+include 'view/footer.php';
+?>

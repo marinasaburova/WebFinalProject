@@ -145,7 +145,8 @@ $numOfItems = getCartNumOfItems();
       <!-- ./cart -->
     </div>
   </main>
+</div>
 
-  <?php
-  include 'view/footer.php';
-  ?>
+<?php
+include 'view/footer.php';
+?>

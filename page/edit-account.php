@@ -1,4 +1,5 @@
 <!-- Displays options to edit account and change password -->
+
 <?php
 require_once('utils/verify-login.php');
 include('view/header.php');

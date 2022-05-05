@@ -1,8 +1,11 @@
 <?php
+// functions for managing the cart
+
 if (empty($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
+// add an item to cart
 function addToCart($itemID, $quantity)
 {
     if (isset($_SESSION['cart'][$itemID])) {
@@ -13,6 +16,7 @@ function addToCart($itemID, $quantity)
     return;
 }
 
+// remove an item entire (all quantities) from cart
 function removeFromCart($itemID)
 {
     if (isset($_SESSION['cart'][$itemID])) {
@@ -21,6 +25,7 @@ function removeFromCart($itemID)
     return;
 }
 
+// decrease item quantity by one
 function removeOneFromCart($itemID)
 {
     if (isset($_SESSION['cart'][$itemID])) {
@@ -33,7 +38,7 @@ function removeOneFromCart($itemID)
     return;
 }
 
-
+// clear entire cart
 function clearCart()
 {
     if (isset($_SESSION['cart'])) {
@@ -42,12 +47,14 @@ function clearCart()
     return;
 }
 
+// get the cart
 function getCart()
 {
     $cart = $_SESSION['cart'];
     return $cart;
 }
 
+// get cart price
 function getCartTotal()
 {
     $cart = $_SESSION['cart'];
@@ -61,21 +68,25 @@ function getCartTotal()
     return $total;
 }
 
+// get cart tax
 function getTax()
 {
     return getCartTotal() * .05;
 }
 
+// get cart shipping
 function getShipping()
 {
     return 5;
 }
 
+// get cart total price including shipping & tax
 function getTotal()
 {
     return getCartTotal() + getShipping() + getTax();
 }
 
+// get cart quantity
 function getCartNumOfItems()
 {
     $cart = $_SESSION['cart'];
@@ -86,6 +97,7 @@ function getCartNumOfItems()
     return $numOfItems;
 }
 
+// check if item can be added to cart
 function canAddToCart($itemID, $quantityAdding)
 {
     $item = getProductDetails($itemID);
@@ -103,6 +115,7 @@ function canAddToCart($itemID, $quantityAdding)
     }
 }
 
+// check if item can be purchased safely
 function canPurchaseItem($itemID)
 {
     $item = getProductDetails($itemID);
@@ -120,6 +133,7 @@ function canPurchaseItem($itemID)
     }
 }
 
+// check if entire cart can be purchased
 function canPurchaseCart()
 {
     foreach ($_SESSION['cart'] as $item => $quantity) {

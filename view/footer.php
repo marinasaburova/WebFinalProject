@@ -1,5 +1,5 @@
 </div>
-<!-- /.container -->
+<!-- /.container-fluid -->
 
 <!-- Footer -->
 <!-- can make it fixed using fixed-bottom -->

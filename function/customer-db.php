@@ -1,5 +1,7 @@
 <?php
+// functions for managing customer related info 
 
+// checks if customer login is correct
 function isValidLogin($email, $password)
 {
     global $db;
@@ -17,6 +19,7 @@ function isValidLogin($email, $password)
     return password_verify($password, $hash);
 }
 
+// logs customer out, redirects to homepage
 function logout()
 {
     session_destroy();
@@ -24,6 +27,7 @@ function logout()
     exit;
 }
 
+// registers a new customer
 function registerCustomer($email, $password, $firstName, $lastName)
 {
     global $db;
@@ -45,6 +49,7 @@ function registerCustomer($email, $password, $firstName, $lastName)
     return true;
 }
 
+// updates customer personal details
 function updateCustomer($customerID, $email, $firstName, $lastName)
 {
     global $db;
@@ -65,6 +70,7 @@ function updateCustomer($customerID, $email, $firstName, $lastName)
     return true;
 }
 
+// updates customer password
 function updatePassword($customerID, $newPassword)
 {
     global $db;
@@ -79,31 +85,7 @@ function updatePassword($customerID, $newPassword)
     $statement->closeCursor();
 }
 
-function getCustomerData($customerID)
-{
-    global $db;
-
-    $query = 'SELECT * FROM `customer` WHERE `customerID` = :customerID';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':customerID', $customerID);
-    $statement->execute();
-    $customer = $statement->fetch();
-    $statement->closeCursor();
-    return $customer;
-}
-
-function getCustomerID($email)
-{
-    global $db;
-    $query = "SELECT `customerID` FROM `customer` WHERE `email` = :email";
-    $statement = $db->prepare($query);
-    $statement->bindValue(':email', $email);
-    $statement->execute();
-    $customer = $statement->fetch();
-    $statement->closeCursor();
-    return $customer['customerID'];
-}
-
+// updates the customer default address
 function updateDefaultAddr($customerID, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
     global $db;
@@ -122,6 +104,34 @@ function updateDefaultAddr($customerID, $firstName, $lastName, $street, $street2
     $statement->closeCursor();
 }
 
+// returns customer details
+function getCustomerData($customerID)
+{
+    global $db;
+
+    $query = 'SELECT * FROM `customer` WHERE `customerID` = :customerID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':customerID', $customerID);
+    $statement->execute();
+    $customer = $statement->fetch();
+    $statement->closeCursor();
+    return $customer;
+}
+
+// returns customer ID from email
+function getCustomerID($email)
+{
+    global $db;
+    $query = "SELECT `customerID` FROM `customer` WHERE `email` = :email";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $customer = $statement->fetch();
+    $statement->closeCursor();
+    return $customer['customerID'];
+}
+
+// gets customer's order history
 function getOrderHistory($customerID)
 {
     global $db;
@@ -136,6 +146,7 @@ function getOrderHistory($customerID)
     return $orders;
 }
 
+// searches for an order based on email and order id
 function searchOrder($email, $orderID)
 {
     global $db;
@@ -154,6 +165,7 @@ function searchOrder($email, $orderID)
     }
 }
 
+// gets order details
 function getOrderDetails($orderID)
 {
     global $db;
@@ -167,6 +179,7 @@ function getOrderDetails($orderID)
     return $orderInfo;
 }
 
+// gets all items in an order
 function getOrderItems($orderID)
 {
     global $db;
@@ -180,6 +193,7 @@ function getOrderItems($orderID)
     return $items;
 }
 
+// gets total quantity of items in order
 function getOrderQuantity($orderID)
 {
     $items = getOrderItems($orderID);
@@ -192,6 +206,7 @@ function getOrderQuantity($orderID)
     return $quantity;
 }
 
+// places an order
 function placeOrder($customerID, $email, $firstName, $lastName, $street, $street2, $city, $state, $zip)
 {
     global $db;
@@ -201,8 +216,8 @@ function placeOrder($customerID, $email, $firstName, $lastName, $street, $street
     }
 
     $itemsPrice = getCartTotal();
-    $tax = getCartTax();
-    $shipping = getCartShipping();
+    $tax = getTax();
+    $shipping = getShipping();
     $cart = $_SESSION['cart'];
 
     $query = 'INSERT INTO `orders` (`customerID`, `email`, `itemsPrice`, `shipping`, `tax`, `status`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`)
@@ -248,27 +263,4 @@ function placeOrder($customerID, $email, $firstName, $lastName, $street, $street
 
     clearCart();
     return $orderID;
-}
-
-function getCartTax()
-{
-    $price = getCartTotal();
-    $tax = $price * 0.05;
-    return $tax;
-}
-
-function getCartShipping()
-{
-    return 5;
-}
-
-function updateStatus($orderID, $status)
-{
-    global $db;
-
-    $query = 'UPDATE orders SET `status` = :status WHERE `orderID` = :orderID';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':status', $status);
-    $statement->execute();
-    $statement->closeCursor();
 }

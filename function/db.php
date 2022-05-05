@@ -1,12 +1,9 @@
 <?php
+// connects to database
 
 $dsn = 'mysql:host=localhost;dbname=kelarinadatabase';
 $username = 'kelarina';
 $password = 'kelarinapass';
-
-/*$dsn = 'mysql:host=localhost;dbname=kelarinadatabase';
-$username = 'root';
-$password = '';*/
 
 $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 try {

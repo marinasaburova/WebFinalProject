@@ -1,7 +1,4 @@
-<!-- Show's users cart and lets them edit it -->
-
-<!-- Displays details for a specific product -->
-<!-- Use GET for this page, so that users can bookmark it -->
+<!-- Page to fill out shipping & billing details -->
 
 <?php
 include 'view/header.php';

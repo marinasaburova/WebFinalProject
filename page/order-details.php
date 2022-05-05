@@ -1,7 +1,5 @@
 <!-- Shows details about a specific order -->
-<!-- User needs to be logged in to see -->
 <?php
-//require_once('utils/verify-login.php');
 include('view/header.php');
 include('view/navigation.php')
 ?>

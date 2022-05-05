@@ -1,6 +1,7 @@
 <?php
 session_start();
-require('function/db.php');
+require_once('function/db.php');
+// require_once('utils/secure-conn.php');
 require('function/customer-db.php');
 require('function/store-db.php');
 require('function/cart-functions.php');
