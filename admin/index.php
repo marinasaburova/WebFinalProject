@@ -207,6 +207,7 @@ switch ($action) {
         if (isset($_POST['updateOrder'])) {
             $message = 'Updated';
             header('Location: .?action=inventory&msg=success');
+            $orderID = filter_input(INPUT_POST, 'orderID');
             $status = filter_input(INPUT_POST, 'status');
             $email = filter_input(INPUT_POST, 'email');
             $shipStreet = filter_input(INPUT_POST, 'shipStreet');

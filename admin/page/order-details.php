@@ -23,6 +23,7 @@ include 'admin-view/navigation.php';
                         <div class="col-sm-4">
                             <form action="." method="post" enctype="multipart/form-data">
                             <input type="hidden" name="action" value="update-order">
+                            <input type="hidden" name="orderID" value="<?php echo $order['orderID'] ?>">
                                 <div class="col-12">
                                     <h5 class="card-title">Order Status: </h5>
                                     <label for="status" class="form-label"></label>
