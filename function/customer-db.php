@@ -55,8 +55,14 @@ function updateCustomer($customerID, $email, $firstName, $lastName)
     $statement->bindValue(':firstName', $firstName);
     $statement->bindValue(':lastName', $lastName);
     $statement->bindValue(':customerID', $customerID);
-    $statement->execute();
+    try {
+        $statement->execute();
+    } catch (Exception $e) {
+        $statement->closeCursor();
+        return false;
+    }
     $statement->closeCursor();
+    return true;
 }
 
 function updatePassword($customerID, $newPassword)

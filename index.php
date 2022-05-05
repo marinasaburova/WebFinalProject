@@ -298,9 +298,12 @@ switch ($action) {
       $lastName = strip_tags(trim(filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_ADD_SLASHES)));
       $email = strtolower(trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL)));
 
-      updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName);
+      if (updateCustomer($_SESSION['customerID'], $email, $firstName, $lastName)) {
+        header('Location: .?action=editaccount&msg=acctsuccess#personal');
+      } else {
+        header('Location: .?action=editaccount&msg=accterror#personal');
+      }
     }
-    header('Location: .?action=account');
     break;
 
   case ('update-password'):
@@ -311,9 +314,9 @@ switch ($action) {
       $newPassword = filter_input(INPUT_POST, 'newPassword');
       updatePassword($_SESSION['customerID'], $newPassword);
       $message = 'Password updated';
-      header('Location: .?action=editaccount&msg=success#password');
+      header('Location: .?action=editaccount&msg=pwdsuccess#password');
     } else {
-      header('Location: .?action=editaccount&msg=error#password');
+      header('Location: .?action=editaccount&msg=pwderror#password');
     }
     break;
 

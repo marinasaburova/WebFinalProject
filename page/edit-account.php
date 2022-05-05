@@ -9,7 +9,7 @@ include('view/navigation.php');
   <main>
     <div class="py-5 text-center">
       <h2>Edit Account</h2>
-      <p class="lead">Change and update all your account info beauty.</p>
+      <p class="lead" id="personal">Change and update all your account info beauty.</p>
     </div>
 
     <!-- General Info -->
@@ -19,6 +19,15 @@ include('view/navigation.php');
         <!-- Personal Form -->
         <form action="." method="post" class="needs-validation">
           <h4 class="mb-3 pt-1">Personal Information</h4>
+
+          <?php
+          if (isset($_GET['msg']) && $_GET['msg'] == 'acctsuccess') {
+            echo "<p class='text-success'>Account info has been updated!</p>";
+          }
+          if (isset($_GET['msg']) && $_GET['msg'] == 'accterror') {
+            echo "<p class='text-danger'>This email is already in use.</p>";
+          }
+          ?>
 
           <input type="hidden" name="action" value="update-personal">
 
@@ -50,7 +59,7 @@ include('view/navigation.php');
           <h4 class="mb-3 pt-1">Password</h4>
 
           <?php
-          if (isset($_GET['msg']) && $_GET['msg'] == 'success') {
+          if (isset($_GET['msg']) && $_GET['msg'] == 'pwdsuccess') {
             echo "<p class='text-success'>Password has been updated!</p>";
           }
           ?>
@@ -65,7 +74,7 @@ include('view/navigation.php');
             </div>
 
             <?php
-            if (isset($_GET['msg']) && $_GET['msg'] == 'error') {
+            if (isset($_GET['msg']) && $_GET['msg'] == 'pwderror') {
               echo "<p class='text-danger mb-0'>Wrong current password.</p>";
             }
             ?>
