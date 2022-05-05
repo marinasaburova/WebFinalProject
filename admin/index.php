@@ -206,17 +206,17 @@ switch ($action) {
         require_once('../utils/verify-admin.php');
 
         if (isset($_POST['updateOrder'])) {
-            $message = 'Updated';
-            $orderID = filter_input(INPUT_POST, 'orderID');
-            $status = filter_input(INPUT_POST, 'status');
-            $email = filter_input(INPUT_POST, 'email');
-            $shipStreet = filter_input(INPUT_POST, 'shipStreet');
-            $shipStreet2 = filter_input(INPUT_POST, 'shipStreet2');
-            $shipCity = filter_input(INPUT_POST, 'shipCity');
-            $shipState = filter_input(INPUT_POST, 'shipState');
-            $shipZip = filter_input(INPUT_POST, 'shipZip');
+            $update_msg = '<span class="alert-success">Successfully updated!</span>';
+            $orderID = trim(filter_input(INPUT_POST, 'orderID'));
+            $status = strtolower(trim(filter_input(INPUT_POST, 'status')));
+            $email = strtolower(trim(filter_input(INPUT_POST, 'email')));
+            $shipStreet = trim(filter_input(INPUT_POST, 'shipStreet'));
+            $shipStreet2 = trim(filter_input(INPUT_POST, 'shipStreet2'));
+            $shipCity = trim(filter_input(INPUT_POST, 'shipCity'));
+            $shipState = trim(filter_input(INPUT_POST, 'shipState'));
+            $shipZip = trim(filter_input(INPUT_POST, 'shipZip'));
             updateOrder($orderID, $status, $email, $shipStreet, $shipStreet2, $shipCity, $shipState, $shipZip);
-            header('Location: .?action=inventory&msg=success');
+            header("Location: .?action=order-details&orderid=$orderID&msg=success");
             break;
         } else {
             echo 'Did not update';
