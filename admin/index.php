@@ -206,7 +206,6 @@ switch ($action) {
         require_once('../utils/verify-admin.php');
 
         if (isset($_POST['updateOrder'])) {
-            $update_msg = '<span class="alert-success">Successfully updated!</span>';
             $orderID = trim(filter_input(INPUT_POST, 'orderID'));
             $status = strtolower(trim(filter_input(INPUT_POST, 'status')));
             $email = strtolower(trim(filter_input(INPUT_POST, 'email')));
@@ -216,11 +215,10 @@ switch ($action) {
             $shipState = trim(filter_input(INPUT_POST, 'shipState'));
             $shipZip = trim(filter_input(INPUT_POST, 'shipZip'));
             updateOrder($orderID, $status, $email, $shipStreet, $shipStreet2, $shipCity, $shipState, $shipZip);
-            header("Location: .?action=order-details&orderid=$orderID&msg=success");
+            header("Location: .?action=order-details&orderid=$orderID&msg=success#view");
             break;
         } else {
-            echo 'Did not update';
-            include 'page/update-order.php';
+            header("Location: .?action=order-details&orderid=$orderID&msg=error#view");
             break;
         }
 
@@ -283,6 +281,7 @@ switch ($action) {
         $orderID = filter_input(INPUT_GET, 'orderID');
         $order = getOrderDetails($orderID);
         $items = getOrderItems($orderID);
+        $msg = filter_input(INPUT_GET, 'msg');
         include 'page/order-details.php';
         break;
 }

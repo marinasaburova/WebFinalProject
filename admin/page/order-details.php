@@ -9,89 +9,97 @@ include 'admin-view/navigation.php';
     <p class="lead">Edit and manage this order.</p>
 </div>
 
-
-<div class="container-fluid">
+<div class="container-fluid text-center">
 
     <!-- Shipping Address -->
     <div class="pb-5 pt-2 text-center w-75 mx-auto">
         <div class="card-body">
-            <div class="container text-center">
-                <div class="row">
-                    <!-- main column-->
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <form action="." method="post" enctype="multipart/form-data">
-                            <div class="row g-3">
-
-                                <input type="hidden" name="action" value="update-order">
-                                <input type="hidden" name="orderID" value="<?php echo $order['orderID'] ?>">
-                                <div class="col-12">
-                                    <label for="status" class="form-label">Order Status: </label>
-                                    <select class="form-select" id="status" name="status" required>
-                                        <option selected value="<?php echo $order['status'] ?>"><?php echo ucfirst($order['status']) ?></option>
-                                        <option value="placed">Placed</option>
-                                        <option value="shipped">Shipped</option>
-                                        <option value="delivered">Delivered</option>
-                                        <option value="delayed">Delayed</option>
-                                        <option value="cancelled">Cancelled</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="email" class="form-label">Email </label>
-                                    <input type="email" class="form-control" id="email" name="email" maxlength="60" placeholder="you@example.com" value="<?php echo $order['email'] ?>">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid email address for shipping updates.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="shipStreet" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="shipStreet" name="shipStreet" maxlength="30" placeholder="1234 Main St" value="<?php echo $order['shipStreet'] ?>" required>
-                                    <div class="invalid-feedback">
-                                        Please enter your shipping address.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="shipStreet2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                    <input type="text" class="form-control" id="shipStreet2" name="shipStreet2" maxlength="30" placeholder="Apartment or suite" value="<?php echo $order['shipStreet2'] ?>">
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="shipCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="shipCity" name="shipCity" maxlength="30" placeholder="1234 Main St" value="<?php echo $order['shipCity'] ?>" required>
-                                    <div class="invalid-feedback">
-                                        Please enter your city.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="shipState" name="shipState" maxlength="2" minlength="2" value="<?php echo $order['shipState'] ?>" required>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="shipZip" class="form-label">Zip</label>
-                                    <input type="text" class="form-control" id="shipZip" name="shipZip" minlength="5" maxlength="5" value="<?php echo $order['shipZip'] ?>" required>
-                                    <div class="invalid-feedback">
-                                        Zip code required.
-                                    </div>
-                                </div>
-
-                                <button class="w-100 btn btn-primary btn-lg" type="submit" name="updateOrder">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- ./col -->
+            <div class="row">
+                <!-- main column-->
                 <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <?php
+                    if (isset($_GET['msg'])) {
+                        if ($_GET['msg'] == 'success') {
+                            echo '<div class="alert-success py-1 mb-4">Successfully updated the order!</div>';
+                        }
+                        if ($_GET['msg'] == 'error') {
+                            echo '<div class="alert-danger py-1 mb-4">Could not update the order</div>';
+                        }
+                    }
+
+                    ?>
+                    <form action="." method="post" enctype="multipart/form-data">
+                        <div class="row g-3">
+
+                            <input type="hidden" name="action" value="update-order">
+                            <input type="hidden" name="orderID" value="<?php echo $order['orderID'] ?>">
+                            <div class="col-12">
+                                <label for="status" class="form-label">Order Status: </label>
+                                <select class="form-select" id="status" name="status" required>
+                                    <option selected value="<?php echo $order['status'] ?>"><?php echo ucfirst($order['status']) ?></option>
+                                    <option value="placed">Placed</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="delayed">Delayed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">Email </label>
+                                <input type="email" class="form-control" id="email" name="email" maxlength="60" placeholder="you@example.com" value="<?php echo $order['email'] ?>">
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address for shipping updates.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="shipStreet" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="shipStreet" name="shipStreet" maxlength="30" placeholder="1234 Main St" value="<?php echo $order['shipStreet'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="shipStreet2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                                <input type="text" class="form-control" id="shipStreet2" name="shipStreet2" maxlength="30" placeholder="Apartment or suite" value="<?php echo $order['shipStreet2'] ?>">
+                            </div>
+
+                            <div class="col-12">
+                                <label for="shipCity" class="form-label">City</label>
+                                <input type="text" class="form-control" id="shipCity" name="shipCity" maxlength="30" placeholder="1234 Main St" value="<?php echo $order['shipCity'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Please enter your city.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control" id="shipState" name="shipState" maxlength="2" minlength="2" value="<?php echo $order['shipState'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="shipZip" class="form-label">Zip</label>
+                                <input type="text" class="form-control" id="shipZip" name="shipZip" minlength="5" maxlength="5" value="<?php echo $order['shipZip'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Zip code required.
+                                </div>
+                            </div>
+
+                            <button class="w-100 btn btn-primary btn-lg" type="submit" name="updateOrder">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <!-- ./row -->
+            <!-- ./col -->
+            <div class="col-md-4"></div>
         </div>
+        <!-- ./row -->
     </div>
 </div>
 <!-- List Items -->

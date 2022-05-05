@@ -15,7 +15,8 @@ include('admin-view/navigation.php');
 
         <div class="row g-5">
             <!-- Personal Info -->
-            <div class="col-md-5 col-lg-4 order-md-last">
+            <div class="col-md-3 col-lg-4"></div>
+            <div class="col-md-6 col-lg-4">
                 <div class="sticky-top" style="top:72px; z-index: 1018">
 
                     <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
@@ -53,8 +54,8 @@ include('admin-view/navigation.php');
                     </form>
                 </div>
             </div>
-            <!-- ./summary -->
         </div>
+        <div class="col-md-3 col-lg-4"></div>
     </main>
 
     <?php
