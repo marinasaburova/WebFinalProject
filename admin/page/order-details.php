@@ -22,6 +22,7 @@ include 'admin-view/navigation.php';
                         <!-- main column-->
                         <div class="col-sm-4">
                             <form action="." method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="update-order">
                                 <div class="col-12">
                                     <h5 class="card-title">Order Status: </h5>
                                     <label for="status" class="form-label"></label>
@@ -35,7 +36,6 @@ include 'admin-view/navigation.php';
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <input type="hidden" name="action" value="update-order">
                                     <div class="col-12">
                                         <label for="email" class="form-label">Email </label>
                                         <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="<?php echo $order['email'] ?>">
