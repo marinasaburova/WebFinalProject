@@ -24,7 +24,8 @@ if (isset($action)) {
         <ul class="nav nav-pills">
             <li class="nav-item"><a href=".?action=inventory" class="<?php echo $class_inventory ?>">Manage Inventory</a></li>
             <li class="nav-item"><a href=".?action=orders" class="<?php echo $class_orders ?>">Manage Orders</a></li>
-            <li class="nav-item"><a href="#" class="<?php echo $class_customers ?>">Manage Customers</a></li>
+            <!--    <li class="nav-item"><a href="#" class="<?php // echo $class_customers 
+                                                            ?>">Manage Customers</a></li>-->
         </ul>
     </header>
 </nav>

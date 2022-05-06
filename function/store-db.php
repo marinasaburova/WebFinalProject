@@ -13,11 +13,15 @@ function getCategories()
     return $categories;
 }
 
-function getProducts($color, $material)
+function getProducts($category, $color, $material)
 {
     global $db;
 
     $query = 'SELECT * FROM `item` WHERE `quantity` > 0';
+
+    if ($category != 'all') {
+        $query .= ' AND `category` = :category';
+    }
 
     if ($color != 'all') {
         $query .= " AND `color` = :color";
@@ -30,6 +34,10 @@ function getProducts($color, $material)
     $query .= " ORDER BY `itemID` DESC";
 
     $statement = $db->prepare($query);
+
+    if ($category != 'all') {
+        $statement->bindValue(':category', $category);
+    }
 
     if ($color != 'all') {
         $statement->bindValue(':color', $color);

@@ -62,6 +62,11 @@ switch ($action) {
         // show homepage with products
     case ('inventory'):
         require_once('../utils/verify-admin.php');
+        $category = filter_input(INPUT_GET, 'category');
+        if ($category == NULL || $category == FALSE) {
+            $category = 'all';
+        }
+
         $color = filter_input(INPUT_GET, 'colorsearch');
         if ($color == NULL || $color == FALSE) {
             $color = 'all';
@@ -74,9 +79,8 @@ switch ($action) {
         if (isset($_GET['search'])) {
             $searchterm = filter_input(INPUT_GET, 'searchterm');
             $products = keywordSearchAdmin($searchterm, $color, $material);
-        }
-        else {
-            $products = getProducts($color, $material);
+        } else {
+            $products = getProducts($category, $color, $material);
         }
         include 'page/inventory.php';
         break;
@@ -302,7 +306,7 @@ switch ($action) {
         $msg = filter_input(INPUT_GET, 'msg');
         include 'page/order-details.php';
         break;
-    
+
     case ('editaccount'):
         require_once('../utils/verify-admin.php');
 

@@ -11,6 +11,16 @@ $materials = getMaterials();
             <hr class="my-3">
 
             <form action="." method="get">
+
+                <label for="category" class="form-label">Category:</label>
+                <select class="form-control mb-3" name="category">
+                    <option value="all">All</option>
+                    <option value="bags">Bags</option>
+                    <option value="sunglasses">Sunglasses</option>
+                    <option value="belts">Belts</option>
+                    <option value="watches">Watches</option>
+                </select>
+
                 <label for="colorsearch" class="form-label">Color:</label>
                 <select class="form-control mb-3" name="colorsearch">
                     <option value="all">All</option>
@@ -41,7 +51,7 @@ $materials = getMaterials();
                 <input name="searchterm" type="text" class="form-control mb-3">
                 <input type="hidden" name="colorsearch" value="<?php echo $color ?>">
                 <input type="hidden" name="materialsearch" value="<?php echo $material ?>">
-                
+
                 <input type="hidden" name="action" value="inventory">
                 <button class="btn btn-primary mb-3" type="submit" name="search">Search</button>
             </form>
