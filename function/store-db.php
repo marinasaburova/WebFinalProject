@@ -277,13 +277,13 @@ function getOrders($status, $orderBy)
 {
     global $db;
 
-    $query = 'SELECT * FROM `orders`';
+    $query = "SELECT * FROM `orders` WHERE `itemsPrice` > 0";
 
     if ($status != 'all') {
         $query .= " AND `status` = :status";
     }
 
-    $query .= " ORDER BY :orderBy DESC";
+    $query .= " ORDER BY $orderBy DESC";
 
     $statement = $db->prepare($query);
 
@@ -291,10 +291,9 @@ function getOrders($status, $orderBy)
         $statement->bindValue(':status', $status);
     }
 
-    $statement->bindValue(':orderBy', $orderBy);
-
     $statement->execute();
     $products = $statement->fetchAll();
     $statement->closeCursor();
+
     return $products;
 }

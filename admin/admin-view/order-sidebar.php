@@ -21,9 +21,8 @@ $statuses = getOrderStatus();
 
                 <label for="sort" class="form-label">Sort by:</label>
                 <select class="form-control mb-3" name="sort">
-                    <option value="all">All</option>
                     <option value="orderID">Order ID</option>
-                    <option value="price">Price</option>
+                    <option value="itemsPrice">Price</option>
                 </select>
 
                 <input type="hidden" name="action" value="orders">

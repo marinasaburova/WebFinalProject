@@ -6,6 +6,7 @@ include 'admin-view/navigation.php';
 ?>
 <!-- Middle Container -->
 <div class="container-fluid">
+
     <main>
         <div class="py-5 text-center">
             <h2>Orders</h2>
