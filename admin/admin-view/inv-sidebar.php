@@ -29,7 +29,7 @@ $materials = getMaterials();
                     <?php } ?>
                 </select>
 
-                <input type="hidden" name="category" value=<?php echo $category ?>>
+                <input type="hidden" name="action" value="inventory">
 
                 <button class="btn btn-primary mb-3" type="submit">Search</button>
             </form>

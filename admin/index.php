@@ -62,12 +62,16 @@ switch ($action) {
         // show homepage with products
     case ('inventory'):
         require_once('../utils/verify-admin.php');
-        $category = filter_input(INPUT_GET, 'category');
-        if ($category == NULL || $category == FALSE) {
-            $category = 'all';
+        $color = filter_input(INPUT_GET, 'colorsearch');
+        if ($color == NULL || $color == FALSE) {
+            $color = 'all';
+        }
+        $material = filter_input(INPUT_GET, 'materialsearch');
+        if ($material == NULL || $material == FALSE) {
+            $material = 'all';
         }
         //$categories = getCategories();
-        $products = getProducts($category, 'all', 'all');
+        $products = getProducts($color, $material);
         include 'page/inventory.php';
         break;
 
