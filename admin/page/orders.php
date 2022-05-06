@@ -11,9 +11,9 @@ include 'admin-view/navigation.php';
         <div class="py-3 text-center">
             <h2>Orders</h2>
 
-            <?php if (isset($status)) echo "<span class='lead mb-4 mx-2'>Status:<i> $status </i></span>"
+            <?php if (isset($status) && !isset($keyword)) echo "<span class='lead mb-4 mx-2'>Status:<i> $status </i></span>"
             ?>
-            <?php if (isset($orderBy)) echo "<span class='lead mb-4 mx-2'>Ordering By:<i> $orderBy </i></span>"
+            <?php if (isset($orderBy) && !isset($keyword)) echo "<span class='lead mb-4 mx-2'>Ordering By:<i> $orderBy </i></span>"
             ?>
             <?php if (isset($keyword)) echo "<span class='lead mb-4'>Searching for:<i> $keyword </i></span>"
             ?>
