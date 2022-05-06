@@ -70,6 +70,11 @@ switch ($action) {
         if ($material == NULL || $material == FALSE) {
             $material = 'all';
         }
+        // searches for products by keyword
+        if (isset($_GET['search'])) {
+            $searchterm = filter_input(INPUT_GET, 'searchterm');
+            $products = keywordSearchAdmin($searchterm, $color, $material);
+        }
         //$categories = getCategories();
         $products = getProducts($color, $material);
         include 'page/inventory.php';

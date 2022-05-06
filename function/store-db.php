@@ -99,6 +99,28 @@ function getMaterials()
     return $colors;
 }
 
+function keywordSearchAdmin($searchterm, $color, $material)
+{
+    global $db;
+
+    $query = 'SELECT * FROM `item` WHERE `quantity` > 0 AND ((`name` like :searchterm) OR (`description` like :searchterm) OR (`tags` like :searchterm))';
+    if ($color != 'all') {
+        $query .= ' AND `color` = :color';
+    }
+    if ($material != 'all') {
+        $query .= ' AND `material` = :material';
+    }
+
+    $statement = $db->prepare($query);
+    $statement->bindValue(':searchterm', "%$searchterm%");
+    $statement->bindValue(':color', $color);
+    $statement->bindValue(':material', $material);
+    $statement->execute();
+    $products = $statement->fetchAll();
+    $statement->closeCursor();
+    return $products;
+}
+
 
 function keywordSearch($searchterm, $category)
 {
