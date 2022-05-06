@@ -18,39 +18,49 @@ include('admin-view/navigation.php');
             <div class="col-md-3 col-lg-4"></div>
             <div class="col-md-6 col-lg-4">
                 <div class="sticky-top" style="top:72px; z-index: 1018">
-
-                    <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
-                        <span class="text-primary">Your Info</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">Firstname Lastname</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Email</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">email address</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Phone Number</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">Phone</span>
-                        </li>
-                    </ul>
-
-                    <form class="card p-2" action=".#view">
+                    <form action="." method="post" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="editaccount">
-                        <div class="input-group">
-                            <button class="w-100 btn btn-secondary" type="submit">Edit</button>
-                        </div>
+                        <input type="hidden" name="employeeID" value="<?php echo $info['employeeID'] ?>"> 
+                        <h4 class="d-flex justify-content-between align-items-center mb-3 pt-1">
+                            <span class="text-primary">Your Info</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">First name</h6>
+                                </div>
+                                <div class="text-muted">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<?php echo $info['firstName'] ?>" required>
+                                    <div class="invalid-feedback">
+                                        Please enter first name.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">Last name</h6>
+                                </div>
+                                <div class="text-muted">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<?php echo $info['lastName'] ?>" required>
+                                    <div class="invalid-feedback">
+                                        Please enter last name.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">Email</h6>
+                                </div>
+                                <div class="text-muted">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="" value="<?php echo $info['email'] ?>" required>
+                                    <div class="invalid-feedback">
+                                        Please enter name.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button class="w-100 btn btn-secondary" type="submit">Edit</button>
                     </form>
                 </div>
             </div>

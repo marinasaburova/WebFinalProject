@@ -75,8 +75,9 @@ switch ($action) {
             $searchterm = filter_input(INPUT_GET, 'searchterm');
             $products = keywordSearchAdmin($searchterm, $color, $material);
         }
-        //$categories = getCategories();
-        $products = getProducts($color, $material);
+        else {
+            $products = getProducts($color, $material);
+        }
         include 'page/inventory.php';
         break;
 
@@ -126,7 +127,7 @@ switch ($action) {
     case ('editaccount'):
         require_once('../utils/verify-admin.php');
         $info = getEmployeeData($_SESSION['employeeID']);
-        include 'page/edit-account.php';
+        include 'page/account.php';
         break;
 
         // update personal information
@@ -301,4 +302,22 @@ switch ($action) {
         $msg = filter_input(INPUT_GET, 'msg');
         include 'page/order-details.php';
         break;
+    
+    case ('editaccount'):
+        require_once('../utils/verify-admin.php');
+
+        if (isset($_POST['edit'])) {
+            $message = 'Updated';
+            $employeeID = filter_input(INPUT_POST, 'employeeID');
+            $email = filter_input(INPUT_POST, 'email');
+            $firstName = filter_input(INPUT_POST, 'firstName');
+            $lastName = filter_input(INPUT_POST, 'lastName');
+            updateEmployee($employeeID, $email, $firstName, $lastName);
+            header('Location: .?action=inventory&msg=success');
+            break;
+        } else {
+            echo 'not updating product';
+            include 'page/new-product.php';
+            break;
+        }
 }
