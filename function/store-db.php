@@ -152,6 +152,20 @@ function keywordSearch($searchterm, $category)
     return $products;
 }
 
+function keywordSearchOrder($searchterm)
+{
+    global $db;
+
+    $query = 'SELECT * FROM `orders` WHERE `itemsPrice` > 0 AND ((`shipFirstName` like :searchterm) OR (`shipLastName` like :searchterm) OR (`orderID` like :searchterm))';
+
+    $statement = $db->prepare($query);
+    $statement->bindValue(':searchterm', "%$searchterm%");
+    $statement->execute();
+    $products = $statement->fetchAll();
+    $statement->closeCursor();
+    return $products;
+}
+
 function subtractItemQuantity($itemID, $quantity)
 {
     global $db;

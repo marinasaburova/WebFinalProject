@@ -9,7 +9,7 @@ $statuses = getOrderStatus();
             <h4 class="card-title">Filter</h4>
             <hr class="my-3">
 
-            <form action="." method="get">
+            <form action=".#view" method="get">
                 <label for="statussearch" class="form-label">Show:</label>
                 <select class="form-control mb-3" name="statussearch">
                     <option value="all">All</option>
@@ -32,10 +32,11 @@ $statuses = getOrderStatus();
 
             <hr class="my-3">
 
-            <form action="." method="get">
+            <form action=".#view" method="get">
                 <label for="searchterm" class="form-label">Search by Keyword:</label>
                 <input name="searchterm" type="text" class="form-control mb-3">
-                <input type="hidden" name="category" value=<?php echo $category ?>>
+
+                <input type="hidden" name="action" value="orders">
                 <button class="btn btn-primary mb-3" type="submit" name="search">Search</button>
             </form>
         </div>

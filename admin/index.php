@@ -109,6 +109,12 @@ switch ($action) {
             $orderBy = 'orderID';
         }
         $orders = getOrders($status, $orderBy);
+
+        $keyword = filter_input(INPUT_GET, 'searchterm');
+        if ($keyword != NULL || $keyword != false) {
+            $orders = keywordSearchOrder($keyword);
+        }
+
         include 'page/orders.php';
         break;
 

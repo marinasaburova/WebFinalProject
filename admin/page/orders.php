@@ -8,8 +8,15 @@ include 'admin-view/navigation.php';
 <div class="container-fluid">
 
     <main>
-        <div class="py-5 text-center">
+        <div class="py-3 text-center">
             <h2>Orders</h2>
+
+            <?php if (isset($status)) echo "<span class='lead mb-4 mx-2'>Status:<i> $status </i></span>"
+            ?>
+            <?php if (isset($orderBy)) echo "<span class='lead mb-4 mx-2'>Ordering By:<i> $orderBy </i></span>"
+            ?>
+            <?php if (isset($keyword)) echo "<span class='lead mb-4'>Searching for:<i> $keyword </i></span>"
+            ?>
         </div>
 
         <div class="row">
@@ -22,8 +29,7 @@ include 'admin-view/navigation.php';
                     <tbody>
                         <?php
                         if (empty($orders) || sizeof($orders) == 0) {
-                            echo '<p class="">No orders.</p>';
-                            echo '<a href="."><p class="my-0">No orders.</p></a>';
+                            echo '<div class="" ><p class="">No orders found.</p></div>';
                         }
 
                         foreach ($orders as $order) {
