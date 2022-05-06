@@ -83,6 +83,9 @@ switch ($action) {
             $products = getProducts($category, $color, $material);
         }
 
+        $currentColor = $color;
+        $currentMaterial = $material;
+
         include 'page/inventory.php';
         break;
 

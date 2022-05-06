@@ -124,9 +124,17 @@ function keywordSearchAdmin($searchterm, $category, $color, $material)
 
     $statement = $db->prepare($query);
     $statement->bindValue(':searchterm', "%$searchterm%");
-    $statement->bindValue(':category', $category);
-    $statement->bindValue(':color', $color);
-    $statement->bindValue(':material', $material);
+
+    if ($color != 'all') {
+        $statement->bindValue(':color', $color);
+    }
+    if ($material != 'all') {
+        $statement->bindValue(':material', $material);
+    }
+    if ($category != 'all') {
+        $statement->bindValue(':category', $category);
+    }
+
     $statement->execute();
     $products = $statement->fetchAll();
     $statement->closeCursor();

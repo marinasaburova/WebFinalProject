@@ -13,8 +13,7 @@ include 'admin-view/navigation.php';
       <div class="py-3 text-center">
         <h2>Inventory</h2>
 
-        <?php if ($category != 'all') echo "<span class='lead mb-4 mx-2'>Category:<i> $category </i></span>"
-        ?>
+        <span class='lead mb-4 mx-2'>Category:<i> <?php echo $category ?></i></span>
         <?php if ($color != 'all') echo "<span class='lead mb-4 mx-2'>Color:<i> $color </i></span>"
         ?>
         <?php if ($material != 'all') echo "<span class='lead mb-4 mx-2'>Material:<i> $material </i></span>"

@@ -49,8 +49,8 @@ $materials = getMaterials();
             <form action="." method="get">
                 <label for="searchterm" class="form-label">Search by Keyword:</label>
                 <input name="searchterm" type="text" class="form-control mb-3">
-                <input type="hidden" name="colorsearch" value="<?php echo $_GET['colorsearch'] ?>">
-                <input type="hidden" name="materialsearch" value="<?php echo $_GET['materialsearch'] ?>">
+                <input type="hidden" name="colorsearch" value="<?php echo $currentColor ?>">
+                <input type="hidden" name="materialsearch" value="<?php echo $currentMaterial ?>">
 
                 <input type="hidden" name="action" value="inventory">
                 <button class="btn btn-primary mb-3" type="submit" name="search">Search</button>
