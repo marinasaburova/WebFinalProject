@@ -78,10 +78,11 @@ switch ($action) {
         // searches for products by keyword
         if (isset($_GET['search'])) {
             $searchterm = filter_input(INPUT_GET, 'searchterm');
-            $products = keywordSearchAdmin($searchterm, $color, $material);
+            $products = keywordSearchAdmin($searchterm, $category, $color, $material);
         } else {
             $products = getProducts($category, $color, $material);
         }
+
         include 'page/inventory.php';
         break;
 

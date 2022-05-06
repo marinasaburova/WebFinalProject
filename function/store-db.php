@@ -107,7 +107,7 @@ function getMaterials()
     return $colors;
 }
 
-function keywordSearchAdmin($searchterm, $color, $material)
+function keywordSearchAdmin($searchterm, $category, $color, $material)
 {
     global $db;
 
@@ -118,9 +118,13 @@ function keywordSearchAdmin($searchterm, $color, $material)
     if ($material != 'all') {
         $query .= ' AND `material` = :material';
     }
+    if ($category != 'all') {
+        $query .= ' AND `category` = :category';
+    }
 
     $statement = $db->prepare($query);
     $statement->bindValue(':searchterm', "%$searchterm%");
+    $statement->bindValue(':category', $category);
     $statement->bindValue(':color', $color);
     $statement->bindValue(':material', $material);
     $statement->execute();
