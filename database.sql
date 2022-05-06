@@ -1,21 +1,14 @@
 DROP DATABASE IF EXISTS kelarinadatabase;
 CREATE DATABASE kelarinadatabase;
-USE kelarinadatabase;  -- MySQL command
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: May 04, 2022 at 03:12 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+USE kelarinadatabase;  
+
 
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2022 at 07:55 PM
+-- Generation Time: May 06, 2022 at 07:34 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -61,10 +54,14 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `email`, `password`, `firstName`, `lastName`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`, `dateJoined`, `status`) VALUES
-(0000000001, 'marina@gmail.com', '$2y$10$PMMWInZZYD3H.wmCc8kEFenORHTlAWHZ0N99ke0L/udypkIaUGk2C', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043, '2022-04-23 20:14:42', 'active'),
+(0000000001, 'marina@gmail.com', '$2y$10$sU6DgIJU0ZCKYfHy6vlX2.41Ccoz9prWKXfORUVx2nHrt1fzQ8A8K', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043, '2022-04-23 20:14:42', 'active'),
 (0000000002, 'kelsey@gmail.com', '$2y$10$i1D9cQHT9R21gFDjZv3vE.iTFTabTBrahyEXRgujTv2oUQFZ0mWVS', 'Kelsey', 'Nyman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-23 20:22:25', 'active'),
 (0000000004, 'sharpay@gmail.com', '$2y$10$WacD08gqa5Rs4P.C7hlAJeYPid7bQ5wSP56gigyWcPg0JrVq.pBfq', 'Sharpay', 'Evans', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29 13:16:29', 'active'),
-(0000000005, 'london@tipton.com', '$2y$10$/CKCAvZJiK7TltwhThhjXOrh4rux/A6QyXpIXbD64DUybfrTqlUuO', 'London', 'Tipton', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820, '2022-04-29 13:17:16', 'active');
+(0000000005, 'london@tipton.com', '$2y$10$/CKCAvZJiK7TltwhThhjXOrh4rux/A6QyXpIXbD64DUybfrTqlUuO', 'London', 'Tipton', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820, '2022-04-29 13:17:16', 'active'),
+(0000000023, 'donna@gmail.com', '$2y$10$JhqtpL8Bpk6WMhGlVHoMeutaw9UBQjEfJF16hu.WbMPDFmND4Cnh2', 'Donna1', 'Sheridan', 'Donna', 'Sheridan', '1 Goat Island Rd.', '', 'Kalokairi', 'FL', 19560, '2022-05-04 20:51:52', 'active'),
+(0000000026, 'm1@gmail.com', '$2y$10$rpSz6S6V/cKABoYusi1p.uxL7EQk55bitRcei5smNxEXs27cgZQ42', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07045, '2022-05-05 14:27:23', 'active'),
+(0000000027, 'm2@gmail.com', '$2y$10$K8Gy.kvhJMX6PBkb4nqIZe58J9cb.rGN91.D6HACQm8qoJGlAWBOm', 'Marina', 'Saburova', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-05 14:43:03', 'active'),
+(0000000029, 'm@gmail.com', '$2y$10$t2XzjwulMPSY2jbPtrSuTO8nS9QljWdtazjntB49elVUGWPGO4d2q', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043, '2022-05-05 14:43:51', 'active');
 
 -- --------------------------------------------------------
 
@@ -113,27 +110,27 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`itemID`, `name`, `price`, `quantity`, `category`, `color`, `material`, `description`, `tags`) VALUES
-(0000000001, 'Elise Bag', '53.00', 8, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. This is a great staple piece to have!', 'leather, bag, purse, minimal, black, simple, classic, staple'),
-(0000000002, 'Clara Belt', '15.00', 48, 'belts', 'white', 'faux leather', 'This simple white faux leather belt with gold details is a perfect way to spice up any outfit!', 'gold, faux leather, belt, simple, minimal, classic, classy, staple, cute, feminine, chic'),
+(0000000001, 'Elise Bag', '53.00', 1, 'bags', 'black', 'leather', 'A gorgeous and simple black bag. This is a great staple piece to have!', 'leather, bag, purse, minimal, black, simple, classic, staple'),
+(0000000002, 'Clarice Belt', '15.00', 48, 'belts', 'black', 'faux leather', 'This simple black faux leather belt with gold details is a perfect way to spice up any outfit!', 'gold, faux leather, belt, simple, minimal, classic, classy, staple, cute, chic'),
 (0000000003, 'Rosella Sunglasses', '15.00', 28, 'sunglasses', 'pink', 'metal', 'Metal frame sunglasses with gorgeous pink reflective lenses! ', 'girly, cute, pink, feminine, classy, bold, rose gold, statement, reflective, mirror'),
-(0000000004, 'Merliah Sunglasses', '15.00', 59, 'sunglasses', 'blue', 'metal', 'Feel the summer breeze with these metal frame sunglasses with a teal reflective lens. So cool!', 'beachy, cute, teal, blue, bold, summer, light blue, reflective, mirror'),
+(0000000004, 'Merliah Sunglasses', '15.00', 0, 'sunglasses', 'blue', 'metal', 'Feel the summer breeze with these metal frame sunglasses with a teal reflective lens. So cool!', 'beachy, cute, teal, blue, bold, summer, light blue, reflective, mirror'),
 (0000000005, 'Silver Square Watch', '50.00', 50, 'watches', 'silver', 'metal', 'A simple watch with a more masculine feel, thanks to the square face. However, the silver metal band still feels luxe. ', 'luxe, masculine, bold, rectangle, square, metal, silver, chain'),
-(0000000006, 'Rose Gold Watch', '50.00', 48, 'watches', 'rose gold', 'metal', 'Cute rose gold watch', 'rose gold, cute, girly'),
-(0000000007, 'Anna Wallet', '50.00', 48, 'bags', 'pink', 'faux leather', 'A classic choice: the light pink wallet. This is a gorgeous choice! The pink is subtle and feminine. ', 'girly, pink, minimal, simple, gold details, classic, classy, chic, feminine'),
-(0000000008, 'White Belt with Gold Details', '20.00', 50, 'belts', 'white', 'faux leather', 'Minimal white belt with gold details', 'simple, minimal, clean'),
-(0000000009, 'Pink Belt', '20.00', 48, 'belts', 'pink', 'faux leather', 'Girly pink belt', 'girly, pink, feminine'),
-(0000000010, 'Jane Watch', '60.12', 47, 'watches', 'white', 'leather', 'A small leather watch with gorgeous gold details. Perfect for a minimalist who still wants to look chic!', 'minimal, simple, white, gold, metal, watch, small'),
+(0000000006, 'Rose Gold Watch', '50.00', 45, 'watches', 'rose gold', 'metal', 'Cute rose gold watch', 'rose gold, cute, girly'),
+(0000000007, 'Anna Wallet', '50.00', 47, 'bags', 'pink', 'faux leather', 'A classic choice: the light pink wallet. This is a gorgeous choice! The pink is subtle and feminine. ', 'girly, pink, minimal, simple, gold details, classic, classy, chic, feminine'),
+(0000000008, 'White Belt with Gold Details', '20.00', 48, 'belts', 'white', 'faux leather', 'Minimal white belt with gold details', 'simple, minimal, clean'),
+(0000000009, 'Pink Belt', '20.00', 45, 'belts', 'pink', 'faux leather', 'Girly pink belt', 'girly, pink, feminine'),
+(0000000010, 'Jane Watch', '60.12', 46, 'watches', 'white', 'leather', 'A small leather watch with gorgeous gold details. Perfect for a minimalist who still wants to look chic!', 'minimal, simple, white, gold, metal, watch, small'),
 (0000000011, 'Stevie Watch', '40.15', 48, 'watches', 'white', 'fabric', 'A watch with a simple fabric strap and gold details. The strap makes it super adjustable, and can be switched out for other ones! ', 'simple, white, minimal, practical, gold'),
-(0000000012, 'Fae Gold Watch', '70.12', 49, 'watches', 'gold', 'metal', 'A glamorous gold watch with a fine-mesh chain. This watch is very sparkly and will grab people\'s attention! ', 'glamorous, feminine, glam, chic, gold, sparkle, shiny, extra, gold, chain, metal'),
+(0000000012, 'Fae Gold Watch', '70.12', 47, 'watches', 'gold', 'metal', 'A glamorous gold watch with a fine-mesh chain. This watch is very sparkly and will grab people\'s attention! ', 'glamorous, feminine, glam, chic, gold, sparkle, shiny, extra, gold, chain, metal'),
 (0000000013, 'Aspen Watch', '55.10', 50, 'watches', 'red', 'leather', 'The Aspen watch is timeless with it\'s beautiful deep burgundy color. Perfect for a classic look.', 'classic, burgundy, red, leather, leather strap, timeless, old fashioned'),
 (0000000014, 'London Watch', '74.50', 50, 'watches', 'black', 'leather', 'This is a classic watch with silver details and a black leather strap. Perfect for cold days in London, for example. ', 'classy, classic, dark, black, silver, timeless, minimal, simple'),
 (0000000015, 'Sophie Leather Shoulder Bag', '50.00', 48, 'bags', 'brown', 'faux leather', 'A faux leather bag in a classic brown shade. This is perfect for autumnal outfits or someone with a boho style. Bonus: you can fit a lot in here!', 'boho, country, autumn, fall, warm, brown, leather, shoulder bag'),
-(0000000016, 'Amie Wallet', '30.10', 50, 'bags', 'pink', 'faux leather', 'This hot pink clutch is bound to gain attention! Vibrant colors are in this season. ', 'hot pink, bright, vibrant, colorful, wallet, clutch, small bag, purse, flashy, extra, glam'),
-(0000000017, 'Dove Leather Wallet', '40.00', 49, 'bags', 'white', 'leather', 'This is a classic piece for any simple gal, with delicate white leather and gold details. The shade is perfect: not too stark white, but not too dirty. ', 'minimal, simple, gold details, wallet, clutch, small, white, light'),
-(0000000018, 'Belle Card Holder', '20.50', 49, 'bags', 'blue', 'leather', 'A super tiny but practical card holder with many compartments.', 'baby blue, light blue, card holder, clutch, handheld, leather, girly, cute, simple, minimal'),
-(0000000019, 'Classic White Shoulder Bag', '70.00', 48, 'bags', 'white', 'leather', 'A large white bag, which is perfect for almost everyone. You can\'t go wrong with this color!', 'simple, white, large bag, shoulder bag, big, minimal, classic, cute'),
-(0000000020, 'Main Character Sunnies', '30.00', 50, 'sunglasses', 'nude', 'metal', 'Off-white metal frame sunglasses with an awesome ombre lens. ', 'statement, brown, nude, neutral, off-white, ombre, glasses'),
-(0000000021, 'Chunky Sunglasses', '40.00', 50, 'sunglasses', 'cream', 'plastic', 'Statement sunglasses with a chunky nude plastic frame. ', 'statement, plastic, chunky, large, big, glam, nude, neutral, off-white, off white');
+(0000000016, 'Amie Wallet', '30.10', 0, 'bags', 'pink', 'faux leather', 'This hot pink clutch is bound to gain attention! Vibrant colors are in this season. ', 'hot pink, bright, vibrant, colorful, wallet, clutch, small bag, purse, flashy, extra, glam'),
+(0000000017, 'Dove Leather Wallet', '40.00', 47, 'bags', 'white', 'leather', 'This is a classic piece for any simple gal, with delicate white leather and gold details. The shade is perfect: not too stark white, but not too dirty. ', 'minimal, simple, gold details, wallet, clutch, small, white, light'),
+(0000000018, 'Belle Card Holder', '20.50', 45, 'bags', 'blue', 'leather', 'A super tiny but practical card holder with many compartments.', 'baby blue, light blue, card holder, clutch, handheld, leather, girly, cute, simple, minimal'),
+(0000000019, 'Classic White Shoulder Bag', '70.00', 45, 'bags', 'white', 'leather', 'A large white bag, which is perfect for almost everyone. You can\'t go wrong with this color!', 'simple, white, large bag, shoulder bag, big, minimal, classic, cute'),
+(0000000020, 'Main Character Sunnies', '30.00', 48, 'sunglasses', 'cream', 'metal', 'Off-white metal frame sunglasses with an awesome ombre lens. ', 'statement, brown, nude, neutral, off-white, ombre, glasses'),
+(0000000021, 'Chunky Sunglasses', '50.00', 49, 'sunglasses', 'cream', 'plastic', 'Statement sunglasses with a chunky nude plastic frame. ', 'statement, plastic, chunky, large, big, glam, nude, neutral, off-white, off white');
 
 -- --------------------------------------------------------
 
@@ -164,11 +161,22 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orderID`, `customerID`, `email`, `itemsPrice`, `shipping`, `tax`, `status`, `timePlaced`, `shipFirstName`, `shipLastName`, `shipStreet`, `shipStreet2`, `shipCity`, `shipState`, `shipZip`) VALUES
-(0000000054, 0000000001, 'marina@gmail.com', '160.12', '5.00', '8.01', 'placed', '2022-05-04 17:46:16', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
-(0000000055, 0000000001, 'marina@gmail.com', '83.00', '5.00', '4.15', 'placed', '2022-05-04 17:47:11', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000054, 0000000001, 'marina@gmail.com', '160.12', '5.00', '8.01', 'delivered', '2022-05-04 17:46:16', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043),
+(0000000055, 0000000001, 'marina@gmail.com', '83.00', '5.00', '4.15', 'cancelled', '2022-05-04 17:47:11', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043),
 (0000000056, 0000000001, 'marina@gmail.com', '70.50', '5.00', '3.53', 'placed', '2022-05-04 17:49:29', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
 (0000000057, NULL, 'sophie@gmail.com', '120.12', '5.00', '6.01', 'placed', '2022-05-04 17:53:05', 'Sophie', 'Sheridan', '1 Mykonos St.', NULL, 'Bridgewater', 'NJ', 08521),
-(0000000058, 0000000005, 'london@tipton.com', '603.54', '5.00', '30.18', 'placed', '2022-05-04 17:54:50', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820);
+(0000000058, 0000000005, 'london@tipton.com', '603.54', '5.00', '30.18', 'placed', '2022-05-04 17:54:50', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820),
+(0000000059, NULL, 'sharpay@gmail.com', '156.00', '5.00', '7.80', 'delivered', '2022-05-04 20:32:50', 'Sharpay', 'Evans', '1 Wildcat Ave.', '', 'Albuquerque', 'NM', 12243),
+(0000000060, NULL, 'livrooney@gmail.com', '40.00', '5.00', '2.00', 'delayed', '2022-05-04 20:36:37', 'Liv', 'Rooney', '98 Palm Tree Ln.', 'Apt. 5B', 'Los Angeles', 'CA', 10504),
+(0000000061, 0000000001, 'marina@gmail.com', '70.00', '5.00', '3.50', 'placed', '2022-05-04 20:45:45', 'Marina', 'Saburova', '12345 Normal Ave', NULL, 'Montclair', 'NJ', 07043),
+(0000000062, 0000000001, 'marina@gmail.com', '210.12', '5.00', '10.51', 'delivered', '2022-05-04 21:44:07', 'Marina', 'Saburova', '12345 Normal Ave', '', 'Montclair', 'NJ', 07043),
+(0000000063, 0000000001, 'marina@gmail.com', '61.50', '5.00', '3.08', 'delivered', '2022-05-04 21:55:00', 'Marina', 'Saburova', '12345 Normal Ave', '', 'Montclair', 'NJ', 07043),
+(0000000064, NULL, 'livrooney@gmail.com', '170.22', '5.00', '8.51', 'placed', '2022-05-05 13:37:46', 'Liv', 'Rooney', '1 Cheese Wheel Ave.', NULL, 'Steven\'s Point', 'WI', 83101),
+(0000000065, NULL, 'sophie@gmail.com', '70.00', '5.00', '3.50', 'delayed', '2022-05-05 13:41:44', 'Sophie', 'Sheridan', '1 Normal Ave', '', 'Montclair', 'NJ', 07034),
+(0000000066, NULL, 'sophie@gmail.com', '55.00', '5.00', '2.75', 'placed', '2022-05-05 14:11:55', 'Sophie', 'Sheridan', '1 Main St.', NULL, 'Malibu', 'FL', 12910),
+(0000000067, NULL, 'm@gmail.com', '115.00', '5.00', '5.75', 'delayed', '2022-05-05 14:25:04', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043),
+(0000000068, 0000000026, 'm@gmail.com', '80.00', '5.00', '4.00', 'placed', '2022-05-05 14:30:02', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07045),
+(0000000069, 0000000029, 'm@gmail.com', '200.62', '5.00', '10.03', 'shipped', '2022-05-05 14:45:15', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043);
 
 -- --------------------------------------------------------
 
@@ -206,7 +214,31 @@ INSERT INTO `order_items` (`orderID`, `itemID`, `quantity`, `price`) VALUES
 (0000000058, 0000000017, 1, '40.00'),
 (0000000058, 0000000019, 2, '70.00'),
 (0000000058, 0000000009, 1, '20.00'),
-(0000000058, 0000000010, 2, '60.12');
+(0000000058, 0000000010, 2, '60.12'),
+(0000000059, 0000000006, 1, '50.00'),
+(0000000059, 0000000001, 2, '53.00'),
+(0000000060, 0000000021, 1, '40.00'),
+(0000000061, 0000000021, 1, '40.00'),
+(0000000061, 0000000020, 1, '30.00'),
+(0000000062, 0000000010, 1, '60.12'),
+(0000000062, 0000000008, 2, '20.00'),
+(0000000062, 0000000009, 3, '20.00'),
+(0000000062, 0000000007, 1, '50.00'),
+(0000000063, 0000000018, 3, '20.50'),
+(0000000064, 0000000019, 1, '70.00'),
+(0000000064, 0000000016, 1, '30.10'),
+(0000000064, 0000000012, 1, '70.12'),
+(0000000065, 0000000019, 1, '70.00'),
+(0000000066, 0000000017, 1, '40.00'),
+(0000000066, 0000000004, 1, '15.00'),
+(0000000067, 0000000004, 1, '15.00'),
+(0000000067, 0000000006, 2, '50.00'),
+(0000000068, 0000000020, 1, '30.00'),
+(0000000068, 0000000021, 1, '50.00'),
+(0000000069, 0000000019, 1, '70.00'),
+(0000000069, 0000000017, 1, '40.00'),
+(0000000069, 0000000018, 1, '20.50'),
+(0000000069, 0000000012, 1, '70.12');
 
 --
 -- Indexes for dumped tables
@@ -258,7 +290,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `customerID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -276,7 +308,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Constraints for dumped tables
@@ -299,7 +331,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 GRANT SELECT, INSERT, DELETE, UPDATE
 ON kelarinadatabase.*
