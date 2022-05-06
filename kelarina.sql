@@ -8,7 +8,7 @@ USE kelarinadatabase;
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 07:34 PM
+-- Generation Time: May 06, 2022 at 09:20 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -60,7 +60,6 @@ INSERT INTO `customer` (`customerID`, `email`, `password`, `firstName`, `lastNam
 (0000000005, 'london@tipton.com', '$2y$10$/CKCAvZJiK7TltwhThhjXOrh4rux/A6QyXpIXbD64DUybfrTqlUuO', 'London', 'Tipton', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820, '2022-04-29 13:17:16', 'active'),
 (0000000023, 'donna@gmail.com', '$2y$10$JhqtpL8Bpk6WMhGlVHoMeutaw9UBQjEfJF16hu.WbMPDFmND4Cnh2', 'Donna1', 'Sheridan', 'Donna', 'Sheridan', '1 Goat Island Rd.', '', 'Kalokairi', 'FL', 19560, '2022-05-04 20:51:52', 'active'),
 (0000000026, 'm1@gmail.com', '$2y$10$rpSz6S6V/cKABoYusi1p.uxL7EQk55bitRcei5smNxEXs27cgZQ42', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07045, '2022-05-05 14:27:23', 'active'),
-(0000000027, 'm2@gmail.com', '$2y$10$K8Gy.kvhJMX6PBkb4nqIZe58J9cb.rGN91.D6HACQm8qoJGlAWBOm', 'Marina', 'Saburova', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-05 14:43:03', 'active'),
 (0000000029, 'm@gmail.com', '$2y$10$t2XzjwulMPSY2jbPtrSuTO8nS9QljWdtazjntB49elVUGWPGO4d2q', 'Marina', 'Saburova', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07043, '2022-05-05 14:43:51', 'active');
 
 -- --------------------------------------------------------
@@ -127,9 +126,9 @@ INSERT INTO `item` (`itemID`, `name`, `price`, `quantity`, `category`, `color`, 
 (0000000015, 'Sophie Leather Shoulder Bag', '50.00', 48, 'bags', 'brown', 'faux leather', 'A faux leather bag in a classic brown shade. This is perfect for autumnal outfits or someone with a boho style. Bonus: you can fit a lot in here!', 'boho, country, autumn, fall, warm, brown, leather, shoulder bag'),
 (0000000016, 'Amie Wallet', '30.10', 0, 'bags', 'pink', 'faux leather', 'This hot pink clutch is bound to gain attention! Vibrant colors are in this season. ', 'hot pink, bright, vibrant, colorful, wallet, clutch, small bag, purse, flashy, extra, glam'),
 (0000000017, 'Dove Leather Wallet', '40.00', 47, 'bags', 'white', 'leather', 'This is a classic piece for any simple gal, with delicate white leather and gold details. The shade is perfect: not too stark white, but not too dirty. ', 'minimal, simple, gold details, wallet, clutch, small, white, light'),
-(0000000018, 'Belle Card Holder', '20.50', 45, 'bags', 'blue', 'leather', 'A super tiny but practical card holder with many compartments.', 'baby blue, light blue, card holder, clutch, handheld, leather, girly, cute, simple, minimal'),
-(0000000019, 'Classic White Shoulder Bag', '70.00', 45, 'bags', 'white', 'leather', 'A large white bag, which is perfect for almost everyone. You can\'t go wrong with this color!', 'simple, white, large bag, shoulder bag, big, minimal, classic, cute'),
-(0000000020, 'Main Character Sunnies', '30.00', 48, 'sunglasses', 'cream', 'metal', 'Off-white metal frame sunglasses with an awesome ombre lens. ', 'statement, brown, nude, neutral, off-white, ombre, glasses'),
+(0000000018, 'Belle Card Holder', '20.50', 44, 'bags', 'blue', 'leather', 'A super tiny but practical card holder with many compartments.', 'baby blue, light blue, card holder, clutch, handheld, leather, girly, cute, simple, minimal'),
+(0000000019, 'Classic White Shoulder Bag', '70.00', 44, 'bags', 'white', 'leather', 'A large white bag, which is perfect for almost everyone. You can\'t go wrong with this color!', 'simple, white, large bag, shoulder bag, big, minimal, classic, cute'),
+(0000000020, 'Main Character Sunnies', '30.00', 47, 'sunglasses', 'cream', 'metal', 'Off-white metal frame sunglasses with an awesome ombre lens. ', 'statement, brown, nude, neutral, off-white, ombre, glasses'),
 (0000000021, 'Chunky Sunglasses', '50.00', 49, 'sunglasses', 'cream', 'plastic', 'Statement sunglasses with a chunky nude plastic frame. ', 'statement, plastic, chunky, large, big, glam, nude, neutral, off-white, off white');
 
 -- --------------------------------------------------------
@@ -176,7 +175,8 @@ INSERT INTO `orders` (`orderID`, `customerID`, `email`, `itemsPrice`, `shipping`
 (0000000066, NULL, 'sophie@gmail.com', '55.00', '5.00', '2.75', 'placed', '2022-05-05 14:11:55', 'Sophie', 'Sheridan', '1 Main St.', NULL, 'Malibu', 'FL', 12910),
 (0000000067, NULL, 'm@gmail.com', '115.00', '5.00', '5.75', 'delayed', '2022-05-05 14:25:04', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043),
 (0000000068, 0000000026, 'm@gmail.com', '80.00', '5.00', '4.00', 'placed', '2022-05-05 14:30:02', 'Marina', 'Saburova', '1 Normal Ave', NULL, 'Montclair', 'NJ', 07045),
-(0000000069, 0000000029, 'm@gmail.com', '200.62', '5.00', '10.03', 'shipped', '2022-05-05 14:45:15', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043);
+(0000000069, 0000000029, 'm@gmail.com', '200.62', '5.00', '10.03', 'shipped', '2022-05-05 14:45:15', 'Marina', 'Saburova', '1 Normal Ave', '', 'Montclair', 'NJ', 07043),
+(0000000070, 0000000005, 'london@tipton.com', '120.50', '5.00', '6.03', 'placed', '2022-05-06 19:18:00', 'London', 'Tipton', '128 St. James Street', 'Suite 504', 'Boston', 'MA', 01820);
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,10 @@ INSERT INTO `order_items` (`orderID`, `itemID`, `quantity`, `price`) VALUES
 (0000000069, 0000000019, 1, '70.00'),
 (0000000069, 0000000017, 1, '40.00'),
 (0000000069, 0000000018, 1, '20.50'),
-(0000000069, 0000000012, 1, '70.12');
+(0000000069, 0000000012, 1, '70.12'),
+(0000000070, 0000000020, 1, '30.00'),
+(0000000070, 0000000019, 1, '70.00'),
+(0000000070, 0000000018, 1, '20.50');
 
 --
 -- Indexes for dumped tables
@@ -308,7 +311,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `orderID` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- Constraints for dumped tables
