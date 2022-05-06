@@ -29,6 +29,7 @@ $materials = getMaterials();
                     <?php } ?>
                 </select>
 
+                <input type="hidden" name="category" value=<?php echo $category ?>>
                 <input type="hidden" name="action" value="inventory">
 
                 <button class="btn btn-primary mb-3" type="submit">Search</button>
@@ -40,6 +41,8 @@ $materials = getMaterials();
                 <label for="searchterm" class="form-label">Search by Keyword:</label>
                 <input name="searchterm" type="text" class="form-control mb-3">
                 <input type="hidden" name="category" value=<?php echo $category ?>>
+                <input type="hidden" name="action" value="inventory">
+
                 <button class="btn btn-primary mb-3" type="submit" name="search">Search</button>
             </form>
         </div>
