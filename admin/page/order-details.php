@@ -38,11 +38,11 @@ include 'admin-view/navigation.php';
                                 <label for="status" class="form-label">Order Status: </label>
                                 <select class="form-select" id="status" name="status" required>
                                     <option selected value="<?php echo $order['status'] ?>"><?php echo ucfirst($order['status']) ?></option>
-                                    <option value="placed">Placed</option>
-                                    <option value="shipped">Shipped</option>
-                                    <option value="delivered">Delivered</option>
-                                    <option value="delayed">Delayed</option>
-                                    <option value="cancelled">Cancelled</option>
+                                    <option value="placed">placed</option>
+                                    <option value="shipped">shipped</option>
+                                    <option value="delivered">delivered</option>
+                                    <option value="delayed">delayed</option>
+                                    <option value="cancelled">cancelled</option>
                                 </select>
                             </div>
 
