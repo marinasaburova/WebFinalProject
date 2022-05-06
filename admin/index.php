@@ -85,7 +85,17 @@ switch ($action) {
         // show all orders
     case ('orders'):
         require_once('../utils/verify-admin.php');
-        $orders = getAllOrders();
+        $status = filter_input(INPUT_POST, 'statussearch');
+        if ($status == NULL || $status == false)
+        {
+            $status = 'all';
+        }
+        $orderBy = filter_input(INPUT_POST, 'sort');
+        if ($orderBy == NULL || $orderBy == false)
+        {
+            $orderBy = 'orderID';
+        }
+        $orders = getOrders($status, $orderBy);
         include 'page/orders.php';
         break;
 
@@ -284,4 +294,5 @@ switch ($action) {
         $msg = filter_input(INPUT_GET, 'msg');
         include 'page/order-details.php';
         break;
+    
 }

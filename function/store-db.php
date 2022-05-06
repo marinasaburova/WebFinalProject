@@ -247,3 +247,54 @@ function getAllOrders()
     $statement->closeCursor();
     return $orders;
 }
+
+function getOrderStatus()
+{
+    // placed, shipped, delivered, delayed, cancelled
+    global $db;
+
+    $query = "SELECT DISTINCT `status` FROM `orders`";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $statuses = $statement->fetchAll();
+    $statement->closeCursor();
+    return $statuses;
+}
+
+function getOrderID()
+{
+    global $db;
+
+    $query = "SELECT DISTINCT `orderID` FROM `orders`";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $orderIDs = $statement->fetchAll();
+    $statement->closeCursor();
+    return $orderIDs;
+}
+
+function getOrders($status, $orderBy)
+{
+    global $db;
+
+    $query = 'SELECT * FROM `orders`';
+
+    if ($status != 'all') {
+        $query .= " AND `status` = :status";
+    }
+
+    $query .= " ORDER BY :orderBy DESC";
+
+    $statement = $db->prepare($query);
+
+    if ($status != 'all') {
+        $statement->bindValue(':status', $status);
+    }
+
+    $statement->bindValue(':orderBy', $orderBy);
+
+    $statement->execute();
+    $products = $statement->fetchAll();
+    $statement->closeCursor();
+    return $products;
+}
